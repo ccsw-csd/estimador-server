@@ -20,11 +20,20 @@ public class UserEntity {
   @Column(name = "id", nullable = false)
   private String id;
 
-  @Column(name = "username")
+  @Column(name = "username", nullable = false)
   private String username;
 
   @Column(name = "role")
   private String role;
+  
+  @Column(name = "email", nullable = false)
+  private String email;
+  
+  @Column(name = "first_name")
+  private String first_name;
+  
+  @Column(name = "last_name")
+  private String last_name;
 
   /**
    * @return id
@@ -73,5 +82,47 @@ public class UserEntity {
 
     this.role = role;
   }
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the first_name
+	 */
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	/**
+	 * @param first_name the first_name to set
+	 */
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	/**
+	 * @return the last_name
+	 */
+	public String getLast_name() {
+		return last_name;
+	}
+
+	/**
+	 * @param last_name the last_name to set
+	 */
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
 
 }

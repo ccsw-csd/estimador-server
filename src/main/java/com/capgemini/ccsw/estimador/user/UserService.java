@@ -1,5 +1,6 @@
 package com.capgemini.ccsw.estimador.user;
 
+import com.capgemini.ccsw.estimador.config.security.UserInfoAppDto;
 import com.capgemini.ccsw.estimador.user.model.UserEntity;
 
 /**
@@ -15,4 +16,10 @@ public interface UserService {
    * @throws Exception
    */
   UserEntity getByUsername(String username);
+  
+  /**
+   * Guarda un usuario
+   * @param dto
+   */
+  void save(UserInfoAppDto dto);
 }
