@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.ccsw.estimador.role.RoleService;
 import com.capgemini.ccsw.estimador.user.UserService;
 import com.capgemini.ccsw.estimador.user.model.UserEntity;
 
@@ -58,6 +59,9 @@ public class JsonWebTokenUtility {
 
    @Autowired
    private UserService userService;
+   
+   @Autowired
+   private RoleService roleService;
 
    private Map<String, UserInfoAppDto> userCache = new HashMap<>();
 
@@ -135,7 +139,7 @@ public class JsonWebTokenUtility {
       userDetails.setRole("USER");
 
       if (user != null) {
-         userDetails.setRole(user.getRole());
+         userDetails.setRole(roleService.getById(user.getRole()).getName());
       }
 
       return userDetails;

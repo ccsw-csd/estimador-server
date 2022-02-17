@@ -20,7 +20,7 @@ public class SecurityController {
 	  UserInfoAppDto userInfoAppDto = UserUtils.getUserDetails();
 	  
 	  if( userService.getByUsername(userInfoAppDto.getUsername()) == null ) {
-		  userInfoAppDto.setRole("2"); 
+		  userInfoAppDto.setRole("User"); 
 		  userService.save(userInfoAppDto);
 	  }
 		   

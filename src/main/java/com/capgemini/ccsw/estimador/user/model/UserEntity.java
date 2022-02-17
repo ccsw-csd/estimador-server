@@ -18,13 +18,13 @@ public class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private String id;
+  private Long id;
 
   @Column(name = "username", nullable = false)
   private String username;
 
   @Column(name = "role")
-  private String role;
+  private Long role;
   
   @Column(name = "email", nullable = false)
   private String email;
@@ -38,7 +38,7 @@ public class UserEntity {
   /**
    * @return id
    */
-  public String getId() {
+  public Long getId() {
 
     return this.id;
   }
@@ -46,7 +46,7 @@ public class UserEntity {
   /**
    * @param id new value of {@link #getid}.
    */
-  public void setId(String id) {
+  public void setId(Long id) {
 
     this.id = id;
   }
@@ -70,7 +70,7 @@ public class UserEntity {
   /**
    * @return role
    */
-  public String getRole() {
+  public Long getRole() {
 
     return this.role;
   }
@@ -78,7 +78,7 @@ public class UserEntity {
   /**
    * @param role new value of {@link #getrole}.
    */
-  public void setRole(String role) {
+  public void setRole(Long role) {
 
     this.role = role;
   }
