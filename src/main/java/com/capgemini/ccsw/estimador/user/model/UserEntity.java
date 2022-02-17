@@ -18,18 +18,27 @@ public class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private String id;
+  private Long id;
 
-  @Column(name = "username")
+  @Column(name = "username", nullable = false)
   private String username;
 
   @Column(name = "role")
-  private String role;
+  private Long role;
+  
+  @Column(name = "email", nullable = false)
+  private String email;
+  
+  @Column(name = "first_name")
+  private String first_name;
+  
+  @Column(name = "last_name")
+  private String last_name;
 
   /**
    * @return id
    */
-  public String getId() {
+  public Long getId() {
 
     return this.id;
   }
@@ -37,7 +46,7 @@ public class UserEntity {
   /**
    * @param id new value of {@link #getid}.
    */
-  public void setId(String id) {
+  public void setId(Long id) {
 
     this.id = id;
   }
@@ -61,7 +70,7 @@ public class UserEntity {
   /**
    * @return role
    */
-  public String getRole() {
+  public Long getRole() {
 
     return this.role;
   }
@@ -69,9 +78,51 @@ public class UserEntity {
   /**
    * @param role new value of {@link #getrole}.
    */
-  public void setRole(String role) {
+  public void setRole(Long role) {
 
     this.role = role;
   }
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the first_name
+	 */
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	/**
+	 * @param first_name the first_name to set
+	 */
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	/**
+	 * @return the last_name
+	 */
+	public String getLast_name() {
+		return last_name;
+	}
+
+	/**
+	 * @param last_name the last_name to set
+	 */
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
 
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.capgemini.ccsw.estimador.config.security.UserInfoAppDto;
+import com.capgemini.ccsw.estimador.role.RoleRepository;
 import com.capgemini.ccsw.estimador.user.model.UserEntity;
 
 /**
@@ -20,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   UserRepository userRepository;
+  
+  @Autowired
+  RoleRepository roleRepository;
 
   /**
    * {@inheritDoc}
@@ -28,6 +33,22 @@ public class UserServiceImpl implements UserService {
   public UserEntity getByUsername(String username) {
 
     return this.userRepository.getByUsername(username);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void save(UserInfoAppDto dto) {
+	UserEntity user = new UserEntity();
+	
+	user.setRole(roleRepository.getByName(dto.getRole()).getId());
+	user.setUsername(dto.getUsername());
+	user.setEmail(dto.getMail());
+	user.setFirst_name(dto.getFirstName());
+	user.setLast_name(dto.getLastName());
+		
+	this.userRepository.save(user);
   }
 
 }

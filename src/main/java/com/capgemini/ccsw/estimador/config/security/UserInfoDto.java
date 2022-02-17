@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UserInfoDto {
 
   @JsonProperty("_id")
-  private String id;
+  private Long id;
 
   @JsonProperty("_rev")
   private String rev;
@@ -46,7 +46,7 @@ public class UserInfoDto {
   /**
    * @return id
    */
-  public String getId() {
+  public Long getId() {
 
     return this.id;
   }
@@ -54,7 +54,7 @@ public class UserInfoDto {
   /**
    * @param id new value of {@link #getid}.
    */
-  public void setId(String id) {
+  public void setId(Long id) {
 
     this.id = id;
   }
