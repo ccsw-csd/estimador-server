@@ -139,7 +139,7 @@ public class JsonWebTokenUtility {
       userDetails.setRole("USER");
 
       if (user != null) {
-         userDetails.setRole(roleService.getById(user.getRole()).getName());
+         userDetails.setRole(roleService.getById(user.getRole().getId()).getName());
       }
 
       return userDetails;
