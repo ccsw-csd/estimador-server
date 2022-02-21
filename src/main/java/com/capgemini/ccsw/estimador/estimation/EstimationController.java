@@ -27,7 +27,7 @@ public class EstimationController {
 	@RequestMapping(path="", method = RequestMethod.POST)
 	public Page<EstimationDto> findPage(@RequestBody EstimationSearchDto dto) {
 	
-		return this.beanMapper.mapPage(estimationService.findAll(dto), EstimationDto.class);
+		return this.beanMapper.mapPage(estimationService.findPage(dto), EstimationDto.class);
 	}
 
 }

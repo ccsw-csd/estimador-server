@@ -15,6 +15,6 @@ public interface EstimationService {
 	 * @param dto
 	 * @return
 	 */
-	Page<EstimationEntity> findAll(EstimationSearchDto dto);
+	Page<EstimationEntity> findPage(EstimationSearchDto dto);
 
 }
