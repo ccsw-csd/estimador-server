@@ -41,7 +41,7 @@ public class EstimationEntity {
 	private ProjectEntity project;
 	
 	@Column(name = "total_cost", nullable = false)
-	private Long totalCost;
+	private Double totalCost;
 	
 	@Column(name = "total_days", nullable = false)
 	private Long totalDays;
@@ -128,14 +128,14 @@ public class EstimationEntity {
 	/**
 	 * @return the totalCost
 	 */
-	public Long getTotalCost() {
+	public Double getTotalCost() {
 		return totalCost;
 	}
 
 	/**
 	 * @param totalCost the totalCost to set
 	 */
-	public void setTotalCost(Long totalCost) {
+	public void setTotalCost(Double totalCost) {
 		this.totalCost = totalCost;
 	}
 

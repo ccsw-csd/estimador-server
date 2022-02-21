@@ -17,7 +17,7 @@ public class EstimationServiceImpl implements EstimationService{
 	EstimationRepository estimationRepository;
 
 	@Override
-	public Page<EstimationEntity> findAll(EstimationSearchDto dto) {
+	public Page<EstimationEntity> findPage(EstimationSearchDto dto) {
 
 		return this.estimationRepository.findAll(dto.getPageable());
 	}

@@ -22,7 +22,7 @@ public class EstimationDto {
 	
 	private ProjectDto project;
 	
-	private Long totalCost;
+	private Double totalCost;
 	
 	private Long totalDays;
 	
@@ -105,14 +105,14 @@ public class EstimationDto {
 	/**
 	 * @return the totalCost
 	 */
-	public Long getTotalCost() {
+	public Double getTotalCost() {
 		return totalCost;
 	}
 
 	/**
 	 * @param totalCost the totalCost to set
 	 */
-	public void setTotalCost(Long totalCost) {
+	public void setTotalCost(Double totalCost) {
 		this.totalCost = totalCost;
 	}
 
