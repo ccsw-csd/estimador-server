@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.capgemini.ccsw.estimador.role.model.RoleEntity;
 
 /**
  * @author pajimene
@@ -23,8 +27,9 @@ public class UserEntity {
   @Column(name = "username", nullable = false)
   private String username;
 
-  @Column(name = "role")
-  private Long role;
+  @ManyToOne
+  @JoinColumn(name = "role", nullable = false)
+  private RoleEntity role;
   
   @Column(name = "email", nullable = false)
   private String email;
@@ -70,7 +75,7 @@ public class UserEntity {
   /**
    * @return role
    */
-  public Long getRole() {
+  public RoleEntity getRole() {
 
     return this.role;
   }
@@ -78,7 +83,7 @@ public class UserEntity {
   /**
    * @param role new value of {@link #getrole}.
    */
-  public void setRole(Long role) {
+  public void setRole(RoleEntity role) {
 
     this.role = role;
   }
