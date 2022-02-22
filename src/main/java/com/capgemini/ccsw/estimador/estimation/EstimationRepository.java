@@ -1,8 +1,12 @@
 package com.capgemini.ccsw.estimador.estimation;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
@@ -16,5 +20,10 @@ public interface EstimationRepository extends CrudRepository<EstimationEntity, L
 	 * @param pageable
 	 * @return
 	 */
-	Page<EstimationEntity> findAll(Pageable pageable);
+	@Query("select e FROM EstimationEntity e "
+			+ "WHERE (:customer is null or e.project.customer.id = :customer) "
+			+ "and (:project is null or e.project.name like '%'||:project||'%') "
+			+ "and (:startDate is null or :endDate is null or e.created BETWEEN :startDate and :endDate)")
+	Page<EstimationEntity> find(@Param("customer") Long customer, @Param("project") String project, 
+								@Param("startDate") Date startDate, @Param("endDate") Date endDate, Pageable pageable);
 }

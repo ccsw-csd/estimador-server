@@ -14,7 +14,7 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
 /**
  * @author iciudade
  */
-@RequestMapping(value = "/estimation/")
+@RequestMapping(value = "/estimation")
 @RestController
 public class EstimationController {
 
