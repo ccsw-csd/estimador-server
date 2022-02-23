@@ -1,9 +1,8 @@
 package com.capgemini.ccsw.estimador.project.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.user.model.UserDto;
 
 /**
  * 
@@ -16,9 +15,7 @@ public class ProjectDto {
 	
 	private String name;
 	
-	private Calendar created;
-	
-	private UserDto createdBy;
+	private Date created;
 	
 	private CustomerDto customer;
 
@@ -53,29 +50,15 @@ public class ProjectDto {
 	/**
 	 * @return the created
 	 */
-	public Calendar getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
 	/**
 	 * @param created the created to set
 	 */
-	public void setCreated(Calendar created) {
+	public void setCreated(Date created) {
 		this.created = created;
-	}
-
-	/**
-	 * @return the createdBy
-	 */
-	public UserDto getCreatedBy() {
-		return createdBy;
-	}
-
-	/**
-	 * @param createdBy the createdBy to set
-	 */
-	public void setCreatedBy(UserDto createdBy) {
-		this.createdBy = createdBy;
 	}
 
 	/**
