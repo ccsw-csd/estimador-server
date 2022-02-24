@@ -1,9 +1,8 @@
 package com.capgemini.ccsw.estimador.estimation.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import com.capgemini.ccsw.estimador.project.model.ProjectDto;
-import com.capgemini.ccsw.estimador.user.model.UserDto;
 
 /**
  * 
@@ -14,9 +13,7 @@ public class EstimationDto {
 
 	private Long id;
 	
-	private Calendar created;
-	
-	private UserDto createdBy;
+	private Date created;
 	
 	private String estVersion;
 	
@@ -26,7 +23,7 @@ public class EstimationDto {
 	
 	private Long totalDays;
 	
-	private Calendar lastUpdate;
+	private Date lastUpdate;
 	
 	private int status;
 	
@@ -49,29 +46,15 @@ public class EstimationDto {
 	/**
 	 * @return the created
 	 */
-	public Calendar getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
 	/**
 	 * @param created the created to set
 	 */
-	public void setCreated(Calendar created) {
+	public void setCreated(Date created) {
 		this.created = created;
-	}
-
-	/**
-	 * @return the createdBy
-	 */
-	public UserDto getCreatedBy() {
-		return createdBy;
-	}
-
-	/**
-	 * @param createdBy the createdBy to set
-	 */
-	public void setCreatedBy(UserDto createdBy) {
-		this.createdBy = createdBy;
 	}
 
 	/**
@@ -133,14 +116,14 @@ public class EstimationDto {
 	/**
 	 * @return the lastUpdate
 	 */
-	public Calendar getLastUpdate() {
+	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 
 	/**
 	 * @param lastUpdate the lastUpdate to set
 	 */
-	public void setLastUpdate(Calendar lastUpdate) {
+	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 

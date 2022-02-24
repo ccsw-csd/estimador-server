@@ -1,6 +1,6 @@
 package com.capgemini.ccsw.estimador.estimation.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class EstimationEntity {
 	private Long id;
 	
 	@Column(name = "created", nullable = false)
-	private Calendar created;
+	private Date created;
 	
 	@ManyToOne
 	@JoinColumn(name = "created_by")
@@ -47,7 +47,7 @@ public class EstimationEntity {
 	private Long totalDays;
 	
 	@Column(name = "last_update")
-	private Calendar lastUpdate;
+	private Date lastUpdate;
 	
 	@Column(name = "status", nullable = false)
 	private int status;
@@ -72,14 +72,14 @@ public class EstimationEntity {
 	/**
 	 * @return the created
 	 */
-	public Calendar getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
 	/**
 	 * @param created the created to set
 	 */
-	public void setCreated(Calendar created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
@@ -156,14 +156,14 @@ public class EstimationEntity {
 	/**
 	 * @return the lastUpdate
 	 */
-	public Calendar getLastUpdate() {
+	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 
 	/**
 	 * @param lastUpdate the lastUpdate to set
 	 */
-	public void setLastUpdate(Calendar lastUpdate) {
+	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 

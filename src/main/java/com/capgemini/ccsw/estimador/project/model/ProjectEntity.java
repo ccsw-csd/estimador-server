@@ -1,6 +1,6 @@
 package com.capgemini.ccsw.estimador.project.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +30,7 @@ public class ProjectEntity {
 	private String name;
 	
 	@Column(name = "created", nullable = false)
-	private Calendar created;
+	private Date created;
 	
 	@ManyToOne
 	@JoinColumn(name = "created_by", nullable = false)
@@ -71,14 +71,14 @@ public class ProjectEntity {
 	/**
 	 * @return the created
 	 */
-	public Calendar getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
 	/**
 	 * @param created the created to set
 	 */
-	public void setCreated(Calendar created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
