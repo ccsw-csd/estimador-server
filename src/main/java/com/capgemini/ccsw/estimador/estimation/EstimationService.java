@@ -10,14 +10,15 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
  */
 public interface EstimationService {
 
-  /**
-   * Metodo para recuperar un listado paginado de {@link com.capgemini.ccsw.estimador.estimation.model.EstimationEntity}
-   *
-   * @param dto
-   * @return
-   */
-  Page<EstimationEntity> findPage(EstimationSearchDto dto);
+    /**
+     * Metodo para recuperar un listado paginado de
+     * {@link com.capgemini.ccsw.estimador.estimation.model.EstimationEntity}
+     *
+     * @param dto
+     * @return
+     */
+    Page<EstimationEntity> findPage(EstimationSearchDto dto);
 
-  EstimationEntity getEstimation(Long id);
+    EstimationEntity getEstimation(Long id);
 
 }

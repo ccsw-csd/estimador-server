@@ -19,22 +19,21 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
 @RestController
 public class EstimationController {
 
-  @Autowired
-  EstimationService estimationService;
+    @Autowired
+    EstimationService estimationService;
 
-  @Autowired
-  BeanMapper beanMapper;
+    @Autowired
+    BeanMapper beanMapper;
 
-  @RequestMapping(path = "", method = RequestMethod.POST)
-  public Page<EstimationDto> findPage(@RequestBody EstimationSearchDto dto) {
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    public Page<EstimationDto> findPage(@RequestBody EstimationSearchDto dto) {
 
-    return this.beanMapper.mapPage(this.estimationService.findPage(dto), EstimationDto.class);
-  }
+        return this.beanMapper.mapPage(this.estimationService.findPage(dto), EstimationDto.class);
+    }
 
-  @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-  public EstimationDto getEstimation(@PathVariable Long id) {
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public EstimationDto getEstimation(@PathVariable Long id) {
 
-    return this.beanMapper.map(this.estimationService.getEstimation(id), EstimationDto.class);
-  }
-
+        return this.beanMapper.map(this.estimationService.getEstimation(id), EstimationDto.class);
+    }
 }
