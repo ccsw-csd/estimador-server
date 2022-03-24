@@ -2,9 +2,9 @@ package com.capgemini.ccsw.estimador.user;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import com.capgemini.ccsw.estimador.user.model.UserEntity;
 
@@ -23,7 +23,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
      */
     UserEntity getByUsername(String username);
 
-    @Query(value = "select * from user where concat(first_name, ' ', last_name, ' ', username) LIKE %:name% LIMIT 15", nativeQuery = true)
-    List<UserEntity> findByFilter(@Param("name") String filter);
+    @Query("select u from UserEntity u where concat(first_name, ' ', last_name, ' ', username) LIKE %:filter% order by first_name, last_name asc")
+    List<UserEntity> findUsersLikeFilter(String filter, Pageable pageable);
 
 }

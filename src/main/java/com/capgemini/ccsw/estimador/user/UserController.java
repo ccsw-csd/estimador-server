@@ -13,7 +13,9 @@ import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
 import com.capgemini.ccsw.estimador.user.model.UserDto;
 
 /**
- * TODO asolerpa This type ...
+ * @author asolerpa
+ *
+ *         Controllador que expone las operaciones de negocio de la entidad User
  *
  */
 @RequestMapping(value = "/user")

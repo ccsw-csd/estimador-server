@@ -9,7 +9,9 @@ import com.capgemini.ccsw.estimador.collaborator.model.CollaboratorEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
- * TODO asolerpa This type ...
+ * @author asolerpa
+ *
+ *         Clase que implementa los métodos de la interfaz CollaboratorService
  *
  */
 @Service

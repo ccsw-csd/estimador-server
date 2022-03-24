@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserEntity> findByFilter(String filter) {
 
-        return this.userRepository.findByFilter(filter);
+        return this.userRepository.findUsersLikeFilter(filter, PageRequest.of(0, 15));
     }
 
 }

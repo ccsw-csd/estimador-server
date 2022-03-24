@@ -25,6 +25,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerEntity> findByFilter(String filter) {
 
-        return this.customerRepository.findByFilter(filter);
+        return this.customerRepository.findTop15ByNameContaining(filter);
     }
 }

@@ -13,7 +13,10 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.user.model.UserEntity;
 
 /**
- * TODO asolerpa This type ...
+ * @author asolerpa
+ *
+ *         Entidad que representa los datos almacenados en la tabla
+ *         estimation_collaborators
  *
  */
 @Entity

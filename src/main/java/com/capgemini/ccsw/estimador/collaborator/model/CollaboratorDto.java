@@ -4,7 +4,9 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 import com.capgemini.ccsw.estimador.user.model.UserDto;
 
 /**
- * TODO asolerpa This type ...
+ * @author asolerpa
+ *
+ *         Clase DTO de la entidad CollaboratorEntity
  *
  */
 public class CollaboratorDto {
