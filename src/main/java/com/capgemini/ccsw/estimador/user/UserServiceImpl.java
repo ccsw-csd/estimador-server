@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
         user.setRole(this.roleRepository.getByName(dto.getRole()));
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getMail());
-        user.setFirst_name(dto.getFirstName());
-        user.setLast_name(dto.getLastName());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
 
         this.userRepository.save(user);
     }

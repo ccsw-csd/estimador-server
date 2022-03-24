@@ -112,7 +112,7 @@ public class UserEntity {
     /**
      * @param firstName the firstName to set
      */
-    public void setFirst_name(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -126,7 +126,7 @@ public class UserEntity {
     /**
      * @param lastName the lastName to set
      */
-    public void setLast_name(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
