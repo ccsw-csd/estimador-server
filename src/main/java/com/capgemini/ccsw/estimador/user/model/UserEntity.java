@@ -19,115 +19,115 @@ import com.capgemini.ccsw.estimador.role.model.RoleEntity;
 @Table(name = "user")
 public class UserEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-  @Column(name = "username", nullable = false)
-  private String username;
+    @Column(name = "username", nullable = false)
+    private String username;
 
-  @ManyToOne
-  @JoinColumn(name = "role", nullable = false)
-  private RoleEntity role;
-  
-  @Column(name = "email", nullable = false)
-  private String email;
-  
-  @Column(name = "first_name")
-  private String first_name;
-  
-  @Column(name = "last_name")
-  private String last_name;
+    @ManyToOne
+    @JoinColumn(name = "role", nullable = false)
+    private RoleEntity role;
 
-  /**
-   * @return id
-   */
-  public Long getId() {
+    @Column(name = "email", nullable = false)
+    private String email;
 
-    return this.id;
-  }
+    @Column(name = "first_name")
+    private String firstName;
 
-  /**
-   * @param id new value of {@link #getid}.
-   */
-  public void setId(Long id) {
+    @Column(name = "last_name")
+    private String lastName;
 
-    this.id = id;
-  }
+    /**
+     * @return id
+     */
+    public Long getId() {
 
-  /**
-   * @return username
-   */
-  public String getUsername() {
+        return this.id;
+    }
 
-    return this.username;
-  }
+    /**
+     * @param id new value of {@link #getid}.
+     */
+    public void setId(Long id) {
 
-  /**
-   * @param username new value of {@link #getusername}.
-   */
-  public void setUsername(String username) {
+        this.id = id;
+    }
 
-    this.username = username;
-  }
+    /**
+     * @return username
+     */
+    public String getUsername() {
 
-  /**
-   * @return role
-   */
-  public RoleEntity getRole() {
+        return this.username;
+    }
 
-    return this.role;
-  }
+    /**
+     * @param username new value of {@link #getusername}.
+     */
+    public void setUsername(String username) {
 
-  /**
-   * @param role new value of {@link #getrole}.
-   */
-  public void setRole(RoleEntity role) {
+        this.username = username;
+    }
 
-    this.role = role;
-  }
+    /**
+     * @return role
+     */
+    public RoleEntity getRole() {
 
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-	
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
+        return this.role;
+    }
 
-	/**
-	 * @return the first_name
-	 */
-	public String getFirst_name() {
-		return first_name;
-	}
+    /**
+     * @param role new value of {@link #getrole}.
+     */
+    public void setRole(RoleEntity role) {
 
-	/**
-	 * @param first_name the first_name to set
-	 */
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
+        this.role = role;
+    }
 
-	/**
-	 * @return the last_name
-	 */
-	public String getLast_name() {
-		return last_name;
-	}
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return this.email;
+    }
 
-	/**
-	 * @param last_name the last_name to set
-	 */
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
 }

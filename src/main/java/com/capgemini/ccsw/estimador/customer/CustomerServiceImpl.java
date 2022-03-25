@@ -11,13 +11,20 @@ import com.capgemini.ccsw.estimador.customer.model.CustomerEntity;
  * @author iciudade
  */
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
-	@Autowired
-	CustomerRepository customerRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
-	@Override
-	public List<CustomerEntity> findAll(){
-		return this.customerRepository.findAll();
-	}
+    @Override
+    public List<CustomerEntity> findAll() {
+
+        return this.customerRepository.findAll();
+    }
+
+    @Override
+    public List<CustomerEntity> findByFilter(String filter) {
+
+        return this.customerRepository.findTop15ByNameContaining(filter);
+    }
 }

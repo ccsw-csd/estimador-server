@@ -8,11 +8,14 @@ import com.capgemini.ccsw.estimador.customer.model.CustomerEntity;
  * @author iciudade
  */
 public interface CustomerService {
-	
-	/**
-	 * Metodo para recuperar un listado de {@link com.capgemini.ccsw.estimador.customer.model.CustomerEntity}
-	 * @return
-	 */
-	List<CustomerEntity> findAll();
 
+    /**
+     * Metodo para recuperar un listado de
+     * {@link com.capgemini.ccsw.estimador.customer.model.CustomerEntity}
+     *
+     * @return
+     */
+    List<CustomerEntity> findAll();
+
+    List<CustomerEntity> findByFilter(String filter);
 }
