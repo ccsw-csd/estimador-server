@@ -1,35 +1,27 @@
 package com.capgemini.ccsw.estimador.criteriacalculation.model;
 
+import java.util.List;
 
 public class CriteriaCalculationDto {
 
-    private String concept;
+    private Double hours;
 
-    private double value;
+    private List<CriteriaDto> criteriaList;
 
-    private String type;
-
-    public String getConcept() {
-        return concept;
+    public Double getHours() {
+        return hours;
     }
 
-    public void setConcept(String concept) {
-        this.concept = concept;
+    public void setHours(Double hours) {
+        this.hours = hours;
     }
 
-    public double getValue() {
-        return value;
+    public List<CriteriaDto> getCriteriaList() {
+        return criteriaList;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setCriteriaList(List<CriteriaDto> criteriaList) {
+        this.criteriaList = criteriaList;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

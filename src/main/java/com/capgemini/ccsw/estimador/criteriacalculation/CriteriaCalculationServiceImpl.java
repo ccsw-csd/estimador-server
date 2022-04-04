@@ -5,21 +5,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationBodyDto;
 import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaDto;
 import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 
 @Service
 public class CriteriaCalculationServiceImpl implements CriteriaCalculationService {
 
-    @Override
-    public List<CriteriaCalculationTransformationDto> transformation(CriteriaCalculationBodyDto body) {
-        double hours = body.getHours();
+    private static final String CRITERIA_LISTED_NAMES = "% about development";
+
+	@Override
+    public List<CriteriaCalculationTransformationDto> transformation(CriteriaCalculationDto criteriaCalculationDto) {
+        Double hours = criteriaCalculationDto.getHours();
         List<CriteriaCalculationTransformationDto> list = new ArrayList<>();
 
-        for (CriteriaCalculationDto element : body.getCriteriaList()) {
+        for (CriteriaDto element : criteriaCalculationDto.getCriteriaList()) {
             CriteriaCalculationTransformationDto returned = new CriteriaCalculationTransformationDto();
-            if(element.getType().equals("% about development")) {
+            if(element.getType().equals(CRITERIA_LISTED_NAMES)) {
             	returned.setHours(element.getValue() * hours / 100);
             	returned.setConcept(element.getConcept());
             	list.add(returned);

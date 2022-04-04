@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.ccsw.estimador.criteriacalculation.CriteriaCalculationController;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationBodyDto;
 import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaDto;
 
 @SpringBootTest
 public class CriteriaCalculationTest {
@@ -24,9 +24,9 @@ public class CriteriaCalculationTest {
     public void testIfCriteriaCalculationReturnsRightList() {
         assertNotNull(criteriaCalculationController);
 
-        CriteriaCalculationBodyDto body = new CriteriaCalculationBodyDto();
-        List<CriteriaCalculationDto> list = new ArrayList<CriteriaCalculationDto>();
-        CriteriaCalculationDto criteriaTmp = new CriteriaCalculationDto();
+        CriteriaCalculationDto body = new CriteriaCalculationDto();
+        List<CriteriaDto> list = new ArrayList<CriteriaDto>();
+        CriteriaDto criteriaTmp = new CriteriaDto();
 
         criteriaTmp.setConcept("hola");
         criteriaTmp.setType("% about development");
