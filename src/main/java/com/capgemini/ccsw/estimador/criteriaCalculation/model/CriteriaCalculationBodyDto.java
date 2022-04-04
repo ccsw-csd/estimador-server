@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.criteriaCalculation.model;
+package com.capgemini.ccsw.estimador.criteriaCalculation.model;
 
 import java.util.List;
 

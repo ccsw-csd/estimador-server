@@ -1,13 +1,13 @@
-package com.capgemini.ccsw.criteriaCalculation;
+package com.capgemini.ccsw.estimador.criteriaCalculation;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.capgemini.ccsw.estimador.criteriaCalculation.model.CriteriaCalculationDto;
+import com.capgemini.ccsw.estimador.criteriaCalculation.model.CriteriaCalculationTransformationDto;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationBodyDto;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationDto;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationTransformationDto;
+import com.capgemini.ccsw.estimador.criteriaCalculation.model.CriteriaCalculationBodyDto;
 
 @Service
 public class CriteriaCalculationServiceImpl implements CriteriaCalculationService {

@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.capgemini.ccsw.criteriaCalculation.CriteriaCalculationController;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationBodyDto;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationDto;
+import com.capgemini.ccsw.estimador.criteriaCalculation.CriteriaCalculationController;
+import com.capgemini.ccsw.estimador.criteriaCalculation.model.CriteriaCalculationBodyDto;
+import com.capgemini.ccsw.estimador.criteriaCalculation.model.CriteriaCalculationDto;
 
 @SpringBootTest
 public class CriteriaCalculationTest {

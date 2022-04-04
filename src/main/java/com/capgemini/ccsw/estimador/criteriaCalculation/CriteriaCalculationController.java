@@ -1,15 +1,15 @@
-package com.capgemini.ccsw.criteriaCalculation;
+package com.capgemini.ccsw.estimador.criteriaCalculation;
 
 import java.util.List;
 
+import com.capgemini.ccsw.estimador.criteriaCalculation.model.CriteriaCalculationTransformationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationBodyDto;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationTransformationDto;
+import com.capgemini.ccsw.estimador.criteriaCalculation.model.CriteriaCalculationBodyDto;
 
 @RestController
 @RequestMapping(value = "/critcalculation")
