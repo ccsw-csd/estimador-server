@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.criteriaCalculation.model;
+package com.capgemini.ccsw.estimador.criteriacalculation.model;
 
 public class CriteriaCalculationDto {
 

@@ -1,13 +1,13 @@
-package com.capgemini.ccsw.criteriaCalculation;
+package com.capgemini.ccsw.estimador.criteriacalculation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationBodyDto;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationDto;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationTransformationDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationBodyDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 
 @Service
 public class CriteriaCalculationServiceImpl implements CriteriaCalculationService {
@@ -19,9 +19,11 @@ public class CriteriaCalculationServiceImpl implements CriteriaCalculationServic
 
         for (CriteriaCalculationDto element : body.getCriteriaList()) {
             CriteriaCalculationTransformationDto returned = new CriteriaCalculationTransformationDto();
-            returned.setHours(element.getValue() * hours / 100);
-            returned.setType(element.getType());
-            list.add(returned);
+            if(element.getType().equals("% about development")) {
+            	returned.setHours(element.getValue() * hours / 100);
+            	returned.setConcept(element.getConcept());
+            	list.add(returned);
+            }
         }
         return list;
     }

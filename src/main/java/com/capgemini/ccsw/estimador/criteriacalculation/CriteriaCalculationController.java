@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.criteriaCalculation;
+package com.capgemini.ccsw.estimador.criteriacalculation;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationBodyDto;
-import com.capgemini.ccsw.criteriaCalculation.model.CriteriaCalculationTransformationDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationBodyDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 
 @RestController
 @RequestMapping(value = "/critcalculation")
