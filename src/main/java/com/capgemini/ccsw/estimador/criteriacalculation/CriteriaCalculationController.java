@@ -18,9 +18,9 @@ public class CriteriaCalculationController {
     @Autowired
     CriteriaCalculationService criteriaCalculationService;
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
+    @RequestMapping(path = "/calculate", method = RequestMethod.POST)
     public List<CriteriaCalculationTransformationDto> calculatePercentagesWithCriteria(
-            @RequestBody CriteriaCalculationDto criteriaCalculationBodyDto) {
-        return criteriaCalculationService.transformation(criteriaCalculationBodyDto);
+            @RequestBody CriteriaCalculationDto criteriaCalculationDto) {
+        return criteriaCalculationService.transformation(criteriaCalculationDto);
     }
 }

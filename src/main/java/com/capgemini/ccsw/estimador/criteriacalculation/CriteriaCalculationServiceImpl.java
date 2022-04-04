@@ -22,7 +22,7 @@ public class CriteriaCalculationServiceImpl implements CriteriaCalculationServic
         for (CriteriaDto element : criteriaCalculationDto.getCriteriaList()) {
             CriteriaCalculationTransformationDto returned = new CriteriaCalculationTransformationDto();
             if(element.getType().equals(CRITERIA_LISTED_NAMES)) {
-            	returned.setHours(element.getValue() * hours / 100);
+            	returned.setHours((double) element.getValue() * hours / 100);
             	returned.setConcept(element.getConcept());
             	list.add(returned);
             }
