@@ -24,18 +24,22 @@ public class CriteriaCalculationTest {
     public void testIfCriteriaCalculationReturnsRightList() {
         assertNotNull(criteriaCalculationController);
 
+        final Double HOURS = (double) 100;
+        final Double VALUE = (double) 15;
+        final String TYPE = "% about development";
+        final String CONCEPT = "exampleConcept";
         CriteriaCalculationDto body = new CriteriaCalculationDto();
         List<CriteriaDto> list = new ArrayList<CriteriaDto>();
         CriteriaDto criteriaTmp = new CriteriaDto();
 
-        criteriaTmp.setConcept("hola");
-        criteriaTmp.setType("% about development");
-        criteriaTmp.setValue(15);
+        criteriaTmp.setConcept(CONCEPT);
+        criteriaTmp.setType(TYPE);
+        criteriaTmp.setValue(VALUE);
 
         list.add(criteriaTmp);
 
         body.setCriteriaList(list);
-        body.setHours(100);
+        body.setHours(HOURS);
 
         assertEquals(15,
                 criteriaCalculationController.transformation(body).stream().findFirst().orElse(null).getHours());
