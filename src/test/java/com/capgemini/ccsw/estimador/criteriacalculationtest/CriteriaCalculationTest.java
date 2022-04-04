@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.criteriacalculationTest;
+package com.capgemini.ccsw.estimador.criteriacalculationtest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
