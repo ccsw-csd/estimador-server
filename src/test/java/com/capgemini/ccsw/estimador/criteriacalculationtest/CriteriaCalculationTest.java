@@ -42,6 +42,6 @@ public class CriteriaCalculationTest {
         body.setHours(HOURS);
 
         assertEquals(15,
-                criteriaCalculationController.transformation(body).stream().findFirst().orElse(null).getHours());
+                criteriaCalculationController.calculatePercentagesWithCriteria(body).stream().findFirst().orElse(null).getHours());
     }
 }
