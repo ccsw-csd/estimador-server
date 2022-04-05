@@ -7,6 +7,5 @@ import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculatio
 
 public interface CriteriaCalculationService {
 
-	List<CriteriaCalculationTransformationDto> transformation(CriteriaCalculationDto criteriaCalculationDto);
-
+    List<CriteriaCalculationTransformationDto> transformation(CriteriaCalculationDto criteriaCalculationDto);
 }
