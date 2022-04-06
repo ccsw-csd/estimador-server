@@ -32,6 +32,7 @@ public class WeightCalculatorTest {
     final String taskName = "taskName";
 
     final Double percentageTest = 10d;
+
     @InjectMocks
     WeightCalculatorServiceImpl weightCalculatorServiceImpl;
 
