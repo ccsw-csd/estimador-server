@@ -26,14 +26,17 @@ public class WeightCalculatorServiceImpl implements WeightCalculatorService {
     private void assignValuesToReturn(List<WeightCalculatorDto> weightCalculatorDtoList, TaskDto taskDto,
             HashMap<String, WeightsDto> weightsDto) {
         WeightCalculatorDto weightCalculatorDto = new WeightCalculatorDto();
-        weightCalculatorDto.setElement(taskDto.getElement());
-        weightCalculatorDto.setTaskName(taskDto.getName());
-        weightCalculatorDto.setTotalHours(
-                ((taskDto.getVerySimpleCostQuantity() * weightsDto.get(taskDto.getElement()).getVerySimpleCost())
-                        + (taskDto.getSimpleCostQuantity() * weightsDto.get(taskDto.getElement()).getSimpleCost())
-                        + (taskDto.getMediumCostQuantity() * weightsDto.get(taskDto.getElement()).getMediumCost())
-                        + (taskDto.getComplexCostQuantity() * weightsDto.get(taskDto.getElement()).getComplexCost()))
-                        * (1 - taskDto.getPercentageOfReuse() / 100));
-        weightCalculatorDtoList.add(weightCalculatorDto);
+        if (weightsDto.containsKey(taskDto.getElement())) {
+            weightCalculatorDto.setElement(taskDto.getElement());
+            weightCalculatorDto.setTaskName(taskDto.getName());
+            weightCalculatorDto.setTotalHours(
+                    ((taskDto.getVerySimpleCostQuantity() * weightsDto.get(taskDto.getElement()).getVerySimpleCost())
+                            + (taskDto.getSimpleCostQuantity() * weightsDto.get(taskDto.getElement()).getSimpleCost())
+                            + (taskDto.getMediumCostQuantity() * weightsDto.get(taskDto.getElement()).getMediumCost())
+                            + (taskDto.getComplexCostQuantity()
+                                    * weightsDto.get(taskDto.getElement()).getComplexCost()))
+                            * (1 - taskDto.getPercentageOfReuse() / 100));
+            weightCalculatorDtoList.add(weightCalculatorDto);
+        }
     }
 }
