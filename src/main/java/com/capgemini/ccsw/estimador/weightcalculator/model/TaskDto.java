@@ -10,7 +10,7 @@ public class TaskDto {
 
     Double simpleCostQuantity;
 
-    Double costQuantity;
+    Double mediumCostQuantity;
 
     Double complexCostQuantity;
 
@@ -48,12 +48,12 @@ public class TaskDto {
         this.simpleCostQuantity = simpleCostQuantity;
     }
 
-    public Double getCostQuantity() {
-        return costQuantity;
+    public Double getMediumCostQuantity() {
+        return mediumCostQuantity;
     }
 
-    public void setCostQuantity(Double costQuantity) {
-        this.costQuantity = costQuantity;
+    public void setMediumCostQuantity(Double mediumCostQuantity) {
+        this.mediumCostQuantity = mediumCostQuantity;
     }
 
     public Double getComplexCostQuantity() {

@@ -44,13 +44,13 @@ public class WeightCalculatorTest {
         taskDto.setElement(elementName);
         taskDto.setVerySimpleCostQuantity(verySimpleCostValue);
         taskDto.setSimpleCostQuantity(simpleCostValue);
-        taskDto.setCostQuantity(costValue);
+        taskDto.setMediumCostQuantity(costValue);
         taskDto.setComplexCostQuantity(complexCostValue);
         taskDto.setPercentageOfReuse(percentageTest);
 
         WeightsDto weightDto = new WeightsDto();
         weightDto.setElement(elementName);
-        weightDto.setCost(costValue);
+        weightDto.setMediumCost(costValue);
         weightDto.setVerySimpleCost(verySimpleCostValue);
         weightDto.setSimpleCost(simpleCostValue);
         weightDto.setComplexCost(complexCostValue);

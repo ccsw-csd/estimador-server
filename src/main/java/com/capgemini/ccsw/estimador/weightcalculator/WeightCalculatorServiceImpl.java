@@ -25,7 +25,7 @@ public class WeightCalculatorServiceImpl implements WeightCalculatorService {
                     weightCalculatorDto
                             .setTotalHours(((taskDto.getVerySimpleCostQuantity() * weightsDto.getVerySimpleCost())
                                     + (taskDto.getSimpleCostQuantity() * weightsDto.getSimpleCost())
-                                    + (taskDto.getCostQuantity() * weightsDto.getCost())
+                                    + (taskDto.getMediumCostQuantity() * weightsDto.getMediumCost())
                                     + (taskDto.getComplexCostQuantity() * weightsDto.getComplexCost()))
                                     * (1 - taskDto.getPercentageOfReuse() / 100));
                     weightCalculatorDtoList.add(weightCalculatorDto);

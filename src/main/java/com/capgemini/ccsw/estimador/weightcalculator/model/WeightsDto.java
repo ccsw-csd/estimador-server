@@ -8,7 +8,7 @@ public class WeightsDto {
 
     Double simpleCost;
 
-    Double cost;
+    Double mediumCost;
 
     Double complexCost;
 
@@ -36,12 +36,12 @@ public class WeightsDto {
         this.simpleCost = simpleCost;
     }
 
-    public Double getCost() {
-        return cost;
+    public Double getMediumCost() {
+        return mediumCost;
     }
 
-    public void setCost(Double cost) {
-        this.cost = cost;
+    public void setMediumCost(Double mediumCost) {
+        this.mediumCost = mediumCost;
     }
 
     public Double getComplexCost() {
