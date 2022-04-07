@@ -17,13 +17,9 @@ public class WeightCalculatorServiceImpl implements WeightCalculatorService {
     public List<WeightCalculatorDto> calculateWeights(List<TaskDto> taskDtoList, List<WeightsDto> weightsDtoList) {
         List<WeightCalculatorDto> weightCalculatorDtoList = new ArrayList<>();
         HashMap<String, WeightsDto> hashMapOfWeightsDto = new HashMap<>();
-        for (WeightsDto weightsDto : weightsDtoList) {
-            hashMapOfWeightsDto.put(weightsDto.getElement(), weightsDto);
-        }
-        for (TaskDto taskDto : taskDtoList) {
-            assignValuesToReturn(weightCalculatorDtoList, taskDto, hashMapOfWeightsDto);
-
-        }
+        weightsDtoList.stream().forEach(weightsDto -> hashMapOfWeightsDto.put(weightsDto.getElement(), weightsDto));
+        taskDtoList.stream()
+                .forEach(taskDto -> assignValuesToReturn(weightCalculatorDtoList, taskDto, hashMapOfWeightsDto));
         return weightCalculatorDtoList;
     }
 
