@@ -25,7 +25,7 @@ public class WeightCalculatorIT extends BaseITAbstract {
 
     final Double simpleCostValue = 2d;
 
-    final Double costValue = 3d;
+    final Double mediumCostValue = 3d;
 
     final Double complexCostValue = 4d;
 
@@ -42,13 +42,13 @@ public class WeightCalculatorIT extends BaseITAbstract {
         taskDto.setElement(elementName);
         taskDto.setVerySimpleCostQuantity(verySimpleCostValue);
         taskDto.setSimpleCostQuantity(simpleCostValue);
-        taskDto.setMediumCostQuantity(costValue);
+        taskDto.setMediumCostQuantity(mediumCostValue);
         taskDto.setComplexCostQuantity(complexCostValue);
         taskDto.setPercentageOfReuse(percentageTest);
 
         WeightsDto weightDto = new WeightsDto();
         weightDto.setElement(elementName);
-        weightDto.setMediumCost(costValue);
+        weightDto.setMediumCost(mediumCostValue);
         weightDto.setVerySimpleCost(verySimpleCostValue);
         weightDto.setSimpleCost(simpleCostValue);
         weightDto.setComplexCost(complexCostValue);
