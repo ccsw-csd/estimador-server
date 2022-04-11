@@ -1,10 +1,10 @@
-package com.capgemini.ccsw.estimador.elementWeight;
+package com.capgemini.ccsw.estimador.elementweight;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.capgemini.ccsw.estimador.elementWeight.model.ElementWeightEntity;
+import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**

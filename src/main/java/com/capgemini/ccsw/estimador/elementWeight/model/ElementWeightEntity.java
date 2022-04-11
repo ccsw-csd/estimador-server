@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.elementWeight.model;
+package com.capgemini.ccsw.estimador.elementweight.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
-import com.capgemini.ccsw.estimador.estimationLevel.model.EstimationLevelEntity;
+import com.capgemini.ccsw.estimador.estimationlevel.model.EstimationLevelEntity;
 
 /**
  * @author asolerpa

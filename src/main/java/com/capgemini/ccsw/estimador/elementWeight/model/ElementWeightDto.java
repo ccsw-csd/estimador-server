@@ -1,6 +1,6 @@
-package com.capgemini.ccsw.estimador.elementWeight.model;
+package com.capgemini.ccsw.estimador.elementweight.model;
 
-import com.capgemini.ccsw.estimador.estimationLevel.model.EstimationLevelDto;
+import com.capgemini.ccsw.estimador.estimationlevel.model.EstimationLevelDto;
 
 /**
  * @author asolerpa

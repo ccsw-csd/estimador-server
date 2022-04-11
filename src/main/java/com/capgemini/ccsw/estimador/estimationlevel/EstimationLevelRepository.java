@@ -1,10 +1,10 @@
-package com.capgemini.ccsw.estimador.estimationLevel;
+package com.capgemini.ccsw.estimador.estimationlevel;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.capgemini.ccsw.estimador.estimationLevel.model.EstimationLevelEntity;
+import com.capgemini.ccsw.estimador.estimationlevel.model.EstimationLevelEntity;
 
 /**
  * @author asolerpa

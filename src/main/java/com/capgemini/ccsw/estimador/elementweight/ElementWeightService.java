@@ -1,9 +1,9 @@
-package com.capgemini.ccsw.estimador.elementWeight;
+package com.capgemini.ccsw.estimador.elementweight;
 
 import java.util.List;
 
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.elementWeight.model.ElementWeightEntity;
+import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightEntity;
 
 /**
  * @author asolerpa

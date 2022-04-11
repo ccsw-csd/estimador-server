@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.estimationLevel;
+package com.capgemini.ccsw.estimador.estimationlevel;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
-import com.capgemini.ccsw.estimador.estimationLevel.model.EstimationLevelDto;
+import com.capgemini.ccsw.estimador.estimationlevel.model.EstimationLevelDto;
 
 /**
  * @author asolerpa

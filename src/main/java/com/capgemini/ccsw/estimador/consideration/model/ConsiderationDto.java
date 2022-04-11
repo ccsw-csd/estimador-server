@@ -1,27 +1,25 @@
-package com.capgemini.ccsw.estimador.estimationParameter.model;
+package com.capgemini.ccsw.estimador.consideration.model;
 
 import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
-import com.capgemini.ccsw.estimador.parameter.model.ParameterDto;
 
 /**
  * @author asolerpa
  *
- *         Clase DTO de la entidad EstimationParameterEntity
+ *         Clase DTO de la entidad ConsiderationEntity
  *
  */
-public class EstimationParameterDto {
+public class ConsiderationDto {
 
     private Long id;
 
     private EstimationDto estimation;
 
-    private ParameterDto parameter;
+    private String comment;
 
     /**
      * @return id
      */
     public Long getId() {
-
         return this.id;
     }
 
@@ -29,7 +27,6 @@ public class EstimationParameterDto {
      * @param id new value of {@link #getid}.
      */
     public void setId(Long id) {
-
         this.id = id;
     }
 
@@ -37,7 +34,6 @@ public class EstimationParameterDto {
      * @return estimation
      */
     public EstimationDto getEstimation() {
-
         return this.estimation;
     }
 
@@ -45,24 +41,21 @@ public class EstimationParameterDto {
      * @param estimation new value of {@link #getestimation}.
      */
     public void setEstimation(EstimationDto estimation) {
-
         this.estimation = estimation;
     }
 
     /**
-     * @return parameter
+     * @return comment
      */
-    public ParameterDto getParameter() {
-
-        return this.parameter;
+    public String getComment() {
+        return this.comment;
     }
 
     /**
-     * @param parameter new value of {@link #getparameter}.
+     * @param comment new value of {@link #getcomment}.
      */
-    public void setParameter(ParameterDto parameter) {
-
-        this.parameter = parameter;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 }

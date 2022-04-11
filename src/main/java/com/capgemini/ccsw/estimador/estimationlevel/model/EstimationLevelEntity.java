@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.estimationLevel.model;
+package com.capgemini.ccsw.estimador.estimationlevel.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

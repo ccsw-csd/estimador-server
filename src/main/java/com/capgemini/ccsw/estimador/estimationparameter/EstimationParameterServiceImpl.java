@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.estimationParameter;
+package com.capgemini.ccsw.estimador.estimationparameter;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
 import com.capgemini.ccsw.estimador.estimation.EstimationService;
-import com.capgemini.ccsw.estimador.estimationParameter.model.EstimationParameterEntity;
+import com.capgemini.ccsw.estimador.estimationparameter.model.EstimationParameterEntity;
 
 /**
  * @author asolerpa

@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.elementWeight;
+package com.capgemini.ccsw.estimador.elementweight;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.elementWeight.model.ElementWeightDto;
+import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightDto;
 
 /**
  * @author asolerpa

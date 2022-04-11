@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.estimationParameter.EstimationParameterService;
-import com.capgemini.ccsw.estimador.estimationParameter.model.EstimationParameterEntity;
+import com.capgemini.ccsw.estimador.estimationparameter.EstimationParameterService;
+import com.capgemini.ccsw.estimador.estimationparameter.model.EstimationParameterEntity;
 import com.capgemini.ccsw.estimador.parameter.model.ParameterEntity;
 
 /**

@@ -1,11 +1,11 @@
-package com.capgemini.ccsw.estimador.estimationParameter;
+package com.capgemini.ccsw.estimador.estimationparameter;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
-import com.capgemini.ccsw.estimador.estimationParameter.model.EstimationParameterEntity;
+import com.capgemini.ccsw.estimador.estimationparameter.model.EstimationParameterEntity;
 
 /**
  * @author asolerpa

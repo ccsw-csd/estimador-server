@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.elementWeight;
+package com.capgemini.ccsw.estimador.elementweight;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.elementWeight.model.ElementWeightEntity;
+import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightEntity;
 import com.capgemini.ccsw.estimador.estimation.EstimationService;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
