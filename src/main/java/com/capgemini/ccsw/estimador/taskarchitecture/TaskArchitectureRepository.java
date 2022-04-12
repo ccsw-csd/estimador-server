@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.taskarchitecture.model.TaskArchitectureEntity;
 
 /**
@@ -16,6 +15,6 @@ import com.capgemini.ccsw.estimador.taskarchitecture.model.TaskArchitectureEntit
  */
 public interface TaskArchitectureRepository extends CrudRepository<TaskArchitectureEntity, Long> {
 
-    List<TaskArchitectureEntity> findByEstimation(EstimationEntity estimation);
+    List<TaskArchitectureEntity> findByEstimationId(Long estimationId);
 
 }

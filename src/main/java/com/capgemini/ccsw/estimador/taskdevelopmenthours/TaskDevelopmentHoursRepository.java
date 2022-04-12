@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.taskdevelopmenthours.model.TaskDevelopmentHoursEntity;
 
 /**
@@ -16,6 +15,6 @@ import com.capgemini.ccsw.estimador.taskdevelopmenthours.model.TaskDevelopmentHo
  */
 public interface TaskDevelopmentHoursRepository extends CrudRepository<TaskDevelopmentHoursEntity, Long> {
 
-    List<TaskDevelopmentHoursEntity> findByEstimation(EstimationEntity estimation);
+    List<TaskDevelopmentHoursEntity> findByEstimationId(Long estimationId);
 
 }

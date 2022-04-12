@@ -3,7 +3,7 @@ package com.capgemini.ccsw.estimador.taskdevelopmenthours;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +28,8 @@ public class TaskDevelopmentHoursController {
     @Autowired
     BeanMapper beanMapper;
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    public List<TaskDevelopmentHoursDto> findByEstimation(@RequestBody Long id) {
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public List<TaskDevelopmentHoursDto> findByEstimation(@PathVariable Long id) {
 
         return this.beanMapper.mapList(this.taskDevelopmentHoursService.findByEstimation(id),
                 TaskDevelopmentHoursDto.class);

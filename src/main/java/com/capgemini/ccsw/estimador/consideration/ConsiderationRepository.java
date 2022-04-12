@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import com.capgemini.ccsw.estimador.consideration.model.ConsiderationEntity;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -16,6 +15,6 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
  */
 public interface ConsiderationRepository extends CrudRepository<ConsiderationEntity, Long> {
 
-    List<ConsiderationEntity> findByEstimation(EstimationEntity estimation);
+    List<ConsiderationEntity> findByEstimationId(Long estimationId);
 
 }
