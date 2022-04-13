@@ -13,6 +13,6 @@ import com.capgemini.ccsw.estimador.taskarchitecture.model.TaskArchitectureEntit
  */
 public interface TaskArchitectureService {
 
-    List<TaskArchitectureEntity> findByEstimation(Long id);
+    List<TaskArchitectureEntity> findByEstimationId(Long id);
 
 }

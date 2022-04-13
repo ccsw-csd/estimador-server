@@ -20,7 +20,7 @@ public class ConsiderationServiceImpl implements ConsiderationService {
     ConsiderationRepository considerationRepository;
 
     @Override
-    public List<ConsiderationEntity> findByEstimation(Long id) {
+    public List<ConsiderationEntity> findByEstimationId(Long id) {
 
         return this.considerationRepository.findByEstimationId(id);
     }

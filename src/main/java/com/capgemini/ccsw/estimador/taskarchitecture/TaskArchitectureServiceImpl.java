@@ -21,7 +21,7 @@ public class TaskArchitectureServiceImpl implements TaskArchitectureService {
     TaskArchitectureRepository taskArchitectureRepository;
 
     @Override
-    public List<TaskArchitectureEntity> findByEstimation(Long id) {
+    public List<TaskArchitectureEntity> findByEstimationId(Long id) {
         return this.taskArchitectureRepository.findByEstimationId(id);
     }
 

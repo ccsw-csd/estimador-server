@@ -28,9 +28,9 @@ public class CollaboratorController {
     @Autowired
     BeanMapper beanMapper;
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public List<CollaboratorDto> findByEstimation(@PathVariable Long id) {
+    @RequestMapping(path = "/estimation/{id}", method = RequestMethod.GET)
+    public List<CollaboratorDto> findByEstimationId(@PathVariable Long id) {
 
-        return this.beanMapper.mapList(this.collaboratorService.findByEstimation(id), CollaboratorDto.class);
+        return this.beanMapper.mapList(this.collaboratorService.findByEstimationId(id), CollaboratorDto.class);
     }
 }

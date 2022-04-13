@@ -13,6 +13,6 @@ import com.capgemini.ccsw.estimador.collaborator.model.CollaboratorEntity;
  */
 public interface CollaboratorService {
 
-    List<CollaboratorEntity> findByEstimation(Long estimationId);
+    List<CollaboratorEntity> findByEstimationId(Long estimationId);
 
 }

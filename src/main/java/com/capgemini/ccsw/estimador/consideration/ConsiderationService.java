@@ -13,6 +13,6 @@ import com.capgemini.ccsw.estimador.consideration.model.ConsiderationEntity;
  */
 public interface ConsiderationService {
 
-    List<ConsiderationEntity> findByEstimation(Long id);
+    List<ConsiderationEntity> findByEstimationId(Long id);
 
 }

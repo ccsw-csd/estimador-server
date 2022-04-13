@@ -14,7 +14,7 @@ import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightEntity;
  */
 public interface ElementWeightService {
 
-    List<ElementWeightEntity> findByEstimation(Long id);
+    List<ElementWeightEntity> findByEstimationId(Long id);
 
     List<ElementWeightEntity> findByEstimationCustomer(CustomerDto customer);
 

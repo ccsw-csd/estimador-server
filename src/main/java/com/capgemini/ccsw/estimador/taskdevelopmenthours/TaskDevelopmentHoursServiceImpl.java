@@ -21,7 +21,7 @@ public class TaskDevelopmentHoursServiceImpl implements TaskDevelopmentHoursServ
     TaskDevelopmentHoursRepository taskDevelopmentHoursRepository;
 
     @Override
-    public List<TaskDevelopmentHoursEntity> findByEstimation(Long id) {
+    public List<TaskDevelopmentHoursEntity> findByEstimationId(Long id) {
         return this.taskDevelopmentHoursRepository.findByEstimationId(id);
     }
 }

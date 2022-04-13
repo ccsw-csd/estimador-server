@@ -28,10 +28,10 @@ public class TaskArchitectureController {
     @Autowired
     BeanMapper beanMapper;
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public List<TaskArchitectureDto> findByEstimation(@PathVariable Long id) {
+    @RequestMapping(path = "/estimation/{id}", method = RequestMethod.GET)
+    public List<TaskArchitectureDto> findByEstimationId(@PathVariable Long id) {
 
-        return this.beanMapper.mapList(this.taskArchitectureService.findByEstimation(id), TaskArchitectureDto.class);
+        return this.beanMapper.mapList(this.taskArchitectureService.findByEstimationId(id), TaskArchitectureDto.class);
 
     }
 

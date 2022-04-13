@@ -24,10 +24,10 @@ public class ParameterServiceImpl implements ParameterService {
     EstimationParameterService estimationParameterService;
 
     @Override
-    public List<ParameterEntity> findParametersByEstimation(Long id) {
+    public List<ParameterEntity> findParametersByEstimationId(Long id) {
         List<ParameterEntity> parameters = new ArrayList();
 
-        List<EstimationParameterEntity> list = this.estimationParameterService.findParametersByEstimation(id);
+        List<EstimationParameterEntity> list = this.estimationParameterService.findParametersByEstimationId(id);
 
         list.forEach(element -> {
             parameters.add(element.getParameter());

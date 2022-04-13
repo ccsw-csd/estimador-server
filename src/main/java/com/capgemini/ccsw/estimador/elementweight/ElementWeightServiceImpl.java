@@ -25,7 +25,7 @@ public class ElementWeightServiceImpl implements ElementWeightService {
     EstimationService estimationService;
 
     @Override
-    public List<ElementWeightEntity> findByEstimation(Long id) {
+    public List<ElementWeightEntity> findByEstimationId(Long id) {
 
         return this.elementWeightRepository.findByEstimationId(id);
     }

@@ -13,6 +13,6 @@ import com.capgemini.ccsw.estimador.taskdevelopmenthours.model.TaskDevelopmentHo
  */
 public interface TaskDevelopmentHoursService {
 
-    List<TaskDevelopmentHoursEntity> findByEstimation(Long id);
+    List<TaskDevelopmentHoursEntity> findByEstimationId(Long id);
 
 }

@@ -14,7 +14,7 @@ import com.capgemini.ccsw.estimador.parameter.model.ParameterEntity;
  */
 public interface ParameterService {
 
-    List<ParameterEntity> findParametersByEstimation(Long id);
+    List<ParameterEntity> findParametersByEstimationId(Long id);
 
     List<ParameterEntity> findParametersByEstimationCustomer(CustomerDto customer);
 

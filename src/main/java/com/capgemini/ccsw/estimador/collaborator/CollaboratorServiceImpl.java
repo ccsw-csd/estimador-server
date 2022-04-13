@@ -20,7 +20,7 @@ public class CollaboratorServiceImpl implements CollaboratorService {
     CollaboratorRepository collaboratorRepository;
 
     @Override
-    public List<CollaboratorEntity> findByEstimation(Long id) {
+    public List<CollaboratorEntity> findByEstimationId(Long id) {
 
         return this.collaboratorRepository.findByEstimationId(id);
 

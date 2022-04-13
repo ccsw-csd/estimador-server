@@ -28,10 +28,10 @@ public class ConsiderationController {
     @Autowired
     BeanMapper beanMapper;
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public List<ConsiderationDto> findByEstimation(@PathVariable Long id) {
+    @RequestMapping(path = "/estimation/{id}", method = RequestMethod.GET)
+    public List<ConsiderationDto> findByEstimationId(@PathVariable Long id) {
 
-        return this.beanMapper.mapList(this.considerationService.findByEstimation(id), ConsiderationDto.class);
+        return this.beanMapper.mapList(this.considerationService.findByEstimationId(id), ConsiderationDto.class);
 
     }
 

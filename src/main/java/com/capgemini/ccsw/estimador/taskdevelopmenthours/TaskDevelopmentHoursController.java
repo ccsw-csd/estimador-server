@@ -28,10 +28,10 @@ public class TaskDevelopmentHoursController {
     @Autowired
     BeanMapper beanMapper;
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public List<TaskDevelopmentHoursDto> findByEstimation(@PathVariable Long id) {
+    @RequestMapping(path = "/estimation/{id}", method = RequestMethod.GET)
+    public List<TaskDevelopmentHoursDto> findByEstimationId(@PathVariable Long id) {
 
-        return this.beanMapper.mapList(this.taskDevelopmentHoursService.findByEstimation(id),
+        return this.beanMapper.mapList(this.taskDevelopmentHoursService.findByEstimationId(id),
                 TaskDevelopmentHoursDto.class);
 
     }
