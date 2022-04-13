@@ -1,12 +1,14 @@
 package com.capgemini.ccsw.estimador.criteriacalculation;
 
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.capgemini.ccsw.estimador.criteriacalculation.CriteriaCalculationServiceImpl;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
+import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaDto;
 
 import java.util.ArrayList;
 import java.util.List;
