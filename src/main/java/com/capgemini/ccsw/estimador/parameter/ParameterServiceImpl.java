@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.estimationParameter.EstimationParameterService;
-import com.capgemini.ccsw.estimador.estimationParameter.model.EstimationParameterEntity;
+import com.capgemini.ccsw.estimador.estimationparameter.EstimationParameterService;
+import com.capgemini.ccsw.estimador.estimationparameter.model.EstimationParameterEntity;
 import com.capgemini.ccsw.estimador.parameter.model.ParameterEntity;
 
 /**
@@ -24,10 +24,10 @@ public class ParameterServiceImpl implements ParameterService {
     EstimationParameterService estimationParameterService;
 
     @Override
-    public List<ParameterEntity> findParametersByEstimation(Long id) {
+    public List<ParameterEntity> findParametersByEstimationId(Long id) {
         List<ParameterEntity> parameters = new ArrayList();
 
-        List<EstimationParameterEntity> list = this.estimationParameterService.findParametersByEstimation(id);
+        List<EstimationParameterEntity> list = this.estimationParameterService.findParametersByEstimationId(id);
 
         list.forEach(element -> {
             parameters.add(element.getParameter());

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import com.capgemini.ccsw.estimador.collaborator.model.CollaboratorEntity;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -16,6 +15,6 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
  */
 public interface CollaboratorRepository extends CrudRepository<CollaboratorEntity, Long> {
 
-    List<CollaboratorEntity> findByEstimation(EstimationEntity estimation);
+    List<CollaboratorEntity> findByEstimationId(Long id);
 
 }
