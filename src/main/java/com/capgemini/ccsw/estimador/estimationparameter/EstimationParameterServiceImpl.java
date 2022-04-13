@@ -28,7 +28,7 @@ public class EstimationParameterServiceImpl implements EstimationParameterServic
     @Override
     public List<EstimationParameterEntity> findParametersByEstimation(Long id) {
 
-        return this.estimationParameterRepository.findByEstimation(this.estimationService.getEstimation(id));
+        return this.estimationParameterRepository.findByEstimationId(id);
 
     }
 

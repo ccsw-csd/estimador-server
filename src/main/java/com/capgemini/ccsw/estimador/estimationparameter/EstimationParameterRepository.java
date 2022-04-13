@@ -2,9 +2,9 @@ package com.capgemini.ccsw.estimador.estimationparameter;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.estimationparameter.model.EstimationParameterEntity;
 
 /**
@@ -16,5 +16,7 @@ import com.capgemini.ccsw.estimador.estimationparameter.model.EstimationParamete
  */
 public interface EstimationParameterRepository extends CrudRepository<EstimationParameterEntity, Long> {
 
-    List<EstimationParameterEntity> findByEstimation(EstimationEntity estimation);
+    @EntityGraph(attributePaths = { "estimation", "parameter", "parameter.block" })
+    List<EstimationParameterEntity> findByEstimationId(Long estimationId);
+
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.ccsw.estimador.collaborator.model.CollaboratorEntity;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -21,9 +20,9 @@ public class CollaboratorServiceImpl implements CollaboratorService {
     CollaboratorRepository collaboratorRepository;
 
     @Override
-    public List<CollaboratorEntity> findByEstimation(EstimationEntity estimation) {
+    public List<CollaboratorEntity> findByEstimation(Long id) {
 
-        return this.collaboratorRepository.findByEstimation(estimation);
+        return this.collaboratorRepository.findByEstimationId(id);
 
     }
 

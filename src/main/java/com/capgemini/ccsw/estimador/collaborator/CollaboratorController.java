@@ -3,15 +3,13 @@ package com.capgemini.ccsw.estimador.collaborator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.ccsw.estimador.collaborator.model.CollaboratorDto;
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -30,11 +28,9 @@ public class CollaboratorController {
     @Autowired
     BeanMapper beanMapper;
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    public List<CollaboratorDto> findByEstimation(@RequestBody EstimationDto estimation) {
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public List<CollaboratorDto> findByEstimation(@PathVariable Long id) {
 
-        return this.beanMapper.mapList(
-                this.collaboratorService.findByEstimation(this.beanMapper.map(estimation, EstimationEntity.class)),
-                CollaboratorDto.class);
+        return this.beanMapper.mapList(this.collaboratorService.findByEstimation(id), CollaboratorDto.class);
     }
 }

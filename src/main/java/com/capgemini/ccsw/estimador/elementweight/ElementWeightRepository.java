@@ -2,10 +2,10 @@ package com.capgemini.ccsw.estimador.elementweight;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 
 import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightEntity;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -16,6 +16,7 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
  */
 public interface ElementWeightRepository extends CrudRepository<ElementWeightEntity, Long> {
 
-    List<ElementWeightEntity> findByEstimation(EstimationEntity estimation);
+    @EntityGraph(attributePaths = { "estimation", "level" })
+    List<ElementWeightEntity> findByEstimationId(Long estimationId);
 
 }

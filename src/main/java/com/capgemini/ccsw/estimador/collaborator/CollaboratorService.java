@@ -3,7 +3,6 @@ package com.capgemini.ccsw.estimador.collaborator;
 import java.util.List;
 
 import com.capgemini.ccsw.estimador.collaborator.model.CollaboratorEntity;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -14,6 +13,6 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
  */
 public interface CollaboratorService {
 
-    List<CollaboratorEntity> findByEstimation(EstimationEntity estimation);
+    List<CollaboratorEntity> findByEstimation(Long estimationId);
 
 }
