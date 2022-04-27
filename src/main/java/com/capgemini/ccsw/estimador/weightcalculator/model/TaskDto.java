@@ -1,23 +1,31 @@
 package com.capgemini.ccsw.estimador.weightcalculator.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class TaskDto {
 
     String name;
 
+    @JsonAlias({ "elementName" })
     String element;
 
+    @JsonAlias({ "quantityVerySimple" })
     Double verySimpleCostQuantity;
 
+    @JsonAlias({ "quantitySimple" })
     Double simpleCostQuantity;
 
+    @JsonAlias({ "quantityMedium" })
     Double mediumCostQuantity;
 
+    @JsonAlias({ "quantityComplex" })
     Double complexCostQuantity;
 
+    @JsonAlias({ "reusability" })
     Double percentageOfReuse;
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -25,7 +33,7 @@ public class TaskDto {
     }
 
     public String getElement() {
-        return element;
+        return this.element;
     }
 
     public void setElement(String element) {
@@ -33,7 +41,7 @@ public class TaskDto {
     }
 
     public Double getVerySimpleCostQuantity() {
-        return verySimpleCostQuantity;
+        return this.verySimpleCostQuantity;
     }
 
     public void setVerySimpleCostQuantity(Double verySimpleCostQuantity) {
@@ -41,7 +49,7 @@ public class TaskDto {
     }
 
     public Double getSimpleCostQuantity() {
-        return simpleCostQuantity;
+        return this.simpleCostQuantity;
     }
 
     public void setSimpleCostQuantity(Double simpleCostQuantity) {
@@ -49,7 +57,7 @@ public class TaskDto {
     }
 
     public Double getMediumCostQuantity() {
-        return mediumCostQuantity;
+        return this.mediumCostQuantity;
     }
 
     public void setMediumCostQuantity(Double mediumCostQuantity) {
@@ -57,7 +65,7 @@ public class TaskDto {
     }
 
     public Double getComplexCostQuantity() {
-        return complexCostQuantity;
+        return this.complexCostQuantity;
     }
 
     public void setComplexCostQuantity(Double complexCostQuantity) {
@@ -65,7 +73,7 @@ public class TaskDto {
     }
 
     public Double getPercentageOfReuse() {
-        return percentageOfReuse;
+        return this.percentageOfReuse;
     }
 
     public void setPercentageOfReuse(Double percentageOfReuse) {
