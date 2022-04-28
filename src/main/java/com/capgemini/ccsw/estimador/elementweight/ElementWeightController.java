@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.parameter;
+package com.capgemini.ccsw.estimador.elementweight;
 
 import java.util.List;
 
@@ -11,36 +11,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.parameter.model.ParameterDto;
+import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightDto;
 
 /**
  * @author asolerpa
  *
  *         Controllador que expone las operaciones de negocio de la entidad
- *         Parameter
+ *         ElementWeight
  *
  */
-@RequestMapping(value = "/parameter")
+@RequestMapping(value = "/elementWeight")
 @RestController
-public class ParameterController {
+public class ElementWeightController {
 
     @Autowired
-    ParameterService parameterService;
+    ElementWeightService elementWeightService;
 
     @Autowired
     BeanMapper beanMapper;
 
     @RequestMapping(path = "/estimation/{id}", method = RequestMethod.GET)
-    public List<ParameterDto> findParametersByEstimationId(@PathVariable Long id) {
+    public List<ElementWeightDto> findElementWeightsByEstimationId(@PathVariable Long id) {
 
-        return this.beanMapper.mapList(this.parameterService.findParametersByEstimationId(id), ParameterDto.class);
+        return this.beanMapper.mapList(this.elementWeightService.findByEstimationId(id), ElementWeightDto.class);
     }
 
     @RequestMapping(path = "customer", method = RequestMethod.POST)
-    public List<ParameterDto> findParametersByEstimationCustomer(@RequestBody CustomerDto customer) {
+    public List<ElementWeightDto> findElementWeightsByEstimationCustomer(@RequestBody CustomerDto customer) {
 
-        return this.beanMapper.mapList(this.parameterService.findParametersByEstimationCustomer(customer),
-                ParameterDto.class);
+        return this.beanMapper.mapList(this.elementWeightService.findByEstimationCustomer(customer),
+                ElementWeightDto.class);
     }
 
 }
