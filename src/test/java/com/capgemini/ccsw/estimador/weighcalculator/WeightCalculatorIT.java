@@ -38,20 +38,20 @@ public class WeightCalculatorIT extends BaseITAbstract {
     @Test
     void restWeightCalculatorTest() {
         TaskDto taskDto = new TaskDto();
-        taskDto.setName(taskName);
-        taskDto.setElement(elementName);
-        taskDto.setVerySimpleCostQuantity(verySimpleCostValue);
-        taskDto.setSimpleCostQuantity(simpleCostValue);
-        taskDto.setMediumCostQuantity(mediumCostValue);
-        taskDto.setComplexCostQuantity(complexCostValue);
-        taskDto.setPercentageOfReuse(percentageTest);
+        taskDto.setName(this.taskName);
+        taskDto.setElementName(this.elementName);
+        taskDto.setQuantityVerySimple(this.verySimpleCostValue);
+        taskDto.setQuantitySimple(this.simpleCostValue);
+        taskDto.setQuantityMedium(this.mediumCostValue);
+        taskDto.setQuantityComplex(this.complexCostValue);
+        taskDto.setReusability(this.percentageTest);
 
         WeightsDto weightDto = new WeightsDto();
-        weightDto.setElement(elementName);
-        weightDto.setMediumCost(mediumCostValue);
-        weightDto.setVerySimpleCost(verySimpleCostValue);
-        weightDto.setSimpleCost(simpleCostValue);
-        weightDto.setComplexCost(complexCostValue);
+        weightDto.setElement(this.elementName);
+        weightDto.setMedium(this.mediumCostValue);
+        weightDto.setVerySimple(this.verySimpleCostValue);
+        weightDto.setSimple(this.simpleCostValue);
+        weightDto.setComplex(this.complexCostValue);
 
         List<TaskDto> taskDtoList = new ArrayList<TaskDto>();
         taskDtoList.add(taskDto);
@@ -67,8 +67,8 @@ public class WeightCalculatorIT extends BaseITAbstract {
         };
         HttpEntity<?> httpEntity = new HttpEntity<>(taskAndWeightsDto, getHeaders());
 
-        ResponseEntity<List<WeightCalculatorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH,
-                HttpMethod.POST, httpEntity, responseType);
+        ResponseEntity<List<WeightCalculatorDto>> response = this.restTemplate
+                .exchange(LOCALHOST + this.port + SERVICE_PATH, HttpMethod.POST, httpEntity, responseType);
 
         assertEquals(27d, response.getBody().stream().findFirst().orElse(null).getTotalHours());
     }

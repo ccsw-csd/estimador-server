@@ -1,70 +1,85 @@
 package com.capgemini.ccsw.estimador.weightcalculator.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-
 public class WeightsDto {
 
     String element;
 
-    @JsonAlias({ "verySimple" })
-    Double verySimpleCost;
+    Double verySimple;
 
-    @JsonAlias({ "simple" })
-    Double simpleCost;
+    Double simple;
 
-    @JsonAlias({ "medium" })
-    Double mediumCost;
+    Double medium;
 
-    @JsonAlias({ "complex" })
-    Double complexCost;
+    Double complex;
 
+    /**
+     * @return element
+     */
     public String getElement() {
-
         return this.element;
     }
 
+    /**
+     * @param element new value of {@link #getelement}.
+     */
     public void setElement(String element) {
-
         this.element = element;
     }
 
-    public Double getVerySimpleCost() {
-
-        return this.verySimpleCost;
+    /**
+     * @return verySimple
+     */
+    public Double getVerySimple() {
+        return this.verySimple;
     }
 
-    public void setVerySimpleCost(Double verySimpleCost) {
-
-        this.verySimpleCost = verySimpleCost;
+    /**
+     * @param verySimple new value of {@link #getverySimple}.
+     */
+    public void setVerySimple(Double verySimple) {
+        this.verySimple = verySimple;
     }
 
-    public Double getSimpleCost() {
-
-        return this.simpleCost;
+    /**
+     * @return simple
+     */
+    public Double getSimple() {
+        return this.simple;
     }
 
-    public void setSimpleCost(Double simpleCost) {
-
-        this.simpleCost = simpleCost;
+    /**
+     * @param simple new value of {@link #getsimple}.
+     */
+    public void setSimple(Double simple) {
+        this.simple = simple;
     }
 
-    public Double getMediumCost() {
-
-        return this.mediumCost;
+    /**
+     * @return medium
+     */
+    public Double getMedium() {
+        return this.medium;
     }
 
-    public void setMediumCost(Double mediumCost) {
-
-        this.mediumCost = mediumCost;
+    /**
+     * @param medium new value of {@link #getmedium}.
+     */
+    public void setMedium(Double medium) {
+        this.medium = medium;
     }
 
-    public Double getComplexCost() {
-
-        return this.complexCost;
+    /**
+     * @return complex
+     */
+    public Double getComplex() {
+        return this.complex;
     }
 
-    public void setComplexCost(Double complexCost) {
-
-        this.complexCost = complexCost;
+    /**
+     * @param complex new value of {@link #getcomplex}.
+     */
+    public void setComplex(Double complex) {
+        this.complex = complex;
     }
+
 }
