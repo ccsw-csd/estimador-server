@@ -106,15 +106,16 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
 
         return outputList;
     }
-
+    /*
     public Double projectTotalDuration(List<BlockDurationTransformatedDto> blockDurationTransformatedDto) {
         Double calculation;
         blockDurationTransformatedDto.stream().forEach(block -> {
-
+    
         });
-
+    
         return 0.0;
     }
+       */
 
     private String findBlockName(List<ParameterEntity> parameterEntityList, List<BlockEntity> blockEntityList, CriteriaCalculationTransformationDto criteriaCalculationTransformation) {
         try {
