@@ -63,12 +63,10 @@ public class EstimationSearchDto {
 		this.projectName = projectName;
 	}
 	
-	
-
 	public Long getProjectId() {
 		return projectId;
 	}
-
+	
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
@@ -100,7 +98,6 @@ public class EstimationSearchDto {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
 	
 	
 }
