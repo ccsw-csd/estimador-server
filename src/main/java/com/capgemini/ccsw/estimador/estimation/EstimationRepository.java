@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.capgemini.ccsw.estimador.customer.model.CustomerEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
@@ -32,6 +31,6 @@ public interface EstimationRepository extends CrudRepository<EstimationEntity, L
             @Param("startDate") Date startDate, @Param("endDate") Date endDate, Pageable pageable);
 
     EstimationEntity getById(Long id);
-
-    EstimationEntity findFirstByProjectCustomerOrderByLastUpdateDesc(CustomerEntity customer);
+    
+    Page<EstimationEntity> findByProjectId(Long projectId, Pageable pageable);
 }

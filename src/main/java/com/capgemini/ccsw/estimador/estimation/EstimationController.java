@@ -36,4 +36,10 @@ public class EstimationController {
 
         return this.beanMapper.map(this.estimationService.getEstimation(id), EstimationDto.class);
     }
+    
+    @RequestMapping(path = "/version", method = RequestMethod.POST)
+    public Page<EstimationDto> findVersion(@RequestBody EstimationSearchDto dto) {
+
+        return this.beanMapper.mapPage(this.estimationService.findVersion(dto), EstimationDto.class);
+    }
 }

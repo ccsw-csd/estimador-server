@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
-import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
-import com.capgemini.ccsw.estimador.customer.model.CustomerEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
 
@@ -22,9 +19,6 @@ public class EstimationServiceImpl implements EstimationService {
 
     @Autowired
     EstimationRepository estimationRepository;
-
-    @Autowired
-    BeanMapper beanMapper;
 
     @Override
     public Page<EstimationEntity> findPage(EstimationSearchDto dto) {
@@ -60,12 +54,11 @@ public class EstimationServiceImpl implements EstimationService {
 
         return this.estimationRepository.getById(id);
     }
-
+    
     @Override
-    public EstimationEntity getLastEstimationByCustomer(CustomerDto customer) {
+    public Page<EstimationEntity> findVersion(EstimationSearchDto dto) {
 
-        return this.estimationRepository
-                .findFirstByProjectCustomerOrderByLastUpdateDesc(this.beanMapper.map(customer, CustomerEntity.class));
-
+        return this.estimationRepository.findByProjectId(dto.getProjectId(), dto.getPageable());
     }
+
 }
