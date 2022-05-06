@@ -15,8 +15,6 @@ public class EstimationSearchDto {
 	
 	private String projectName;
 	
-	private Long projectId;
-	
 	private Date startDate;
 	
 	private Date endDate;
@@ -61,16 +59,6 @@ public class EstimationSearchDto {
 	 */
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
-	}
-	
-	
-
-	public Long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
 	}
 
 	/**
