@@ -40,20 +40,20 @@ public class WeightCalculatorTest {
     void weightCalculatorWorksCorrectlyTest() {
 
         TaskDto taskDto = new TaskDto();
-        taskDto.setName(taskName);
-        taskDto.setElement(elementName);
-        taskDto.setVerySimpleCostQuantity(verySimpleCostValue);
-        taskDto.setSimpleCostQuantity(simpleCostValue);
-        taskDto.setMediumCostQuantity(mediumCostValue);
-        taskDto.setComplexCostQuantity(complexCostValue);
-        taskDto.setPercentageOfReuse(percentageTest);
+        taskDto.setName(this.taskName);
+        taskDto.setElementName(this.elementName);
+        taskDto.setQuantityVerySimple(this.verySimpleCostValue);
+        taskDto.setQuantitySimple(this.simpleCostValue);
+        taskDto.setQuantityMedium(this.mediumCostValue);
+        taskDto.setQuantityComplex(this.complexCostValue);
+        taskDto.setReusability(this.percentageTest);
 
         WeightsDto weightDto = new WeightsDto();
-        weightDto.setElement(elementName);
-        weightDto.setMediumCost(mediumCostValue);
-        weightDto.setVerySimpleCost(verySimpleCostValue);
-        weightDto.setSimpleCost(simpleCostValue);
-        weightDto.setComplexCost(complexCostValue);
+        weightDto.setElement(this.elementName);
+        weightDto.setMedium(this.mediumCostValue);
+        weightDto.setVerySimple(this.verySimpleCostValue);
+        weightDto.setSimple(this.simpleCostValue);
+        weightDto.setComplex(this.complexCostValue);
 
         List<TaskDto> taskDtoList = new ArrayList<TaskDto>();
         taskDtoList.add(taskDto);
@@ -61,12 +61,12 @@ public class WeightCalculatorTest {
         List<WeightsDto> weightsDtoList = new ArrayList<WeightsDto>();
         weightsDtoList.add(weightDto);
 
-        List<WeightCalculatorDto> weightCalculatorDto = weightCalculatorServiceImpl.calculateWeights(taskDtoList,
+        List<WeightCalculatorDto> weightCalculatorDto = this.weightCalculatorServiceImpl.calculateWeights(taskDtoList,
                 weightsDtoList);
 
         assertNotNull(weightCalculatorDto);
-        assertEquals(27d, weightCalculatorDto.stream().filter(item -> item.getElement().equals(elementName)).findFirst()
-                .orElse(null).getTotalHours());
+        assertEquals(27d, weightCalculatorDto.stream().filter(item -> item.getElement().equals(this.elementName))
+                .findFirst().orElse(null).getTotalHours());
 
     }
 }

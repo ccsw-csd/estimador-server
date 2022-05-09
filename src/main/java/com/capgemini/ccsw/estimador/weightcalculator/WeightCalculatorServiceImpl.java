@@ -26,16 +26,15 @@ public class WeightCalculatorServiceImpl implements WeightCalculatorService {
     private void assignValuesToReturn(List<WeightCalculatorDto> weightCalculatorDtoList, TaskDto taskDto,
             HashMap<String, WeightsDto> weightsDto) {
         WeightCalculatorDto weightCalculatorDto = new WeightCalculatorDto();
-        if (weightsDto.containsKey(taskDto.getElement())) {
-            weightCalculatorDto.setElement(taskDto.getElement());
+        if (weightsDto.containsKey(taskDto.getElementName())) {
+            weightCalculatorDto.setElement(taskDto.getElementName());
             weightCalculatorDto.setTaskName(taskDto.getName());
             weightCalculatorDto.setTotalHours(
-                    ((taskDto.getVerySimpleCostQuantity() * weightsDto.get(taskDto.getElement()).getVerySimpleCost())
-                            + (taskDto.getSimpleCostQuantity() * weightsDto.get(taskDto.getElement()).getSimpleCost())
-                            + (taskDto.getMediumCostQuantity() * weightsDto.get(taskDto.getElement()).getMediumCost())
-                            + (taskDto.getComplexCostQuantity()
-                                    * weightsDto.get(taskDto.getElement()).getComplexCost()))
-                            * (1 - taskDto.getPercentageOfReuse() / 100));
+                    ((taskDto.getQuantityVerySimple() * weightsDto.get(taskDto.getElementName()).getVerySimple())
+                            + (taskDto.getQuantitySimple() * weightsDto.get(taskDto.getElementName()).getSimple())
+                            + (taskDto.getQuantityMedium() * weightsDto.get(taskDto.getElementName()).getMedium())
+                            + (taskDto.getQuantityComplex() * weightsDto.get(taskDto.getElementName()).getComplex()))
+                            * (1 - taskDto.getReusability() / 100));
             weightCalculatorDtoList.add(weightCalculatorDto);
         }
     }

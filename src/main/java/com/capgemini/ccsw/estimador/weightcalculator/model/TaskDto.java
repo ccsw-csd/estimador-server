@@ -4,71 +4,114 @@ public class TaskDto {
 
     String name;
 
-    String element;
+    String elementName;
 
-    Double verySimpleCostQuantity;
+    Double quantityVerySimple;
 
-    Double simpleCostQuantity;
+    Double quantitySimple;
 
-    Double mediumCostQuantity;
+    Double quantityMedium;
 
-    Double complexCostQuantity;
+    Double quantityComplex;
 
-    Double percentageOfReuse;
+    Double reusability;
 
+    /**
+     * @return name
+     */
     public String getName() {
-        return name;
+        return this.name;
     }
 
+    /**
+     * @param name new value of {@link #getname}.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getElement() {
-        return element;
+    /**
+     * @return elementName
+     */
+    public String getElementName() {
+        return this.elementName;
     }
 
-    public void setElement(String element) {
-        this.element = element;
+    /**
+     * @param elementName new value of {@link #getelementName}.
+     */
+    public void setElementName(String elementName) {
+        this.elementName = elementName;
     }
 
-    public Double getVerySimpleCostQuantity() {
-        return verySimpleCostQuantity;
+    /**
+     * @return quantityVerySimple
+     */
+    public Double getQuantityVerySimple() {
+        return this.quantityVerySimple;
     }
 
-    public void setVerySimpleCostQuantity(Double verySimpleCostQuantity) {
-        this.verySimpleCostQuantity = verySimpleCostQuantity;
+    /**
+     * @param quantityVerySimple new value of {@link #getquantityVerySimple}.
+     */
+    public void setQuantityVerySimple(Double quantityVerySimple) {
+        this.quantityVerySimple = quantityVerySimple;
     }
 
-    public Double getSimpleCostQuantity() {
-        return simpleCostQuantity;
+    /**
+     * @return quantitySimple
+     */
+    public Double getQuantitySimple() {
+        return this.quantitySimple;
     }
 
-    public void setSimpleCostQuantity(Double simpleCostQuantity) {
-        this.simpleCostQuantity = simpleCostQuantity;
+    /**
+     * @param quantitySimple new value of {@link #getquantitySimple}.
+     */
+    public void setQuantitySimple(Double quantitySimple) {
+        this.quantitySimple = quantitySimple;
     }
 
-    public Double getMediumCostQuantity() {
-        return mediumCostQuantity;
+    /**
+     * @return quantityMedium
+     */
+    public Double getQuantityMedium() {
+        return this.quantityMedium;
     }
 
-    public void setMediumCostQuantity(Double mediumCostQuantity) {
-        this.mediumCostQuantity = mediumCostQuantity;
+    /**
+     * @param quantityMedium new value of {@link #getquantityMedium}.
+     */
+    public void setQuantityMedium(Double quantityMedium) {
+        this.quantityMedium = quantityMedium;
     }
 
-    public Double getComplexCostQuantity() {
-        return complexCostQuantity;
+    /**
+     * @return quantityComplex
+     */
+    public Double getQuantityComplex() {
+        return this.quantityComplex;
     }
 
-    public void setComplexCostQuantity(Double complexCostQuantity) {
-        this.complexCostQuantity = complexCostQuantity;
+    /**
+     * @param quantityComplex new value of {@link #getquantityComplex}.
+     */
+    public void setQuantityComplex(Double quantityComplex) {
+        this.quantityComplex = quantityComplex;
     }
 
-    public Double getPercentageOfReuse() {
-        return percentageOfReuse;
+    /**
+     * @return reusability
+     */
+    public Double getReusability() {
+        return this.reusability;
     }
 
-    public void setPercentageOfReuse(Double percentageOfReuse) {
-        this.percentageOfReuse = percentageOfReuse;
+    /**
+     * @param reusability new value of {@link #getreusability}.
+     */
+    public void setReusability(Double reusability) {
+        this.reusability = reusability;
     }
+
 }
