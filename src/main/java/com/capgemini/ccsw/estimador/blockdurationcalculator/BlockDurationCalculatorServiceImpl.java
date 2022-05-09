@@ -76,7 +76,8 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         HashMap<String, List<CriteriaCalculationTransformationDto>> criteriaHashMap = new HashMap<>();
         for (CriteriaCalculationTransformationDto criteriaCalculationTransformation : blockDurationCalculatorDto.getCriteriaList()) {
 
-            String blockName = findBlockName(parameterEntityList, blockEntityList, criteriaCalculationTransformation);
+            String blockName = criteriaCalculationTransformation.getBlock().getName();
+
             if (!criteriaHashMap.containsKey(blockName)) {
                 List<CriteriaCalculationTransformationDto> tmpCriteriaList = new ArrayList<>();
                 tmpCriteriaList.add(criteriaCalculationTransformation);
@@ -99,14 +100,4 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         return outputList;
     }
 
-    private String findBlockName(List<ParameterEntity> parameterEntityList, List<BlockEntity> blockEntityList, CriteriaCalculationTransformationDto criteriaCalculationTransformation) {
-        try {
-            return blockEntityList.stream()
-                    .filter(block -> block.getId() == parameterEntityList.stream().filter(parameter -> parameter.getConcept().equals(criteriaCalculationTransformation.getConcept())).findFirst().orElse(null).getBlock().getId()).findFirst()
-                    .orElse(null).getName();
-        } catch (Exception e) {
-            System.err.println("Error in com.capgemini.ccsw.estimador.blockdurationcalculator.BlockDurationServiceImpl.findBlockName(): " + criteriaCalculationTransformation.getConcept() + "Not found in parameter concepts list");
-            return "";
-        }
-    }
 }
