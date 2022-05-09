@@ -1,24 +1,36 @@
 package com.capgemini.ccsw.estimador.criteriacalculation.model;
 
+import com.capgemini.ccsw.estimador.block.model.BlockDto;
+
 public class CriteriaCalculationTransformationDto {
 
-	private Double hours;
-	
-	private String concept;
+    private Double hours;
 
-	public Double getHours() {
-		return hours;
-	}
+    private String concept;
 
-	public void setHours(Double hours) {
-		this.hours = hours;
-	}
+    private BlockDto block;
 
-	public String getConcept() {
-		return concept;
-	}
+    public BlockDto getBlock() {
+        return block;
+    }
 
-	public void setConcept(String concept) {
-		this.concept = concept;
-	}
+    public void setBlock(BlockDto block) {
+        this.block = block;
+    }
+
+    public Double getHours() {
+        return hours;
+    }
+
+    public void setHours(Double hours) {
+        this.hours = hours;
+    }
+
+    public String getConcept() {
+        return concept;
+    }
+
+    public void setConcept(String concept) {
+        this.concept = concept;
+    }
 }

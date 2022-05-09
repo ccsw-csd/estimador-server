@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.ccsw.estimador.block.BlockProfileRepository;
+import com.capgemini.ccsw.estimador.block.BlockProfileService;
 import com.capgemini.ccsw.estimador.block.BlockService;
 import com.capgemini.ccsw.estimador.block.model.BlockEntity;
 import com.capgemini.ccsw.estimador.block.model.BlockProfileEntity;
@@ -17,8 +17,6 @@ import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationT
 import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 import com.capgemini.ccsw.estimador.parameter.ParameterService;
 import com.capgemini.ccsw.estimador.parameter.model.ParameterEntity;
-import com.capgemini.ccsw.estimador.profile.ProfileRepository;
-import com.capgemini.ccsw.estimador.profile.model.ProfileEntity;
 
 @Service
 public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculatorService {
@@ -30,10 +28,7 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
     ParameterService parameterService;
 
     @Autowired
-    BlockProfileRepository blockProfileRepository;
-
-    @Autowired
-    ProfileRepository profileRepository;
+    BlockProfileService blockProfileService;
 
     @Override
     public List<BlockDurationTransformatedDto> getHoursGroupedByFte(BlockDurationCalculatorDto blockDurationCalculatorDto) {
@@ -42,8 +37,7 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
 
         List<ParameterEntity> parameterEntityList = parameterService.findAll();
         List<BlockEntity> blockEntityList = blockService.findAll();
-        List<ProfileEntity> p = profileRepository.findAll();
-        List<BlockProfileEntity> blockProfileEntityList = blockProfileRepository.findAll();
+        List<BlockProfileEntity> blockProfileEntityList = blockProfileService.findAll();
 
         blockProfileEntityList.stream().forEach(blockProfileEntity -> {
             if (blockProfile.containsKey(blockProfileEntity.getBlock().getName())) {
@@ -54,8 +48,6 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
                 blockProfile.put(blockProfileEntity.getBlock().getName(), profileList);
             }
         });
-
-        System.out.println(blockProfile);
 
         blockDurationCalculatorDto.getFteList().stream().forEach(fte -> {
             blockProfile.entrySet().stream().forEach(blockProfileEntry -> {
@@ -69,13 +61,22 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
             });
         });
 
-        System.out.println(blockFteList);
+        List<BlockDurationTransformatedDto> outputList = createBlocksFromCriteria(blockDurationCalculatorDto, parameterEntityList, blockEntityList);
 
+        outputList.stream().forEach(block -> block.setHours(block.getHours() / 8 / 20 / blockFteList.get(block.getBlockName())));
+        BlockDurationTransformatedDto developer = new BlockDurationTransformatedDto();
+        developer.setBlockName("Desarrollo");
+        developer.setHours(blockDurationCalculatorDto.getHours() / 20 / 8);
+
+        outputList.add(developer);
+        return outputList;
+    }
+
+    private List<BlockDurationTransformatedDto> createBlocksFromCriteria(BlockDurationCalculatorDto blockDurationCalculatorDto, List<ParameterEntity> parameterEntityList, List<BlockEntity> blockEntityList) {
         HashMap<String, List<CriteriaCalculationTransformationDto>> criteriaHashMap = new HashMap<>();
         for (CriteriaCalculationTransformationDto criteriaCalculationTransformation : blockDurationCalculatorDto.getCriteriaList()) {
 
             String blockName = findBlockName(parameterEntityList, blockEntityList, criteriaCalculationTransformation);
-
             if (!criteriaHashMap.containsKey(blockName)) {
                 List<CriteriaCalculationTransformationDto> tmpCriteriaList = new ArrayList<>();
                 tmpCriteriaList.add(criteriaCalculationTransformation);
@@ -84,6 +85,7 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
             } else {
                 criteriaHashMap.get(blockName).add(criteriaCalculationTransformation);
             }
+
         }
 
         List<BlockDurationTransformatedDto> outputList = new ArrayList<>();
@@ -92,30 +94,10 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
             BlockDurationTransformatedDto tmp = new BlockDurationTransformatedDto();
             criteriaHashMap.get(key).stream().forEach(criteria -> tmp.setHours(criteria.getHours() + tmp.getHours()));
             tmp.setBlockName(key);
-            System.out.println(key);
             outputList.add(tmp);
         }
-
-        BlockDurationTransformatedDto developer = new BlockDurationTransformatedDto();
-        developer.setBlockName("DEVELOPMENT");
-        developer.setHours(blockDurationCalculatorDto.getHours());
-
-        outputList.add(developer);
-
-        outputList.stream().forEach(block -> block.setHours(block.getHours() / 8 / 20 / blockFteList.get(block.getBlockName())));
-
         return outputList;
     }
-    /*
-    public Double projectTotalDuration(List<BlockDurationTransformatedDto> blockDurationTransformatedDto) {
-        Double calculation;
-        blockDurationTransformatedDto.stream().forEach(block -> {
-    
-        });
-    
-        return 0.0;
-    }
-       */
 
     private String findBlockName(List<ParameterEntity> parameterEntityList, List<BlockEntity> blockEntityList, CriteriaCalculationTransformationDto criteriaCalculationTransformation) {
         try {
