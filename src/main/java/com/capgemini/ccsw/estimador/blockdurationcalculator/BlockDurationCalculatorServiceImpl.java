@@ -63,11 +63,11 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
 
         List<BlockDurationTransformatedDto> outputList = createBlocksFromCriteria(blockDurationCalculatorDto, parameterEntityList, blockEntityList);
 
-        outputList.stream().forEach(block -> block.setHours(block.getHours() / 8 / 20 / blockFteList.get(block.getBlockName())));
+        outputList.stream().forEach(block -> block.setDuration(block.getHours() / 8 / 20 / blockFteList.get(block.getBlockName())));
         BlockDurationTransformatedDto developer = new BlockDurationTransformatedDto();
-        developer.setBlockName("Desarrollo");
-        developer.setHours(blockDurationCalculatorDto.getHours() / 20 / 8);
-
+        developer.setBlockName("TOTAL DEVELOPMENT");
+        developer.setHours(blockDurationCalculatorDto.getHours());
+        developer.setDuration(blockDurationCalculatorDto.getHours() / 20 / 8 / blockProfileEntityList.size());
         outputList.add(developer);
         return outputList;
     }

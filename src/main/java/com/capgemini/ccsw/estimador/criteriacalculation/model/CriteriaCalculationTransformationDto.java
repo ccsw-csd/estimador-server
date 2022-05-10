@@ -6,8 +6,6 @@ public class CriteriaCalculationTransformationDto {
 
     private Double hours;
 
-    private String concept;
-
     private BlockDto block;
 
     public BlockDto getBlock() {
@@ -26,11 +24,4 @@ public class CriteriaCalculationTransformationDto {
         this.hours = hours;
     }
 
-    public String getConcept() {
-        return concept;
-    }
-
-    public void setConcept(String concept) {
-        this.concept = concept;
-    }
 }
