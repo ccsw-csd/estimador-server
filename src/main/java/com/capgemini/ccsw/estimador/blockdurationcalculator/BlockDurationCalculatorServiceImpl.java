@@ -21,6 +21,12 @@ import com.capgemini.ccsw.estimador.parameter.model.ParameterEntity;
 @Service
 public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculatorService {
 
+    private static final String TOTAL_BLOCKNAME = "TOTAL DEVELOPMENT";
+
+    private static final int WORK_HOURS = 8;
+
+    private static final int WORK_DAYS = 20;
+
     @Autowired
     BlockService blockService;
 
@@ -63,13 +69,17 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
 
         List<BlockDurationTransformatedDto> outputList = createBlocksFromCriteria(blockDurationCalculatorDto, parameterEntityList, blockEntityList);
 
-        outputList.stream().forEach(block -> block.setDuration(block.getHours() / 8 / 20 / blockFteList.get(block.getBlockName())));
+        outputList.stream().forEach(block -> block.setDuration(calculateDuration(blockFteList, block)));
         BlockDurationTransformatedDto developer = new BlockDurationTransformatedDto();
-        developer.setBlockName("TOTAL DEVELOPMENT");
+        developer.setBlockName(TOTAL_BLOCKNAME);
         developer.setHours(blockDurationCalculatorDto.getHours());
-        developer.setDuration(blockDurationCalculatorDto.getHours() / 20 / 8 / blockProfileEntityList.size());
+        developer.setDuration(blockDurationCalculatorDto.getHours() / WORK_DAYS / WORK_HOURS / blockProfileEntityList.size());
         outputList.add(developer);
         return outputList;
+    }
+
+    private double calculateDuration(HashMap<String, Double> blockFteList, BlockDurationTransformatedDto block) {
+        return block.getHours() / WORK_DAYS / WORK_HOURS / blockFteList.get(block.getBlockName());
     }
 
     private List<BlockDurationTransformatedDto> createBlocksFromCriteria(BlockDurationCalculatorDto blockDurationCalculatorDto, List<ParameterEntity> parameterEntityList, List<BlockEntity> blockEntityList) {

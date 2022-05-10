@@ -5,7 +5,7 @@ import java.util.List;
 import com.capgemini.ccsw.estimador.profile.model.ProfileEntity;
 
 /**
- * @author iciudade
+ * @author danipalm
  *
  */
 public interface ProfileService {

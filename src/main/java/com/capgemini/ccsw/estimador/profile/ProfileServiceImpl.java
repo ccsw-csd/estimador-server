@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.ccsw.estimador.profile.model.ProfileEntity;
 
 /**
- * @author iciudade
+ * @author danipalm
  */
 @Service
 public class ProfileServiceImpl implements ProfileService {

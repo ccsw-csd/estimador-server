@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.capgemini.ccsw.estimador.profile.model.ProfileEntity;
 
 /**
- * @author iciudade
+ * @author danipalm
  */
 public interface ProfileRepository extends CrudRepository<ProfileEntity, Long> {
 

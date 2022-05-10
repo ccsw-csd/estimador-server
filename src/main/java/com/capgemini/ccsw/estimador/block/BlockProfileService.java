@@ -5,9 +5,9 @@ import java.util.List;
 import com.capgemini.ccsw.estimador.block.model.BlockProfileEntity;
 
 /**
- * @author asolerpa
+ * @author dapalmie
  *
- *         Interfaz que declara las operaciones de negocio de la entidad Block
+ *         Interfaz que declara las operaciones de negocio de la entidad BlockProfile
  *
  */
 public interface BlockProfileService {
