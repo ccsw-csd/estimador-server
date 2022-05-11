@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.devonfw.module.beanmapping.common.impl.orika.BeanMapperImplOrika;
 
 /**
@@ -27,11 +25,5 @@ public class BeanMapperImpl extends BeanMapperImplOrika implements BeanMapper {
 
     return new PageImpl<>(list, source.getPageable(), source.getTotalElements());
   }
-
-@Override
-public List<EstimationDto> mapList(Page<EstimationEntity> findVersion, Class<EstimationDto> class1) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 }
