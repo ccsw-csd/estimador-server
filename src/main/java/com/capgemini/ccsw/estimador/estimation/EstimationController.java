@@ -1,5 +1,7 @@
 package com.capgemini.ccsw.estimador.estimation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
 
 /**
@@ -37,9 +40,9 @@ public class EstimationController {
         return this.beanMapper.map(this.estimationService.getEstimation(id), EstimationDto.class);
     }
     
-    @RequestMapping(path = "/version", method = RequestMethod.POST)
-    public Page<EstimationDto> findVersion(@RequestBody EstimationSearchDto dto) {
+    @RequestMapping(path = "/version/{projectId}", method = RequestMethod.GET)
+    public List<EstimationDto> findVersion(@PathVariable Long projectId) {
 
-        return this.beanMapper.mapPage(this.estimationService.findVersion(dto), EstimationDto.class);
+        return this.beanMapper.mapList(this.estimationService.findVersion(projectId), EstimationDto.class);
     }
 }

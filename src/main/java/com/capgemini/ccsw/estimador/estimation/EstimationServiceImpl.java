@@ -3,6 +3,7 @@ package com.capgemini.ccsw.estimador.estimation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
 import com.capgemini.ccsw.estimador.customer.model.CustomerEntity;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
 
@@ -61,10 +63,11 @@ public class EstimationServiceImpl implements EstimationService {
         return this.estimationRepository.getById(id);
     }
     
+    //ESTE ES EL TEXTO EDITADO:
     @Override
-    public Page<EstimationEntity> findVersion(EstimationSearchDto dto) {
+    public List<EstimationEntity> findVersion(Long projectId) {
     	
-    	return this.estimationRepository.findByProjectId(dto.getProjectId(), dto.getPageable());
+    	return this.estimationRepository.findByProjectIdOrderByCreated(projectId);
     	
     }
 
