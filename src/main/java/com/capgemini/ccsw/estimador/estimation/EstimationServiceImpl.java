@@ -63,12 +63,10 @@ public class EstimationServiceImpl implements EstimationService {
         return this.estimationRepository.getById(id);
     }
     
-    //ESTE ES EL TEXTO EDITADO:
     @Override
     public List<EstimationEntity> findVersion(Long projectId) {
     	
     	return this.estimationRepository.findByProjectIdOrderByCreated(projectId);
-    	
     }
 
     @Override
@@ -76,6 +74,5 @@ public class EstimationServiceImpl implements EstimationService {
 
         return this.estimationRepository
                 .findFirstByProjectCustomerOrderByLastUpdateDesc(this.beanMapper.map(customer, CustomerEntity.class));
-
     }
 }
