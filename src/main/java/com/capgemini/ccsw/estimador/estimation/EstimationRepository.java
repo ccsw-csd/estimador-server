@@ -1,6 +1,7 @@
 package com.capgemini.ccsw.estimador.estimation;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,8 @@ public interface EstimationRepository extends CrudRepository<EstimationEntity, L
             @Param("startDate") Date startDate, @Param("endDate") Date endDate, Pageable pageable);
 
     EstimationEntity getById(Long id);
-
+    
     EstimationEntity findFirstByProjectCustomerOrderByLastUpdateDesc(CustomerEntity customer);
+    
+    List<EstimationEntity> findByProjectIdOrderByLastUpdateDesc(Long projectId);
 }
