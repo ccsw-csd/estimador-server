@@ -1,5 +1,6 @@
 package com.capgemini.ccsw.estimador.blockdurationcalculator;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class BlockDurationIT extends BaseITAbstract {
         criteriaDto.setBlock(block);
         criteriaDto.setHours(criteriaHours);
         criteriaList.add(criteriaDto);
-        blockDurationCalculatorDto.setFteList(fteList);
+        blockDurationCalculatorDto.setCriteriaList(criteriaList);
 
         ParameterizedTypeReference<List<BlockDurationTransformatedDto>> responseType = new ParameterizedTypeReference<List<BlockDurationTransformatedDto>>() {
         };
@@ -63,6 +64,8 @@ public class BlockDurationIT extends BaseITAbstract {
         ResponseEntity<List<BlockDurationTransformatedDto>> response = this.restTemplate.exchange(LOCALHOST + this.port + SERVICE_PATH, HttpMethod.POST, httpEntity, responseType);
 
         assertNotNull(response);
+
+        assertEquals(0.0625, response.getBody().stream().findFirst().get().getDuration());
 
     }
 }
