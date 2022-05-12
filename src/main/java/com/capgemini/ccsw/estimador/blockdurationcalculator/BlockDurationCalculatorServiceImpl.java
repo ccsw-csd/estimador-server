@@ -15,8 +15,6 @@ import com.capgemini.ccsw.estimador.block.model.BlockProfileEntity;
 import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationCalculatorDto;
 import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
 import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
-import com.capgemini.ccsw.estimador.parameter.ParameterService;
-import com.capgemini.ccsw.estimador.parameter.model.ParameterEntity;
 
 @Service
 public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculatorService {
@@ -31,9 +29,6 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
     BlockService blockService;
 
     @Autowired
-    ParameterService parameterService;
-
-    @Autowired
     BlockProfileService blockProfileService;
 
     @Override
@@ -41,7 +36,6 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         HashMap<String, Double> blockFteList = new HashMap<>();
         Map<String, List<String>> blockProfile = new HashMap<>();
 
-        List<ParameterEntity> parameterEntityList = parameterService.findAll();
         List<BlockEntity> blockEntityList = blockService.findAll();
         List<BlockProfileEntity> blockProfileEntityList = blockProfileService.findAll();
 
@@ -66,8 +60,7 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
                 }
             });
         });
-
-        List<BlockDurationTransformatedDto> outputList = createBlocksFromCriteria(blockDurationCalculatorDto, parameterEntityList, blockEntityList);
+        List<BlockDurationTransformatedDto> outputList = createBlocksFromCriteria(blockDurationCalculatorDto, blockEntityList);
 
         outputList.stream().forEach(block -> block.setDuration(calculateDuration(blockFteList, block)));
         BlockDurationTransformatedDto developer = new BlockDurationTransformatedDto();
@@ -82,7 +75,7 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         return block.getHours() / WORK_DAYS / WORK_HOURS / blockFteList.get(block.getBlockName());
     }
 
-    private List<BlockDurationTransformatedDto> createBlocksFromCriteria(BlockDurationCalculatorDto blockDurationCalculatorDto, List<ParameterEntity> parameterEntityList, List<BlockEntity> blockEntityList) {
+    private List<BlockDurationTransformatedDto> createBlocksFromCriteria(BlockDurationCalculatorDto blockDurationCalculatorDto, List<BlockEntity> blockEntityList) {
         HashMap<String, List<CriteriaCalculationTransformationDto>> criteriaHashMap = new HashMap<>();
         for (CriteriaCalculationTransformationDto criteriaCalculationTransformation : blockDurationCalculatorDto.getCriteriaList()) {
 
@@ -108,6 +101,43 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
             outputList.add(tmp);
         }
         return outputList;
+    }
+
+    public Double projectTotalDuration(List<BlockDurationTransformatedDto> blockDurationTransformatedDto) {
+        Double calculation = 0.0;
+        Double architeture = 0.0, analysis = 0.0, ux = 0.0;
+
+        for (BlockDurationTransformatedDto block : blockDurationTransformatedDto) {
+            switch (block.getBlockName()) {
+            case "DEVELOPMENT":
+                calculation += block.getDuration();
+                break;
+            case "TESTING":
+                calculation += block.getDuration() * 0.5;
+                break;
+            case "DEPLOY":
+                calculation += block.getDuration();
+                break;
+            case "DOCUMENTATION":
+                calculation += block.getDuration() * 0.75;
+                break;
+            case "ARCHITECTURE":
+                architeture += block.getDuration() * 0.5;
+                break;
+            case "ANALYSYS":
+                analysis += block.getDuration() * 0.5;
+                break;
+            case "UX":
+                ux += block.getDuration() * 0.5;
+                break;
+            default:
+                break;
+            }
+        }
+        calculation += Math.max(Math.max(architeture, analysis), ux);
+
+        return calculation;
+
     }
 
 }
