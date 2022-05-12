@@ -66,7 +66,7 @@ public class EstimationServiceImpl implements EstimationService {
     @Override
     public List<EstimationEntity> findVersion(Long projectId) {
     	
-    	return this.estimationRepository.findByProjectIdOrderByCreated(projectId);
+    	return this.estimationRepository.findByProjectIdOrderByLastUpdateDesc(projectId);
     }
 
     @Override

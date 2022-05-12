@@ -36,5 +36,5 @@ public interface EstimationRepository extends CrudRepository<EstimationEntity, L
     
     EstimationEntity findFirstByProjectCustomerOrderByLastUpdateDesc(CustomerEntity customer);
     
-    List<EstimationEntity> findByProjectIdOrderByCreated(Long projectId);
+    List<EstimationEntity> findByProjectIdOrderByLastUpdateDesc(Long projectId);
 }
