@@ -95,4 +95,17 @@ public class BlockDurationTest {
         assertEquals(0.0625, resultList.stream().findFirst().get().getDuration());
     }
 
+    @Test
+    void projectTotalDurationWorksCorrectlyTest() {
+        List<BlockDurationTransformatedDto> blockDurationTransformatedDto = new ArrayList();
+        BlockDurationTransformatedDto blockDto = mock(BlockDurationTransformatedDto.class);
+        when(blockDto.getBlockName()).thenReturn("DEVELOPMENT");
+        when(blockDto.getDuration()).thenReturn(0.0625d);
+        blockDurationTransformatedDto.add(blockDto);
+        Double calculation = this.blockDurationCalculatorServiceImpl.projectTotalDuration(blockDurationTransformatedDto);
+
+        assertEquals(0.0625d, calculation);
+
+    }
+
 }

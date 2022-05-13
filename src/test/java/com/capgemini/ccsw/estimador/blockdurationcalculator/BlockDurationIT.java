@@ -21,7 +21,6 @@ import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculatio
 
 public class BlockDurationIT extends BaseITAbstract {
 
-    public static final String SERVICE_PATH = "/blockdurationcalculator/calculate";
     final Double totalHours = 10d;
 
     final String fteName = "P1";
@@ -35,6 +34,8 @@ public class BlockDurationIT extends BaseITAbstract {
 
     @Test
     void blockDurationCalculatorWroksCorrectlyTest() {
+
+        final String SERVICE_PATH = "/blockdurationcalculator/calculate";
 
         BlockDurationCalculatorDto blockDurationCalculatorDto = new BlockDurationCalculatorDto();
 
@@ -66,6 +67,28 @@ public class BlockDurationIT extends BaseITAbstract {
         assertNotNull(response);
 
         assertEquals(0.0625, response.getBody().stream().findFirst().get().getDuration());
+
+    }
+
+    @Test
+    void projectTotalDurationWorksCorrectlyTest() {
+        final String SERVICE_PATH = "/blockdurationcalculator/calculate-total";
+        List<BlockDurationTransformatedDto> blockDurationTransformatedDto = new ArrayList();
+        BlockDurationTransformatedDto blockDto = new BlockDurationTransformatedDto();
+        blockDto.setBlockName("DEVELOPMENT");
+        blockDto.setDuration(0.0625d);
+        blockDurationTransformatedDto.add(blockDto);
+
+        ParameterizedTypeReference<Double> responseType = new ParameterizedTypeReference<Double>() {
+        };
+
+        HttpEntity<?> httpEntity = new HttpEntity<>(blockDurationTransformatedDto, getHeaders());
+
+        ResponseEntity<Double> response = this.restTemplate.exchange(LOCALHOST + this.port + SERVICE_PATH, HttpMethod.POST, httpEntity, responseType);
+
+        assertNotNull(response);
+
+        assertEquals(0.0625d, response.getBody());
 
     }
 }

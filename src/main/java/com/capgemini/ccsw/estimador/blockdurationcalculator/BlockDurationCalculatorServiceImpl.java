@@ -68,6 +68,9 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         developer.setHours(blockDurationCalculatorDto.getHours());
         developer.setDuration(blockDurationCalculatorDto.getHours() / WORK_DAYS / WORK_HOURS / blockProfileEntityList.size());
         outputList.add(developer);
+
+        outputList.stream().forEach(block -> block.setShift(block.getHours() / 8));
+
         return outputList;
     }
 
@@ -106,6 +109,8 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
     public Double projectTotalDuration(List<BlockDurationTransformatedDto> blockDurationTransformatedDto) {
         Double calculation = 0.0;
         Double architeture = 0.0, analysis = 0.0, ux = 0.0;
+
+        //Cambiar la iteracion de switch al Enum BlockEnums
 
         for (BlockDurationTransformatedDto block : blockDurationTransformatedDto) {
             switch (block.getBlockName()) {
