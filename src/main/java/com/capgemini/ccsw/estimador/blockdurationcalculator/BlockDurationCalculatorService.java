@@ -8,4 +8,6 @@ import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationT
 public interface BlockDurationCalculatorService {
 
     List<BlockDurationTransformatedDto> getHoursGroupedByFte(BlockDurationCalculatorDto blockDurationCalculatorDto);
+
+    Double projectTotalDuration(List<BlockDurationTransformatedDto> blockDurationTransformatedDto);
 }
