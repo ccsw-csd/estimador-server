@@ -1,11 +1,13 @@
 package com.capgemini.ccsw.estimador.blockdurationcalculator;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingDouble;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.capgemini.ccsw.estimador.blockdurationcalculator.enums.BlockEnums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,10 @@ import com.capgemini.ccsw.estimador.block.BlockProfileService;
 import com.capgemini.ccsw.estimador.block.BlockService;
 import com.capgemini.ccsw.estimador.block.model.BlockEntity;
 import com.capgemini.ccsw.estimador.block.model.BlockProfileEntity;
+import com.capgemini.ccsw.estimador.blockdurationcalculator.enums.BlockEnums;
 import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationCalculatorDto;
 import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
 import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
-
-import static java.util.stream.Collectors.*;
 
 @Service
 public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculatorService {
@@ -80,6 +81,9 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
     }
 
     private double calculateDuration(HashMap<String, Double> blockFteList, BlockDurationTransformatedDto block) {
+        if (blockFteList.get(block.getBlockName()).equals(0.0d))
+            return 0.0d;
+
         return block.getHours() / WORK_DAYS / WORK_HOURS / blockFteList.get(block.getBlockName());
     }
 
@@ -111,10 +115,10 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         return outputList;
     }
 
+    @Override
     public Double projectTotalDuration(List<BlockDurationTransformatedDto> dto) {
 
-        Map<String, Double> map = dto.stream()
-                .peek(elem -> elem.setDuration(elem.getDuration() * BlockEnums.valueOfLabel(elem.getBlockName()).weight))
+        Map<String, Double> map = dto.stream().peek(elem -> elem.setDuration(elem.getDuration() * BlockEnums.valueOfLabel(elem.getBlockName()).weight)) //
                 .collect(groupingBy(elem -> BlockEnums.valueOfLabel(elem.getBlockName()).type, summingDouble(BlockDurationTransformatedDto::getDuration)));
 
         Double common = map.getOrDefault("COMMON", DEFAULT_DURATION);
