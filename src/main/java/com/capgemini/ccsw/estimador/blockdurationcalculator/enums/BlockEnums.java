@@ -2,7 +2,6 @@ package com.capgemini.ccsw.estimador.blockdurationcalculator.enums;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public enum BlockEnums {
 
@@ -26,10 +25,6 @@ public enum BlockEnums {
         this.weight = weight;
         this.label = label;
         this.type = type;
-    }
-
-    public static Stream<BlockEnums> stream() {
-        return Stream.of(BlockEnums.values());
     }
 
     private static final Map<String, BlockEnums> BY_LABEL = new HashMap<>();

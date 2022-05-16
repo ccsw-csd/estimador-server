@@ -8,14 +8,8 @@ public class BlockDurationTransformatedDto {
 
     Double duration = 0d;
 
-    Double shift = 0d;
-
-    public Double getShift() {
-        return hours;
-    }
-
-    public void setShift(Double shift) {
-        this.shift = shift;
+    public Double getWorkdays() {
+        return hours / 8;
     }
 
     public Double getDuration() {
