@@ -5,13 +5,18 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public enum BlockEnums {
-    DEVELOPMENT("DEVELOPMENT", 1, "COMMON"), //
-    TESTING("TESTING", 0.5f, "COMMON"), //
-    DEPLOY("DEPLOY", 1, "COMMON"), //
-    DOCUMENTATION("DOCUMENTATION", 0.75f, "COMMON"), // 
-    ARCHITECTURE("ARCHITECTURE & DESIGN", 0.5f, "ARCHITECTURE"), //
-    ANALYSIS("ANALYSIS", 0.5f, "ANALYSIS"), // 
-    UX("UX", 0.5f, "UX");
+
+    VOID("Void", 0, "Void"), //
+
+    DEVELOPMENT("Desarrollo", 1, "COMMON"), //
+    AUTOMATIC_TEST("Pruebas automáticas", 1, "COMMON"), //
+    TESTING("Testing", 1, "COMMON"), //
+    DEPLOY("Despliegue", 1, "COMMON"), //
+    DOCUMENTATION("Documentación", 0.5f, "COMMON"), // 
+
+    ARCHITECTURE("Arquitectura", 0.5f, "ARCHITECTURE"), //
+    ANALYSIS("Análisis", 0.5f, "ANALYSIS"), // 
+    UX("User eXperience", 0.5f, "UX");
 
     public final float weight;
     public final String label;
@@ -36,7 +41,12 @@ public enum BlockEnums {
     }
 
     public static BlockEnums valueOfLabel(String label) {
-        return BY_LABEL.get(label);
+
+        BlockEnums block = BY_LABEL.get(label);
+        if (block != null)
+            return block;
+
+        return BlockEnums.VOID;
     }
 
 }
