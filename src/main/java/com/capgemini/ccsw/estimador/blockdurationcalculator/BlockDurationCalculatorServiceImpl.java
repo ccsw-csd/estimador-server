@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.capgemini.ccsw.estimador.blockdurationcalculator.enums.BlockEnums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +17,18 @@ import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationC
 import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
 import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 
+import static java.util.stream.Collectors.*;
+
 @Service
 public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculatorService {
 
-    private static final String TOTAL_BLOCKNAME = "TOTAL DEVELOPMENT";
+    private static final String TOTAL_BLOCK_NAME = "TOTAL DEVELOPMENT";
 
     private static final int WORK_HOURS = 8;
 
     private static final int WORK_DAYS = 20;
+
+    private static final double DEFAULT_DURATION = 0.0;
 
     @Autowired
     BlockService blockService;
@@ -64,10 +69,13 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
 
         outputList.stream().forEach(block -> block.setDuration(calculateDuration(blockFteList, block)));
         BlockDurationTransformatedDto developer = new BlockDurationTransformatedDto();
-        developer.setBlockName(TOTAL_BLOCKNAME);
+        developer.setBlockName(TOTAL_BLOCK_NAME);
         developer.setHours(blockDurationCalculatorDto.getHours());
         developer.setDuration(blockDurationCalculatorDto.getHours() / WORK_DAYS / WORK_HOURS / blockProfileEntityList.size());
         outputList.add(developer);
+
+        outputList.stream().forEach(block -> block.setShift(block.getHours() / 8));
+
         return outputList;
     }
 
@@ -103,41 +111,18 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         return outputList;
     }
 
-    public Double projectTotalDuration(List<BlockDurationTransformatedDto> blockDurationTransformatedDto) {
-        Double calculation = 0.0;
-        Double architeture = 0.0, analysis = 0.0, ux = 0.0;
+    public Double projectTotalDuration(List<BlockDurationTransformatedDto> dto) {
 
-        for (BlockDurationTransformatedDto block : blockDurationTransformatedDto) {
-            switch (block.getBlockName()) {
-            case "DEVELOPMENT":
-                calculation += block.getDuration();
-                break;
-            case "TESTING":
-                calculation += block.getDuration() * 0.5;
-                break;
-            case "DEPLOY":
-                calculation += block.getDuration();
-                break;
-            case "DOCUMENTATION":
-                calculation += block.getDuration() * 0.75;
-                break;
-            case "ARCHITECTURE":
-                architeture += block.getDuration() * 0.5;
-                break;
-            case "ANALYSYS":
-                analysis += block.getDuration() * 0.5;
-                break;
-            case "UX":
-                ux += block.getDuration() * 0.5;
-                break;
-            default:
-                break;
-            }
-        }
-        calculation += Math.max(Math.max(architeture, analysis), ux);
+        Map<String, Double> map = dto.stream()
+                .peek(elem -> elem.setDuration(elem.getDuration() * BlockEnums.valueOfLabel(elem.getBlockName()).weight))
+                .collect(groupingBy(elem -> BlockEnums.valueOfLabel(elem.getBlockName()).type, summingDouble(BlockDurationTransformatedDto::getDuration)));
 
-        return calculation;
+        Double common = map.getOrDefault("COMMON", DEFAULT_DURATION);
+        Double architecture = map.getOrDefault("ARCHITECTURE", DEFAULT_DURATION);
+        Double analysis = map.getOrDefault("ANALYSIS", DEFAULT_DURATION);
+        Double ux = map.getOrDefault("UX", DEFAULT_DURATION);
 
+        return common + Math.max(Math.max(architecture, analysis), ux);
     }
 
 }

@@ -4,9 +4,19 @@ public class BlockDurationTransformatedDto {
 
     String blockName;
 
-    Double totalHours = 0d;
+    Double hours = 0d;
 
     Double duration = 0d;
+
+    Double shift = 0d;
+
+    public Double getShift() {
+        return hours;
+    }
+
+    public void setShift(Double shift) {
+        this.shift = shift;
+    }
 
     public Double getDuration() {
         return duration;
@@ -25,10 +35,10 @@ public class BlockDurationTransformatedDto {
     }
 
     public Double getHours() {
-        return totalHours;
+        return hours;
     }
 
-    public void setHours(Double totalHours) {
-        this.totalHours = totalHours;
+    public void setHours(Double hours) {
+        this.hours = hours;
     }
 }

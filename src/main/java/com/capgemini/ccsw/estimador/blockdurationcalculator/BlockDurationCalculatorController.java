@@ -19,16 +19,13 @@ public class BlockDurationCalculatorController {
     BlockDurationCalculatorService blockDurationCalculatorService;
 
     @RequestMapping(path = "/calculate")
-    public List<BlockDurationTransformatedDto> getHoursGroupedByFte(
-            @RequestBody BlockDurationCalculatorDto blockDurationCalculatorDto) {
-
-        return this.blockDurationCalculatorService.getHoursGroupedByFte(blockDurationCalculatorDto);
+    public List<BlockDurationTransformatedDto> getHoursGroupedByFte(@RequestBody BlockDurationCalculatorDto blockDurationCalculatorDto) {
+        return blockDurationCalculatorService.getHoursGroupedByFte(blockDurationCalculatorDto);
     }
 
-    @RequestMapping(path = "/totalduration", method = RequestMethod.POST)
-    public Double calculateTotalDuration(
-            @RequestBody List<BlockDurationTransformatedDto> blockDurationTransformatedDto) {
-
-        return this.blockDurationCalculatorService.projectTotalDuration(blockDurationTransformatedDto);
+    @RequestMapping(path = "/calculate-total")
+    public Double getProjectDuration(@RequestBody List<BlockDurationTransformatedDto> blockDurationTransformatedDto) {
+        return blockDurationCalculatorService.projectTotalDuration(blockDurationTransformatedDto);
     }
+
 }
