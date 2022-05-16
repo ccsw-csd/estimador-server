@@ -67,8 +67,7 @@ public class WeightCalculatorIT extends BaseITAbstract {
         };
         HttpEntity<?> httpEntity = new HttpEntity<>(taskAndWeightsDto, getHeaders());
 
-        ResponseEntity<List<WeightCalculatorDto>> response = this.restTemplate
-                .exchange(LOCALHOST + this.port + SERVICE_PATH, HttpMethod.POST, httpEntity, responseType);
+        ResponseEntity<List<WeightCalculatorDto>> response = this.restTemplate.exchange(LOCALHOST + this.port + SERVICE_PATH, HttpMethod.POST, httpEntity, responseType);
 
         assertEquals(27d, response.getBody().stream().findFirst().orElse(null).getTotalHours());
     }

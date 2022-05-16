@@ -15,3 +15,7 @@ INSERT INTO estimation (id,created,created_by,est_version,project,total_cost,tot
 (1,'1970-01-01',1,'1.0',1,0.0,0.0,'1970-01-01',1,0);
 
 INSERT INTO estimation_collaborators (id,estimation,collaborator) VALUES (1,1,1);
+
+INSERT INTO profile (id,name) VALUES (1,'P1');
+
+INSERT INTO block_profile (id_block,id_profile) VALUES (1,1);

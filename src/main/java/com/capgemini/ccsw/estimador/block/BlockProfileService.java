@@ -2,7 +2,7 @@ package com.capgemini.ccsw.estimador.block;
 
 import java.util.List;
 
-import com.capgemini.ccsw.estimador.block.model.BlockEntity;
+import com.capgemini.ccsw.estimador.block.model.BlockProfileEntity;
 
 /**
  * @author dapalmie
@@ -10,8 +10,8 @@ import com.capgemini.ccsw.estimador.block.model.BlockEntity;
  *         Interfaz que declara las operaciones de negocio de la entidad BlockProfile
  *
  */
-public interface BlockService {
+public interface BlockProfileService {
 
-    List<BlockEntity> findAll();
+    List<BlockProfileEntity> findAll();
 
 }

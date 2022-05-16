@@ -18,4 +18,5 @@ public interface ParameterService {
 
     List<ParameterEntity> findParametersByEstimationCustomer(CustomerDto customer);
 
+    List<ParameterEntity> findAll();
 }

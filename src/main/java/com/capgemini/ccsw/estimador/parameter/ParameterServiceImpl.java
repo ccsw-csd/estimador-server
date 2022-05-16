@@ -23,6 +23,9 @@ public class ParameterServiceImpl implements ParameterService {
     @Autowired
     EstimationParameterService estimationParameterService;
 
+    @Autowired
+    ParameterRepository parameterRepository;
+
     @Override
     public List<ParameterEntity> findParametersByEstimationId(Long id) {
         List<ParameterEntity> parameters = new ArrayList();
@@ -49,6 +52,11 @@ public class ParameterServiceImpl implements ParameterService {
         });
 
         return parameters;
+    }
+
+    @Override
+    public List<ParameterEntity> findAll() {
+        return (List<ParameterEntity>) parameterRepository.findAll();
     }
 
 }
