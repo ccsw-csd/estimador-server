@@ -75,10 +75,13 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
     }
 
     private double calculateDuration(HashMap<String, Double> blockFteList, BlockDurationTransformatedDto block) {
-        if (blockFteList.get(block.getBlockName()).equals(0.0d))
+
+        Double ftes = blockFteList.get(block.getBlockName());
+
+        if (blockFteList == null || ftes == null || ftes.equals(0.0d))
             return DEFAULT_DURATION;
 
-        return block.getHours() / WORK_DAYS / WORK_HOURS / blockFteList.get(block.getBlockName());
+        return block.getHours() / WORK_DAYS / WORK_HOURS / ftes;
     }
 
     private List<BlockDurationTransformatedDto> createBlocksFromCriteria(BlockDurationCalculatorDto blockDurationCalculatorDto, List<BlockEntity> blockEntityList) {

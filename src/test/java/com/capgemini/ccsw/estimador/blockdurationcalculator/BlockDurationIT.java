@@ -66,7 +66,8 @@ public class BlockDurationIT extends BaseITAbstract {
 
         assertNotNull(response);
 
-        assertEquals(0.0625, response.getBody().stream().findFirst().get().getDuration());
+        List<BlockDurationTransformatedDto> list = response.getBody();
+        assertEquals(0.0625, list.get(list.size() - 1).getDuration());
 
     }
 
@@ -75,7 +76,7 @@ public class BlockDurationIT extends BaseITAbstract {
         final String SERVICE_PATH = "/blockdurationcalculator/calculate-total";
         List<BlockDurationTransformatedDto> blockDurationTransformatedDto = new ArrayList();
         BlockDurationTransformatedDto blockDto = new BlockDurationTransformatedDto();
-        blockDto.setBlockName("DEVELOPMENT");
+        blockDto.setBlockName("Desarrollo");
         blockDto.setDuration(0.0625d);
         blockDurationTransformatedDto.add(blockDto);
 
