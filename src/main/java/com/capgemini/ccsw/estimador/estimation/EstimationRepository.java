@@ -1,6 +1,7 @@
 package com.capgemini.ccsw.estimador.estimation;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,8 @@ public interface EstimationRepository extends CrudRepository<EstimationEntity, L
      */
     @Query("select e FROM EstimationEntity e " + "WHERE (:customer is null or e.project.customer.id = :customer) "
             + "and (:project is null or e.project.name like '%'||:project||'%') "
-            + "and (:startDate is null or :endDate is null or e.created BETWEEN :startDate and :endDate)")
+            + "and (:startDate is null or :endDate is null or e.created BETWEEN :startDate and :endDate) and (e.lastUpdate = "
+            + "(select max(lastUpdate) from EstimationEntity t where t.project = e.project))")
     @EntityGraph(attributePaths = { "project", "project.customer", "createdBy", "createdBy.role" })
     Page<EstimationEntity> find(@Param("customer") Long customer, @Param("project") String project,
             @Param("startDate") Date startDate, @Param("endDate") Date endDate, Pageable pageable);
@@ -34,4 +36,6 @@ public interface EstimationRepository extends CrudRepository<EstimationEntity, L
     EstimationEntity getById(Long id);
 
     EstimationEntity findFirstByProjectCustomerOrderByLastUpdateDesc(CustomerEntity customer);
+
+    List<EstimationEntity> findByProjectIdOrderByLastUpdateDesc(Long projectId);
 }

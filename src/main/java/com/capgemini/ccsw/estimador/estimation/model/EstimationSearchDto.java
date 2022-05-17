@@ -87,8 +87,5 @@ public class EstimationSearchDto {
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-	
-	
-	
+	}	
 }

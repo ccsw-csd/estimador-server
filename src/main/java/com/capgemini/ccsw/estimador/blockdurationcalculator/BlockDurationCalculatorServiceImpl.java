@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.ccsw.estimador.block.BlockProfileService;
 import com.capgemini.ccsw.estimador.block.BlockService;
+import com.capgemini.ccsw.estimador.block.model.BlockDto;
 import com.capgemini.ccsw.estimador.block.model.BlockEntity;
 import com.capgemini.ccsw.estimador.block.model.BlockProfileEntity;
 import com.capgemini.ccsw.estimador.blockdurationcalculator.enums.BlockEnums;
@@ -23,7 +24,7 @@ import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculatio
 @Service
 public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculatorService {
 
-    private static final String TOTAL_BLOCK_NAME = "TOTAL DEVELOPMENT";
+    private static final String DEVELOP_BLOCK_NAME = "Desarrollo";
 
     private static final int WORK_HOURS = 8;
 
@@ -69,27 +70,28 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         List<BlockDurationTransformatedDto> outputList = createBlocksFromCriteria(blockDurationCalculatorDto, blockEntityList);
 
         outputList.stream().forEach(block -> block.setDuration(calculateDuration(blockFteList, block)));
-        BlockDurationTransformatedDto developer = new BlockDurationTransformatedDto();
-        developer.setBlockName(TOTAL_BLOCK_NAME);
-        developer.setHours(blockDurationCalculatorDto.getHours());
-        developer.setDuration(blockDurationCalculatorDto.getHours() / WORK_DAYS / WORK_HOURS / blockProfileEntityList.size());
-        outputList.add(developer);
-
-        outputList.stream().forEach(block -> block.setShift(block.getHours() / 8));
 
         return outputList;
     }
 
     private double calculateDuration(HashMap<String, Double> blockFteList, BlockDurationTransformatedDto block) {
-        if (blockFteList.get(block.getBlockName()).equals(0.0d))
-            return 0.0d;
 
-        return block.getHours() / WORK_DAYS / WORK_HOURS / blockFteList.get(block.getBlockName());
+        Double ftes = blockFteList.get(block.getBlockName());
+
+        if (blockFteList == null || ftes == null || ftes.equals(0.0d))
+            return DEFAULT_DURATION;
+
+        return block.getHours() / WORK_DAYS / WORK_HOURS / ftes;
     }
 
     private List<BlockDurationTransformatedDto> createBlocksFromCriteria(BlockDurationCalculatorDto blockDurationCalculatorDto, List<BlockEntity> blockEntityList) {
         HashMap<String, List<CriteriaCalculationTransformationDto>> criteriaHashMap = new HashMap<>();
-        for (CriteriaCalculationTransformationDto criteriaCalculationTransformation : blockDurationCalculatorDto.getCriteriaList()) {
+
+        List<CriteriaCalculationTransformationDto> criteriaList = blockDurationCalculatorDto.getCriteriaList();
+
+        addDevelopEffortToCriteriaList(criteriaList, blockDurationCalculatorDto.getHours());
+
+        for (CriteriaCalculationTransformationDto criteriaCalculationTransformation : criteriaList) {
 
             String blockName = criteriaCalculationTransformation.getBlock().getName();
 
@@ -112,7 +114,19 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
             tmp.setBlockName(key);
             outputList.add(tmp);
         }
+
         return outputList;
+    }
+
+    private void addDevelopEffortToCriteriaList(List<CriteriaCalculationTransformationDto> criteriaList, Double hours) {
+        CriteriaCalculationTransformationDto dto = new CriteriaCalculationTransformationDto();
+        criteriaList.add(dto);
+
+        BlockDto block = new BlockDto();
+        block.setName(DEVELOP_BLOCK_NAME);
+
+        dto.setHours(hours);
+        dto.setBlock(block);
     }
 
     @Override
