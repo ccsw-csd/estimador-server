@@ -16,6 +16,8 @@ import com.capgemini.ccsw.estimador.ftecalculator.model.FteCalculatorDto;
 @Service
 public class FteCalculatorServiceImpl implements FteCalculatorService {
 
+    private static final int WORK_DAYS = 20;
+
     @Override
     public FteCalculatorDto calculateFte(List<CriteriaDto> criteriaList) {
 
@@ -23,19 +25,14 @@ public class FteCalculatorServiceImpl implements FteCalculatorService {
         Double manager = 0d;
         Double teamLeader = 0d;
 
-        for (int i = 0; i < criteriaList.size(); i++) {
+        manager = criteriaList.stream().filter(criteria -> criteria.getBlock().getName().equals("Gestión"))
+                .mapToDouble(criteria -> criteria.getValue()).sum();
 
-            if (criteriaList.get(i).getBlock().getId() == 10) {
-                manager = manager + criteriaList.get(i).getValue();
-            }
+        teamLeader = criteriaList.stream().filter(criteria -> criteria.getBlock().getName().equals("TeamLeader"))
+                .mapToDouble(criteria -> criteria.getValue()).sum();
 
-            else if (criteriaList.get(i).getBlock().getId() == 20) {
-                teamLeader = teamLeader + criteriaList.get(i).getValue();
-            }
-        }
-
-        fteCalculatorDto.setManager(manager / 20);
-        fteCalculatorDto.setTeamLeader(teamLeader / 20);
+        fteCalculatorDto.setManager(manager / WORK_DAYS);
+        fteCalculatorDto.setTeamLeader(teamLeader / WORK_DAYS);
 
         return fteCalculatorDto;
     }

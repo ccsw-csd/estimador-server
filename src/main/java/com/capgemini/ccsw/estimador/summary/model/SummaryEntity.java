@@ -36,16 +36,16 @@ public class SummaryEntity {
     private BlockEntity block;
 
     @Column(name = "a")
-    private Double a;
+    private Double gradeA;
 
     @Column(name = "b")
-    private Double b;
+    private Double gradeB;
 
     @Column(name = "c")
-    private Double c;
+    private Double gradeC;
 
     @Column(name = "d")
-    private Double d;
+    private Double gradeD;
 
     /**
      * @return id
@@ -96,67 +96,67 @@ public class SummaryEntity {
     }
 
     /**
-     * @return a
+     * @return gradeA
      */
-    public Double getA() {
+    public Double getGradeA() {
 
-        return this.a;
+        return this.gradeA;
     }
 
     /**
-     * @param a new value of {@link #geta}.
+     * @param gradeA new value of {@link #getgradeA}.
      */
-    public void setA(Double a) {
+    public void setGradeA(Double gradeA) {
 
-        this.a = a;
+        this.gradeA = gradeA;
     }
 
     /**
-     * @return b
+     * @return gradeB
      */
-    public Double getB() {
+    public Double getGradeB() {
 
-        return this.b;
+        return this.gradeB;
     }
 
     /**
-     * @param b new value of {@link #getb}.
+     * @param gradeB new value of {@link #getgradeB}.
      */
-    public void setB(Double b) {
+    public void setGradeB(Double gradeB) {
 
-        this.b = b;
+        this.gradeB = gradeB;
     }
 
     /**
-     * @return c
+     * @return gradeC
      */
-    public Double getC() {
+    public Double getGradeC() {
 
-        return this.c;
+        return this.gradeC;
     }
 
     /**
-     * @param c new value of {@link #getc}.
+     * @param gradeC new value of {@link #getgradeC}.
      */
-    public void setC(Double c) {
+    public void setGradeC(Double gradeC) {
 
-        this.c = c;
+        this.gradeC = gradeC;
     }
 
     /**
-     * @return d
+     * @return gradeD
      */
-    public Double getD() {
+    public Double getGradeD() {
 
-        return this.d;
+        return this.gradeD;
     }
 
     /**
-     * @param d new value of {@link #getd}.
+     * @param gradeD new value of {@link #getgradeD}.
      */
-    public void setD(Double d) {
+    public void setGradeD(Double gradeD) {
 
-        this.d = d;
+        this.gradeD = gradeD;
     }
 
 }
