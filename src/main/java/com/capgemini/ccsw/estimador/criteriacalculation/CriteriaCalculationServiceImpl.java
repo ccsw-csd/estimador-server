@@ -24,6 +24,7 @@ public class CriteriaCalculationServiceImpl implements CriteriaCalculationServic
             if (element.getType().equals(CRITERIA_LISTED_NAMES)) {
                 returned.setHours(element.getValue() * hours / 100);
                 returned.setBlock(element.getBlock());
+                returned.setConcept(element.getConcept());
                 list.add(returned);
             }
         }
