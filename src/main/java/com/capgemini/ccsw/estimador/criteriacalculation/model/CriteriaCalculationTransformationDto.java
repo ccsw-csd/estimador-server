@@ -8,20 +8,42 @@ public class CriteriaCalculationTransformationDto {
 
     private BlockDto block;
 
+    private String concept;
+
     public BlockDto getBlock() {
-        return block;
+
+        return this.block;
     }
 
     public void setBlock(BlockDto block) {
+
         this.block = block;
     }
 
     public Double getHours() {
-        return hours;
+
+        return this.hours;
     }
 
     public void setHours(Double hours) {
+
         this.hours = hours;
+    }
+
+    /**
+     * @return concept
+     */
+    public String getConcept() {
+
+        return this.concept;
+    }
+
+    /**
+     * @param concept new value of {@link #getconcept}.
+     */
+    public void setConcept(String concept) {
+
+        this.concept = concept;
     }
 
 }
