@@ -25,15 +25,10 @@ public interface EstimationRepository extends CrudRepository<EstimationEntity, L
      * @param pageable
      * @return
      */
-    @Query("select e FROM EstimationEntity e " + "WHERE (:customer is null or e.project.customer.id = :customer) "
-            + "and (:project is null or e.project.name like '%'||:project||'%') "
-            + "and (:startDate is null or :endDate is null or e.created BETWEEN :startDate and :endDate) and (e.lastUpdate = "
-            + "(select max(lastUpdate) from EstimationEntity t where t.project = e.project))")
+    @Query("select e FROM EstimationEntity e " + "WHERE (:customer is null or e.project.customer.id = :customer) " + "and (:project is null or e.project.name like '%'||:project||'%') "
+            + "and (:startDate is null or :endDate is null or e.created BETWEEN :startDate and :endDate) and (e.lastUpdate = " + "(select max(lastUpdate) from EstimationEntity t where t.project = e.project))")
     @EntityGraph(attributePaths = { "project", "project.customer", "createdBy", "createdBy.role" })
-    Page<EstimationEntity> find(@Param("customer") Long customer, @Param("project") String project,
-            @Param("startDate") Date startDate, @Param("endDate") Date endDate, Pageable pageable);
-
-    EstimationEntity getById(Long id);
+    Page<EstimationEntity> find(@Param("customer") Long customer, @Param("project") String project, @Param("startDate") Date startDate, @Param("endDate") Date endDate, Pageable pageable);
 
     EstimationEntity findFirstByProjectCustomerOrderByLastUpdateDesc(CustomerEntity customer);
 
