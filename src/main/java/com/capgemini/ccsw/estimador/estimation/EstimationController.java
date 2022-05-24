@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.ccsw.estimador.config.mapper.BeanMapper;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEditDto;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
 
 /**
@@ -35,11 +35,11 @@ public class EstimationController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public EstimationDto getEstimation(@PathVariable Long id) {
+    public EstimationEditDto getEstimation(@PathVariable Long id) {
 
-        return this.beanMapper.map(this.estimationService.getEstimation(id), EstimationDto.class);
+        return this.estimationService.getEstimationForEdit(id);
     }
-    
+
     @RequestMapping(path = "/version/{projectId}", method = RequestMethod.GET)
     public List<EstimationDto> findVersion(@PathVariable Long projectId) {
 
