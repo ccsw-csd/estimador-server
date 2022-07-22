@@ -19,8 +19,7 @@ import com.capgemini.ccsw.estimador.gradeworkdayscalculator.model.GradeWorkDaysC
 public class GradeWorkDaysCalculatorServiceImpl implements GradeWorkDaysCalculatorService {
 
     @Override
-    public List<GradeWorkDaysCalculatorTransformatedDto> calculateWorkDaysPerGrade(
-            List<GradeWorkDaysCalculatorDto> gradeWorkDaysCalculatorList) {
+    public List<GradeWorkDaysCalculatorTransformatedDto> calculateWorkDaysPerGrade(List<GradeWorkDaysCalculatorDto> gradeWorkDaysCalculatorList) {
 
         List<GradeWorkDaysCalculatorTransformatedDto> transformedDtoList = new ArrayList<>();
         GradeWorkDaysCalculatorTransformatedDto transformatedDtoGradeA = new GradeWorkDaysCalculatorTransformatedDto();
@@ -29,26 +28,22 @@ public class GradeWorkDaysCalculatorServiceImpl implements GradeWorkDaysCalculat
         GradeWorkDaysCalculatorTransformatedDto transformatedDtoGradeD = new GradeWorkDaysCalculatorTransformatedDto();
         Double gradeA = 0d, gradeB = 0d, gradeC = 0d, gradeD = 0d;
 
-        gradeA = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeA() / 100 * row.getWorkdays())
-                .sum();
+        gradeA = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeA() / 100 * row.getWorkdays()).sum();
         transformatedDtoGradeA.setGrade("A");
         transformatedDtoGradeA.setWorkdays(gradeA);
         transformedDtoList.add(transformatedDtoGradeA);
 
-        gradeB = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeB() / 100 * row.getWorkdays())
-                .sum();
+        gradeB = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeB() / 100 * row.getWorkdays()).sum();
         transformatedDtoGradeB.setGrade("B");
         transformatedDtoGradeB.setWorkdays(gradeB);
         transformedDtoList.add(transformatedDtoGradeB);
 
-        gradeC = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeC() / 100 * row.getWorkdays())
-                .sum();
+        gradeC = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeC() / 100 * row.getWorkdays()).sum();
         transformatedDtoGradeC.setGrade("C");
         transformatedDtoGradeC.setWorkdays(gradeC);
         transformedDtoList.add(transformatedDtoGradeC);
 
-        gradeD = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeD() / 100 * row.getWorkdays())
-                .sum();
+        gradeD = gradeWorkDaysCalculatorList.stream().mapToDouble(row -> row.getGradeD() / 100 * row.getWorkdays()).sum();
         transformatedDtoGradeD.setGrade("D");
         transformatedDtoGradeD.setWorkdays(gradeD);
         transformedDtoList.add(transformatedDtoGradeD);

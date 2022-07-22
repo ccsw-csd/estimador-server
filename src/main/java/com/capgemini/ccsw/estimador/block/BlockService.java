@@ -14,4 +14,6 @@ public interface BlockService {
 
     List<BlockEntity> findAll();
 
+    BlockEntity get(Long id);
+
 }

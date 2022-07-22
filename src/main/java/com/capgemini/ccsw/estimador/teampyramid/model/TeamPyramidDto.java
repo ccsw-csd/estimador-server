@@ -1,6 +1,5 @@
 package com.capgemini.ccsw.estimador.teampyramid.model;
 
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 import com.capgemini.ccsw.estimador.profile.model.ProfileDto;
 
 /**
@@ -12,8 +11,6 @@ import com.capgemini.ccsw.estimador.profile.model.ProfileDto;
 public class TeamPyramidDto {
 
     private Long id;
-
-    private EstimationDto estimation;
 
     private ProfileDto profile;
 
@@ -33,22 +30,6 @@ public class TeamPyramidDto {
     public void setId(Long id) {
 
         this.id = id;
-    }
-
-    /**
-     * @return estimation
-     */
-    public EstimationDto getEstimation() {
-
-        return this.estimation;
-    }
-
-    /**
-     * @param estimation new value of {@link #getestimation}.
-     */
-    public void setEstimation(EstimationDto estimation) {
-
-        this.estimation = estimation;
     }
 
     /**

@@ -27,4 +27,9 @@ public class EstimationLevelServiceImpl implements EstimationLevelService {
 
     }
 
+    @Override
+    public EstimationLevelEntity get(Long id) {
+        return estimationLevelRepository.findById(id).orElse(null);
+    }
+
 }

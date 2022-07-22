@@ -15,4 +15,6 @@ public interface EstimationLevelService {
 
     List<EstimationLevelEntity> findAll();
 
+    EstimationLevelEntity get(Long id);
+
 }

@@ -1,7 +1,5 @@
 package com.capgemini.ccsw.estimador.taskarchitecture.model;
 
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
-
 /**
  * @author asolerpa
  *
@@ -11,8 +9,6 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 public class TaskArchitectureDto {
 
     private Long id;
-
-    private EstimationDto estimation;
 
     private String name;
 
@@ -32,20 +28,6 @@ public class TaskArchitectureDto {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return estimation
-     */
-    public EstimationDto getEstimation() {
-        return this.estimation;
-    }
-
-    /**
-     * @param estimation new value of {@link #getestimation}.
-     */
-    public void setEstimation(EstimationDto estimation) {
-        this.estimation = estimation;
     }
 
     /**

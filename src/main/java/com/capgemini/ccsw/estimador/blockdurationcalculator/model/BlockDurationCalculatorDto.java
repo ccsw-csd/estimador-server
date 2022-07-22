@@ -6,11 +6,10 @@ import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculatio
 
 public class BlockDurationCalculatorDto {
 
-    Double hours;
-
-    List<CriteriaCalculationTransformationDto> criteriaList;
-
-    List<FteDto> fteList;
+    private Double hours;
+    private Double archytectureHours;
+    private List<CriteriaCalculationTransformationDto> criteriaList;
+    private List<FteDto> fteList;
 
     public Double getHours() {
         return hours;
@@ -34,5 +33,19 @@ public class BlockDurationCalculatorDto {
 
     public void setFteList(List<FteDto> fteList) {
         this.fteList = fteList;
+    }
+
+    /**
+     * @return the archytectureHours
+     */
+    public Double getArchytectureHours() {
+        return archytectureHours;
+    }
+
+    /**
+     * @param archytectureHours the archytectureHours to set
+     */
+    public void setArchytectureHours(Double archytectureHours) {
+        this.archytectureHours = archytectureHours;
     }
 }

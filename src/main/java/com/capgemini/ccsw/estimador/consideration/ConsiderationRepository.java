@@ -15,6 +15,6 @@ import com.capgemini.ccsw.estimador.consideration.model.ConsiderationEntity;
  */
 public interface ConsiderationRepository extends CrudRepository<ConsiderationEntity, Long> {
 
-    List<ConsiderationEntity> findByEstimationId(Long estimationId);
+    List<ConsiderationEntity> findByEstimationIdOrderByOrderAsc(Long estimationId);
 
 }

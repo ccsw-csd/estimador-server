@@ -41,7 +41,7 @@ public class GradeWorkDaysCalculatorDto {
      * @return workdays
      */
     public Double getWorkdays() {
-        return this.workdays;
+        return this.workdays == null ? 0D : this.workdays;
     }
 
     /**

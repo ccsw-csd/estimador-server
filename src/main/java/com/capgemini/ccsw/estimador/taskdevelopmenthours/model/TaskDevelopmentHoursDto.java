@@ -1,7 +1,5 @@
 package com.capgemini.ccsw.estimador.taskdevelopmenthours.model;
 
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
-
 /**
  * @author asolerpa
  *
@@ -11,8 +9,6 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 public class TaskDevelopmentHoursDto {
 
     private Long id;
-
-    private EstimationDto estimation;
 
     private String name;
 
@@ -36,20 +32,6 @@ public class TaskDevelopmentHoursDto {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return estimation
-     */
-    public EstimationDto getEstimation() {
-        return this.estimation;
-    }
-
-    /**
-     * @param estimation new value of {@link #getestimation}.
-     */
-    public void setEstimation(EstimationDto estimation) {
-        this.estimation = estimation;
     }
 
     /**

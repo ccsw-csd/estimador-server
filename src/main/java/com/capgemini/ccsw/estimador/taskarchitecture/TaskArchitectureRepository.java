@@ -15,6 +15,6 @@ import com.capgemini.ccsw.estimador.taskarchitecture.model.TaskArchitectureEntit
  */
 public interface TaskArchitectureRepository extends CrudRepository<TaskArchitectureEntity, Long> {
 
-    List<TaskArchitectureEntity> findByEstimationId(Long estimationId);
+    List<TaskArchitectureEntity> findByEstimationIdOrderByOrderAsc(Long estimationId);
 
 }

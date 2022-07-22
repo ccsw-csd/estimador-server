@@ -15,6 +15,6 @@ import com.capgemini.ccsw.estimador.taskdevelopmenthours.model.TaskDevelopmentHo
  */
 public interface TaskDevelopmentHoursRepository extends CrudRepository<TaskDevelopmentHoursEntity, Long> {
 
-    List<TaskDevelopmentHoursEntity> findByEstimationId(Long estimationId);
+    List<TaskDevelopmentHoursEntity> findByEstimationIdOrderByOrderAsc(Long estimationId);
 
 }

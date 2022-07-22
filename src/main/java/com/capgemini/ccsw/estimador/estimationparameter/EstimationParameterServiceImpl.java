@@ -39,4 +39,10 @@ public class EstimationParameterServiceImpl implements EstimationParameterServic
 
     }
 
+    @Override
+    public void save(EstimationParameterEntity estimationParameter) {
+        this.estimationParameterRepository.save(estimationParameter);
+
+    }
+
 }

@@ -18,4 +18,6 @@ public interface EstimationParameterService {
 
     List<EstimationParameterEntity> findParametersByEstimationCustomer(CustomerDto customer);
 
+    void save(EstimationParameterEntity estimationParameter);
+
 }

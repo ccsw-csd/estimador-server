@@ -26,4 +26,10 @@ public class BlockServiceImpl implements BlockService {
 
     }
 
+    @Override
+    public BlockEntity get(Long id) {
+
+        return this.blockRepository.findById(id).get();
+    }
+
 }

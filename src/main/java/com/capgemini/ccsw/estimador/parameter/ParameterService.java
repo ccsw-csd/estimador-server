@@ -3,6 +3,8 @@ package com.capgemini.ccsw.estimador.parameter;
 import java.util.List;
 
 import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEditDto;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.parameter.model.ParameterEntity;
 
 /**
@@ -18,5 +20,5 @@ public interface ParameterService {
 
     List<ParameterEntity> findParametersByEstimationCustomer(CustomerDto customer);
 
-    List<ParameterEntity> findAll();
+    void saveEstimation(EstimationEntity estimation, EstimationEditDto data);
 }

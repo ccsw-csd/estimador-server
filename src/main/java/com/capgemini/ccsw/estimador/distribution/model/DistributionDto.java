@@ -1,7 +1,6 @@
-package com.capgemini.ccsw.estimador.summary.model;
+package com.capgemini.ccsw.estimador.distribution.model;
 
 import com.capgemini.ccsw.estimador.block.model.BlockDto;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 
 /**
  * @author asolerpa
@@ -9,11 +8,9 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
  *         Clase DTO de la entidad SummaryEntity
  *
  */
-public class SummaryDto {
+public class DistributionDto {
 
     private Long id;
-
-    private EstimationDto estimation;
 
     private BlockDto block;
 
@@ -39,22 +36,6 @@ public class SummaryDto {
     public void setId(Long id) {
 
         this.id = id;
-    }
-
-    /**
-     * @return estimation
-     */
-    public EstimationDto getEstimation() {
-
-        return this.estimation;
-    }
-
-    /**
-     * @param estimation new value of {@link #getestimation}.
-     */
-    public void setEstimation(EstimationDto estimation) {
-
-        this.estimation = estimation;
     }
 
     /**

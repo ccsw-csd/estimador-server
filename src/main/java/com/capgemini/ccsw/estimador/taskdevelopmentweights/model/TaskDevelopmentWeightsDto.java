@@ -1,7 +1,6 @@
 package com.capgemini.ccsw.estimador.taskdevelopmentweights.model;
 
 import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightDto;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 
 /**
  * @author asolerpa
@@ -12,8 +11,6 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
 public class TaskDevelopmentWeightsDto {
 
     private Long id;
-
-    private EstimationDto estimation;
 
     private String name;
 
@@ -45,20 +42,6 @@ public class TaskDevelopmentWeightsDto {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return estimation
-     */
-    public EstimationDto getEstimation() {
-        return this.estimation;
-    }
-
-    /**
-     * @param estimation new value of {@link #getestimation}.
-     */
-    public void setEstimation(EstimationDto estimation) {
-        this.estimation = estimation;
     }
 
     /**

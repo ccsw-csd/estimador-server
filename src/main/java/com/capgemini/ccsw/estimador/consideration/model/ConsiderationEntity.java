@@ -33,6 +33,23 @@ public class ConsiderationEntity {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "`order`")
+    private Integer order;
+
+    /**
+     * @return the order
+     */
+    public Integer getOrder() {
+        return order;
+    }
+
+    /**
+     * @param order the order to set
+     */
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     /**
      * @return id
      */

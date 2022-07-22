@@ -3,6 +3,8 @@ package com.capgemini.ccsw.estimador.consideration;
 import java.util.List;
 
 import com.capgemini.ccsw.estimador.consideration.model.ConsiderationEntity;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEditDto;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -14,5 +16,7 @@ import com.capgemini.ccsw.estimador.consideration.model.ConsiderationEntity;
 public interface ConsiderationService {
 
     List<ConsiderationEntity> findByEstimationId(Long id);
+
+    void saveEstimation(EstimationEntity estimation, EstimationEditDto data);
 
 }

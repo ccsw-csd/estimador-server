@@ -28,4 +28,6 @@ public interface EstimationService {
     List<EstimationEntity> findVersion(Long projectId);
 
     EstimationEntity getLastEstimationByCustomer(CustomerDto customer);
+
+    Long saveEstimation(Long id, EstimationEditDto data);
 }

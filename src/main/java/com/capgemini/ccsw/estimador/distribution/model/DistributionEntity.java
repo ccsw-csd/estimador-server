@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.summary.model;
+package com.capgemini.ccsw.estimador.distribution.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
  */
 @Entity
 @Table(name = "summary")
-public class SummaryEntity {
+public class DistributionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

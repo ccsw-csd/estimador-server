@@ -25,6 +25,8 @@ import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculatio
 public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculatorService {
 
     private static final String DEVELOP_BLOCK_NAME = "Desarrollo";
+    
+    private static final String ARCHITECTURE_BLOCK_NAME = "Arquitectura";
 
     private static final int WORK_HOURS = 8;
 
@@ -90,6 +92,7 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         List<CriteriaCalculationTransformationDto> criteriaList = blockDurationCalculatorDto.getCriteriaList();
 
         addDevelopEffortToCriteriaList(criteriaList, blockDurationCalculatorDto.getHours());
+        addArchytectureEffortToCriteriaList(criteriaList, blockDurationCalculatorDto.getArchytectureHours());
 
         for (CriteriaCalculationTransformationDto criteriaCalculationTransformation : criteriaList) {
 
@@ -116,6 +119,17 @@ public class BlockDurationCalculatorServiceImpl implements BlockDurationCalculat
         }
 
         return outputList;
+    }
+
+    private void addArchytectureEffortToCriteriaList(List<CriteriaCalculationTransformationDto> criteriaList, Double hours) {
+        CriteriaCalculationTransformationDto dto = new CriteriaCalculationTransformationDto();
+        criteriaList.add(dto);
+
+        BlockDto block = new BlockDto();
+        block.setName(ARCHITECTURE_BLOCK_NAME);
+
+        dto.setHours(hours);
+        dto.setBlock(block);
     }
 
     private void addDevelopEffortToCriteriaList(List<CriteriaCalculationTransformationDto> criteriaList, Double hours) {

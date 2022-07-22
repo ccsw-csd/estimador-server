@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.costpergrade.model;
+package com.capgemini.ccsw.estimador.cost.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
  */
 @Entity
 @Table(name = "cost")
-public class CostPerGradeEntity {
+public class CostEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,17 +30,29 @@ public class CostPerGradeEntity {
     @JoinColumn(name = "estimation", nullable = false)
     private EstimationEntity estimation;
 
-    @Column(name = "a")
+    @Column(name = "cost_a")
     private Double costGradeA;
 
-    @Column(name = "b")
+    @Column(name = "cost_b")
     private Double costGradeB;
 
-    @Column(name = "c")
+    @Column(name = "cost_c")
     private Double costGradeC;
 
-    @Column(name = "d")
+    @Column(name = "cost_d")
     private Double costGradeD;
+
+    @Column(name = "margin_a")
+    private Double marginGradeA;
+
+    @Column(name = "margin_b")
+    private Double marginGradeB;
+
+    @Column(name = "margin_c")
+    private Double marginGradeC;
+
+    @Column(name = "margin_d")
+    private Double marginGradeD;
 
     /**
      * @return id
@@ -125,4 +137,61 @@ public class CostPerGradeEntity {
     public void setCostGradeD(Double costGradeD) {
         this.costGradeD = costGradeD;
     }
+
+    /**
+     * @return the marginGradeA
+     */
+    public Double getMarginGradeA() {
+        return marginGradeA;
+    }
+
+    /**
+     * @param marginGradeA the marginGradeA to set
+     */
+    public void setMarginGradeA(Double marginGradeA) {
+        this.marginGradeA = marginGradeA;
+    }
+
+    /**
+     * @return the marginGradeB
+     */
+    public Double getMarginGradeB() {
+        return marginGradeB;
+    }
+
+    /**
+     * @param marginGradeB the marginGradeB to set
+     */
+    public void setMarginGradeB(Double marginGradeB) {
+        this.marginGradeB = marginGradeB;
+    }
+
+    /**
+     * @return the marginGradeC
+     */
+    public Double getMarginGradeC() {
+        return marginGradeC;
+    }
+
+    /**
+     * @param marginGradeC the marginGradeC to set
+     */
+    public void setMarginGradeC(Double marginGradeC) {
+        this.marginGradeC = marginGradeC;
+    }
+
+    /**
+     * @return the marginGradeD
+     */
+    public Double getMarginGradeD() {
+        return marginGradeD;
+    }
+
+    /**
+     * @param marginGradeD the marginGradeD to set
+     */
+    public void setMarginGradeD(Double marginGradeD) {
+        this.marginGradeD = marginGradeD;
+    }
+
 }

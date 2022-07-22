@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 import com.capgemini.ccsw.estimador.consideration.model.ConsiderationDto;
+import com.capgemini.ccsw.estimador.cost.model.CostDto;
+import com.capgemini.ccsw.estimador.distribution.model.DistributionDto;
 import com.capgemini.ccsw.estimador.elementweight.model.ElementWeightDto;
 import com.capgemini.ccsw.estimador.parameter.model.ParameterDto;
 import com.capgemini.ccsw.estimador.project.model.ProjectDto;
 import com.capgemini.ccsw.estimador.taskarchitecture.model.TaskArchitectureDto;
 import com.capgemini.ccsw.estimador.taskdevelopmenthours.model.TaskDevelopmentHoursDto;
 import com.capgemini.ccsw.estimador.taskdevelopmentweights.model.TaskDevelopmentWeightsDto;
+import com.capgemini.ccsw.estimador.teampyramid.model.TeamPyramidDto;
 import com.capgemini.ccsw.estimador.user.model.UserDto;
 
 /**
@@ -47,11 +50,17 @@ public class EstimationEditDto {
 
     private List<TaskArchitectureDto> architectureTasks;
 
-    private List<TaskDevelopmentHoursDto> developmentTasks;
+    private List<TaskDevelopmentHoursDto> developmentTasksHours;
 
-    private List<TaskDevelopmentWeightsDto> developmentWeights;
+    private List<TaskDevelopmentWeightsDto> developmentTasksWeights;
 
     private List<ConsiderationDto> considerations;
+
+    private List<CostDto> costs;
+
+    private List<DistributionDto> distribution;
+
+    private List<TeamPyramidDto> teamPyramid;
 
     /**
      * @return the id
@@ -267,34 +276,6 @@ public class EstimationEditDto {
     }
 
     /**
-     * @return the developmentTasks
-     */
-    public List<TaskDevelopmentHoursDto> getDevelopmentTasks() {
-        return developmentTasks;
-    }
-
-    /**
-     * @param developmentTasks the developmentTasks to set
-     */
-    public void setDevelopmentTasks(List<TaskDevelopmentHoursDto> developmentTasks) {
-        this.developmentTasks = developmentTasks;
-    }
-
-    /**
-     * @return the developmentWeights
-     */
-    public List<TaskDevelopmentWeightsDto> getDevelopmentWeights() {
-        return developmentWeights;
-    }
-
-    /**
-     * @param developmentWeights the developmentWeights to set
-     */
-    public void setDevelopmentWeights(List<TaskDevelopmentWeightsDto> developmentWeights) {
-        this.developmentWeights = developmentWeights;
-    }
-
-    /**
      * @return the considerations
      */
     public List<ConsiderationDto> getConsiderations() {
@@ -306,6 +287,76 @@ public class EstimationEditDto {
      */
     public void setConsiderations(List<ConsiderationDto> considerations) {
         this.considerations = considerations;
+    }
+
+    /**
+     * @return the cost
+     */
+    public List<CostDto> getCosts() {
+        return costs;
+    }
+
+    /**
+     * @param cost the cost to set
+     */
+    public void setCosts(List<CostDto> costs) {
+        this.costs = costs;
+    }
+
+    /**
+     * @return the distribution
+     */
+    public List<DistributionDto> getDistribution() {
+        return distribution;
+    }
+
+    /**
+     * @param distribution the distribution to set
+     */
+    public void setDistribution(List<DistributionDto> distribution) {
+        this.distribution = distribution;
+    }
+
+    /**
+     * @return the teamPyramid
+     */
+    public List<TeamPyramidDto> getTeamPyramid() {
+        return teamPyramid;
+    }
+
+    /**
+     * @param teamPyramid the teamPyramid to set
+     */
+    public void setTeamPyramid(List<TeamPyramidDto> teamPyramid) {
+        this.teamPyramid = teamPyramid;
+    }
+
+    /**
+     * @return the developmentTasksHours
+     */
+    public List<TaskDevelopmentHoursDto> getDevelopmentTasksHours() {
+        return developmentTasksHours;
+    }
+
+    /**
+     * @param developmentTasksHours the developmentTasksHours to set
+     */
+    public void setDevelopmentTasksHours(List<TaskDevelopmentHoursDto> developmentTasksHours) {
+        this.developmentTasksHours = developmentTasksHours;
+    }
+
+    /**
+     * @return the developmentTasksWeights
+     */
+    public List<TaskDevelopmentWeightsDto> getDevelopmentTasksWeights() {
+        return developmentTasksWeights;
+    }
+
+    /**
+     * @param developmentTasksWeights the developmentTasksWeights to set
+     */
+    public void setDevelopmentTasksWeights(List<TaskDevelopmentWeightsDto> developmentTasksWeights) {
+        this.developmentTasksWeights = developmentTasksWeights;
     }
 
 }

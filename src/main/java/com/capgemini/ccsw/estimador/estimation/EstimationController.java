@@ -40,6 +40,12 @@ public class EstimationController {
         return this.estimationService.getEstimationForEdit(id);
     }
 
+    @RequestMapping(path = { "/new", "/{id}" }, method = RequestMethod.POST)
+    public Long saveEstimation(@PathVariable(required = false, name = "id") Long id, @RequestBody EstimationEditDto data) {
+
+        return this.estimationService.saveEstimation(id, data);
+    }
+
     @RequestMapping(path = "/version/{projectId}", method = RequestMethod.GET)
     public List<EstimationDto> findVersion(@PathVariable Long projectId) {
 

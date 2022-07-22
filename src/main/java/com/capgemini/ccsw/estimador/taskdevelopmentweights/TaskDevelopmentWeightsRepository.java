@@ -15,6 +15,6 @@ import com.capgemini.ccsw.estimador.taskdevelopmentweights.model.TaskDevelopment
  */
 public interface TaskDevelopmentWeightsRepository extends CrudRepository<TaskDevelopmentWeightsEntity, Long> {
 
-    List<TaskDevelopmentWeightsEntity> findByEstimationId(Long estimationId);
+    List<TaskDevelopmentWeightsEntity> findByEstimationIdOrderByOrderAsc(Long estimationId);
 
 }
