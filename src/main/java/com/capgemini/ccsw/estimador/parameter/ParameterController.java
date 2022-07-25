@@ -3,6 +3,7 @@ package com.capgemini.ccsw.estimador.parameter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,10 +30,24 @@ public class ParameterController {
     @Autowired
     BeanMapper beanMapper;
 
-    @RequestMapping(path = "customer", method = RequestMethod.POST)
+    @RequestMapping(path = "/customer", method = RequestMethod.POST)
     public List<ParameterDto> findParametersByEstimationCustomer(@RequestBody CustomerDto customer) {
 
-        return this.beanMapper.mapList(this.parameterService.findParametersByEstimationCustomer(customer), ParameterDto.class);
+        List<ParameterDto> list = this.beanMapper.mapList(this.parameterService.findParametersByEstimationCustomer(customer), ParameterDto.class);
+        list.forEach(i -> i.setId(null));
+
+        return list;
+
+    }
+
+    @RequestMapping(path = "/estimation/{id}", method = RequestMethod.GET)
+    public List<ParameterDto> findParametersByEstimation(@PathVariable Long id) {
+
+        List<ParameterDto> list = this.beanMapper.mapList(this.parameterService.findParametersByEstimationId(id), ParameterDto.class);
+        list.forEach(i -> i.setId(null));
+
+        return list;
+
     }
 
 }

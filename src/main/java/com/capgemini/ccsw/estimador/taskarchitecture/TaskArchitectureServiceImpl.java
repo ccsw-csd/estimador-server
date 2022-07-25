@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEditDto;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
@@ -29,6 +30,7 @@ public class TaskArchitectureServiceImpl implements TaskArchitectureService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void saveEstimation(EstimationEntity estimation, EstimationEditDto data) {
 
         List<TaskArchitectureEntity> actualTasks = findByEstimationId(estimation.getId());

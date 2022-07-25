@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.ccsw.estimador.consideration.model.ConsiderationDto;
 import com.capgemini.ccsw.estimador.consideration.model.ConsiderationEntity;
@@ -29,6 +30,7 @@ public class ConsiderationServiceImpl implements ConsiderationService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void saveEstimation(EstimationEntity estimation, EstimationEditDto data) {
         List<ConsiderationEntity> actualConsiderations = findByEstimationId(estimation.getId());
 

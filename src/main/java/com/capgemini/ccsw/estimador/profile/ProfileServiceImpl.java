@@ -21,4 +21,9 @@ public class ProfileServiceImpl implements ProfileService {
         return this.profileRepository.findAll();
     }
 
+    @Override
+    public ProfileEntity get(Long id) {
+        return this.profileRepository.findById(id).orElse(null);
+    }
+
 }

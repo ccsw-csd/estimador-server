@@ -2,6 +2,8 @@ package com.capgemini.ccsw.estimador.teampyramid;
 
 import java.util.List;
 
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEditDto;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.teampyramid.model.TeamPyramidEntity;
 
 /**
@@ -14,5 +16,7 @@ import com.capgemini.ccsw.estimador.teampyramid.model.TeamPyramidEntity;
 public interface TeamPyramidService {
 
     List<TeamPyramidEntity> findByEstimationId(Long id);
+
+    void saveEstimation(EstimationEntity estimation, EstimationEditDto data);
 
 }

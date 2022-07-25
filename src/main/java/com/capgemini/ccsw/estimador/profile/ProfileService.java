@@ -12,4 +12,6 @@ public interface ProfileService {
 
     List<ProfileEntity> findAll();
 
+    ProfileEntity get(Long id);
+
 }

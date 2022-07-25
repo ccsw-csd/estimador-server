@@ -3,6 +3,8 @@ package com.capgemini.ccsw.estimador.distribution;
 import java.util.List;
 
 import com.capgemini.ccsw.estimador.distribution.model.DistributionEntity;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEditDto;
+import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 
 /**
  * @author asolerpa
@@ -13,5 +15,7 @@ import com.capgemini.ccsw.estimador.distribution.model.DistributionEntity;
 public interface DistributionService {
 
     List<DistributionEntity> findByEstimationId(Long id);
+
+    void saveEstimation(EstimationEntity estimation, EstimationEditDto data);
 
 }

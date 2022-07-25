@@ -2,6 +2,7 @@ package com.capgemini.ccsw.estimador.customer;
 
 import java.util.List;
 
+import com.capgemini.ccsw.estimador.customer.model.CustomerDto;
 import com.capgemini.ccsw.estimador.customer.model.CustomerEntity;
 
 /**
@@ -18,4 +19,6 @@ public interface CustomerService {
     List<CustomerEntity> findAll();
 
     List<CustomerEntity> findByFilter(String filter);
+
+    CustomerEntity getOrNew(CustomerDto customer);
 }

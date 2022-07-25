@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.ccsw.estimador.elementweight.ElementWeightService;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationEditDto;
@@ -33,6 +34,7 @@ public class TaskDevelopmentWeightsServiceImpl implements TaskDevelopmentWeights
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void saveEstimation(EstimationEntity estimation, EstimationEditDto data) {
         List<TaskDevelopmentWeightsEntity> actualTasks = findByEstimationId(estimation.getId());
 

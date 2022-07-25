@@ -31,6 +31,9 @@ import com.capgemini.ccsw.estimador.estimation.model.EstimationEntity;
 import com.capgemini.ccsw.estimador.estimation.model.EstimationSearchDto;
 import com.capgemini.ccsw.estimador.parameter.ParameterService;
 import com.capgemini.ccsw.estimador.parameter.model.ParameterDto;
+import com.capgemini.ccsw.estimador.project.ProjectService;
+import com.capgemini.ccsw.estimador.project.model.ProjectDto;
+import com.capgemini.ccsw.estimador.project.model.ProjectEntity;
 import com.capgemini.ccsw.estimador.taskarchitecture.TaskArchitectureService;
 import com.capgemini.ccsw.estimador.taskarchitecture.model.TaskArchitectureDto;
 import com.capgemini.ccsw.estimador.taskdevelopmenthours.TaskDevelopmentHoursService;
@@ -41,6 +44,9 @@ import com.capgemini.ccsw.estimador.teampyramid.TeamPyramidService;
 import com.capgemini.ccsw.estimador.teampyramid.model.TeamPyramidDto;
 import com.capgemini.ccsw.estimador.user.UserService;
 import com.capgemini.ccsw.estimador.user.model.UserDto;
+import com.capgemini.ccsw.estimador.user.model.UserEntity;
+
+import io.jsonwebtoken.lang.Collections;
 
 /**
  * @author iciudade
@@ -53,6 +59,9 @@ public class EstimationServiceImpl implements EstimationService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ProjectService projectService;
 
     @Autowired
     CollaboratorService collaboratorService;
@@ -122,9 +131,17 @@ public class EstimationServiceImpl implements EstimationService {
         EstimationEntity estimation = null;
 
         if (id == null) {
+
+            UserEntity userEntity = userService.getByUsername(UserUtils.getUserDetails().getUsername());
+
             estimation = new EstimationEntity();
             estimation.setCreated(new Date());
-            estimation.setCreatedBy(userService.getByUsername(UserUtils.getUserDetails().getUsername()));
+            estimation.setCreatedBy(userEntity);
+            estimation.setEstVersion(data.getEstVersion());
+
+            ProjectEntity project = projectService.createProject(data.getProject(), userEntity);
+            estimation.setProject(project);
+
         } else {
             estimation = this.estimationRepository.findById(id).orElse(null);
         }
@@ -145,10 +162,9 @@ public class EstimationServiceImpl implements EstimationService {
         taskDevelopmentWeightsService.saveEstimation(estimation, data);
         considerationService.saveEstimation(estimation, data);
 
-        //TODO: Resumen
-        //distributionService.saveEstimation(estimation, data);
-        //costService.saveEstimation(estimation, data);
-        //teamPyramidService.saveEstimation(estimation, data);
+        distributionService.saveEstimation(estimation, data);
+        costService.saveEstimation(estimation, data);
+        teamPyramidService.saveEstimation(estimation, data);
 
         return estimation.getId();
     }
@@ -156,25 +172,69 @@ public class EstimationServiceImpl implements EstimationService {
     @Override
     public EstimationEditDto getEstimationForEdit(Long id) {
         EstimationEntity estimation = this.estimationRepository.findById(id).orElse(null);
+
         if (estimation == null)
-            return null;
+            return createNewEstimation();
+        else
+            return populateEstimation(id, estimation);
+    }
 
-        EstimationEditDto estimationDto = this.beanMapper.map(estimation, EstimationEditDto.class);
+    private EstimationEditDto createNewEstimation() {
+        final Long defaultEstimationId = 1L;
+        EstimationEditDto estimation = new EstimationEditDto();
 
-        estimationDto.setCollaborators(this.beanMapper.mapList(this.collaboratorService.findByEstimationId(id).stream().map(item -> item.getCollaborator()).collect(Collectors.toList()), UserDto.class));
-        estimationDto.setParameters(this.beanMapper.mapList(this.parameterService.findParametersByEstimationId(id), ParameterDto.class));
-        estimationDto.setElementWeight(this.beanMapper.mapList(this.elementWeightService.findByEstimationId(id), ElementWeightDto.class));
+        UserEntity user = userService.getByUsername(UserUtils.getUserDetails().getUsername());
+        UserDto userDto = beanMapper.map(user, UserDto.class);
 
-        estimationDto.setArchitectureTasks(this.beanMapper.mapList(this.taskArchitectureService.findByEstimationId(id), TaskArchitectureDto.class));
-        estimationDto.setDevelopmentTasksHours(this.beanMapper.mapList(this.taskDevelopmentHoursService.findByEstimationId(id), TaskDevelopmentHoursDto.class));
-        estimationDto.setDevelopmentTasksWeights(this.beanMapper.mapList(this.taskDevelopmentWeightsService.findByEstimationId(id), TaskDevelopmentWeightsDto.class));
-        estimationDto.setConsiderations(this.beanMapper.mapList(this.considerationService.findByEstimationId(id), ConsiderationDto.class));
+        estimation.setCreated(new Date());
+        estimation.setEstVersion("0.1");
 
-        estimationDto.setDistribution(this.beanMapper.mapList(this.distributionService.findByEstimationId(id), DistributionDto.class));
-        estimationDto.setCosts(convertToList(costService.getByEstimationId(id)));
-        estimationDto.setTeamPyramid(this.beanMapper.mapList(this.teamPyramidService.findByEstimationId(id), TeamPyramidDto.class));
+        estimation.setProject(new ProjectDto());
+        estimation.getProject().setName("");
 
-        return estimationDto;
+        estimation.setLastUpdate(new Date());
+        estimation.setCreatedBy(userDto);
+        estimation.setShowhours(true);
+
+        estimation.setCollaborators(Collections.arrayToList(new UserDto[] { userDto }));
+
+        estimation.setParameters(this.beanMapper.mapList(this.parameterService.findParametersByEstimationId(defaultEstimationId), ParameterDto.class));
+        estimation.setElementWeight(this.beanMapper.mapList(this.elementWeightService.findByEstimationId(defaultEstimationId), ElementWeightDto.class));
+
+        estimation.setArchitectureTasks(new ArrayList<>());
+        estimation.setDevelopmentTasksHours(new ArrayList<>());
+        estimation.setDevelopmentTasksWeights(new ArrayList<>());
+        estimation.setConsiderations(new ArrayList<>());
+
+        estimation.setDistribution(this.beanMapper.mapList(this.distributionService.findByEstimationId(defaultEstimationId), DistributionDto.class));
+        estimation.setCosts(convertToList(costService.getByEstimationId(defaultEstimationId)));
+        estimation.setTeamPyramid(this.beanMapper.mapList(this.teamPyramidService.findByEstimationId(defaultEstimationId), TeamPyramidDto.class));
+
+        estimation.getParameters().forEach(i -> i.setId(null));
+        estimation.getElementWeight().forEach(i -> i.setId(null));
+        estimation.getDistribution().forEach(i -> i.setId(null));
+        estimation.getTeamPyramid().forEach(i -> i.setId(null));
+
+        return estimation;
+    }
+
+    private EstimationEditDto populateEstimation(Long id, EstimationEntity estimationEntity) {
+        EstimationEditDto estimation = this.beanMapper.map(estimationEntity, EstimationEditDto.class);
+
+        estimation.setCollaborators(this.beanMapper.mapList(this.collaboratorService.findByEstimationId(id).stream().map(item -> item.getCollaborator()).collect(Collectors.toList()), UserDto.class));
+        estimation.setParameters(this.beanMapper.mapList(this.parameterService.findParametersByEstimationId(id), ParameterDto.class));
+        estimation.setElementWeight(this.beanMapper.mapList(this.elementWeightService.findByEstimationId(id), ElementWeightDto.class));
+
+        estimation.setArchitectureTasks(this.beanMapper.mapList(this.taskArchitectureService.findByEstimationId(id), TaskArchitectureDto.class));
+        estimation.setDevelopmentTasksHours(this.beanMapper.mapList(this.taskDevelopmentHoursService.findByEstimationId(id), TaskDevelopmentHoursDto.class));
+        estimation.setDevelopmentTasksWeights(this.beanMapper.mapList(this.taskDevelopmentWeightsService.findByEstimationId(id), TaskDevelopmentWeightsDto.class));
+        estimation.setConsiderations(this.beanMapper.mapList(this.considerationService.findByEstimationId(id), ConsiderationDto.class));
+
+        estimation.setDistribution(this.beanMapper.mapList(this.distributionService.findByEstimationId(id), DistributionDto.class));
+        estimation.setCosts(convertToList(costService.getByEstimationId(id)));
+        estimation.setTeamPyramid(this.beanMapper.mapList(this.teamPyramidService.findByEstimationId(id), TeamPyramidDto.class));
+
+        return estimation;
     }
 
     private List<CostDto> convertToList(CostEntity costEntity) {
