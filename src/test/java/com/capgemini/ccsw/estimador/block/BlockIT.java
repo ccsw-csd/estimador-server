@@ -1,7 +1,8 @@
 package com.capgemini.ccsw.estimador.block;
 
-import com.capgemini.ccsw.estimador.block.model.BlockDto;
 import com.capgemini.ccsw.estimador.config.BaseITAbstract;
+import com.ccsw.estimador.block.model.BlockDto;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;

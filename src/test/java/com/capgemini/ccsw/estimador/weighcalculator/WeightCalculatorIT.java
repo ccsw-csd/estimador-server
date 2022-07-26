@@ -12,10 +12,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import com.capgemini.ccsw.estimador.config.BaseITAbstract;
-import com.capgemini.ccsw.estimador.weightcalculator.model.TaskAndWeightsDto;
-import com.capgemini.ccsw.estimador.weightcalculator.model.TaskDto;
-import com.capgemini.ccsw.estimador.weightcalculator.model.WeightCalculatorDto;
-import com.capgemini.ccsw.estimador.weightcalculator.model.WeightsDto;
+import com.ccsw.estimador.weightcalculator.model.TaskAndWeightsDto;
+import com.ccsw.estimador.weightcalculator.model.TaskDto;
+import com.ccsw.estimador.weightcalculator.model.WeightCalculatorDto;
+import com.ccsw.estimador.weightcalculator.model.WeightsDto;
 
 public class WeightCalculatorIT extends BaseITAbstract {
 

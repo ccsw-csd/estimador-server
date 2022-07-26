@@ -12,12 +12,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import com.capgemini.ccsw.estimador.block.model.BlockDto;
-import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationCalculatorDto;
-import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
-import com.capgemini.ccsw.estimador.blockdurationcalculator.model.FteDto;
 import com.capgemini.ccsw.estimador.config.BaseITAbstract;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
+import com.ccsw.estimador.block.model.BlockDto;
+import com.ccsw.estimador.blockdurationcalculator.model.BlockDurationCalculatorDto;
+import com.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
+import com.ccsw.estimador.blockdurationcalculator.model.FteDto;
+import com.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 
 public class BlockDurationIT extends BaseITAbstract {
 
