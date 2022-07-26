@@ -14,7 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.capgemini.ccsw.estimador.profile.model.ProfileEntity;
+import com.ccsw.estimador.profile.ProfileRepository;
+import com.ccsw.estimador.profile.ProfileServiceImpl;
+import com.ccsw.estimador.profile.model.ProfileEntity;
 
 @ExtendWith(MockitoExtension.class)
 public class ProfileTest {

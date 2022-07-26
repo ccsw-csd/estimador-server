@@ -14,16 +14,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.capgemini.ccsw.estimador.block.BlockProfileService;
-import com.capgemini.ccsw.estimador.block.BlockService;
-import com.capgemini.ccsw.estimador.block.model.BlockDto;
-import com.capgemini.ccsw.estimador.block.model.BlockEntity;
-import com.capgemini.ccsw.estimador.block.model.BlockProfileEntity;
-import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationCalculatorDto;
-import com.capgemini.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
-import com.capgemini.ccsw.estimador.blockdurationcalculator.model.FteDto;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
-import com.capgemini.ccsw.estimador.profile.model.ProfileEntity;
+import com.ccsw.estimador.block.BlockProfileService;
+import com.ccsw.estimador.block.BlockService;
+import com.ccsw.estimador.block.model.BlockDto;
+import com.ccsw.estimador.block.model.BlockEntity;
+import com.ccsw.estimador.block.model.BlockProfileEntity;
+import com.ccsw.estimador.blockdurationcalculator.BlockDurationCalculatorServiceImpl;
+import com.ccsw.estimador.blockdurationcalculator.model.BlockDurationCalculatorDto;
+import com.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
+import com.ccsw.estimador.blockdurationcalculator.model.FteDto;
+import com.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
+import com.ccsw.estimador.profile.model.ProfileEntity;
 
 @ExtendWith(MockitoExtension.class)
 public class BlockDurationTest {

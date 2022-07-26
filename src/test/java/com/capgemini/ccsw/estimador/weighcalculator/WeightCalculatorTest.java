@@ -11,10 +11,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.capgemini.ccsw.estimador.weightcalculator.WeightCalculatorServiceImpl;
-import com.capgemini.ccsw.estimador.weightcalculator.model.TaskDto;
-import com.capgemini.ccsw.estimador.weightcalculator.model.WeightCalculatorDto;
-import com.capgemini.ccsw.estimador.weightcalculator.model.WeightsDto;
+import com.ccsw.estimador.weightcalculator.WeightCalculatorServiceImpl;
+import com.ccsw.estimador.weightcalculator.model.TaskDto;
+import com.ccsw.estimador.weightcalculator.model.WeightCalculatorDto;
+import com.ccsw.estimador.weightcalculator.model.WeightsDto;
 
 @ExtendWith(MockitoExtension.class)
 public class WeightCalculatorTest {

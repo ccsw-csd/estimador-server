@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.capgemini.ccsw.estimador.config.BaseITAbstract;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
-import com.capgemini.ccsw.estimador.criteriacalculation.model.CriteriaDto;
+import com.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
+import com.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
+import com.ccsw.estimador.criteriacalculation.model.CriteriaDto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.core.ParameterizedTypeReference;

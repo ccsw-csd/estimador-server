@@ -11,9 +11,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import com.capgemini.ccsw.estimador.collaborator.model.CollaboratorDto;
 import com.capgemini.ccsw.estimador.config.BaseITAbstract;
-import com.capgemini.ccsw.estimador.estimation.model.EstimationDto;
+import com.ccsw.estimador.collaborator.model.CollaboratorDto;
+import com.ccsw.estimador.estimation.model.EstimationDto;
 
 public class CollaboratorIT extends BaseITAbstract {
 
