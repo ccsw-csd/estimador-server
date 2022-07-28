@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccsw.estimador.config.mapper.BeanMapper;
 import com.ccsw.estimador.estimation.model.EstimationDto;
+import com.ccsw.estimador.estimation.model.EstimationDuplicateDto;
 import com.ccsw.estimador.estimation.model.EstimationEditDto;
 import com.ccsw.estimador.estimation.model.EstimationSearchDto;
 
@@ -27,6 +28,12 @@ public class EstimationController {
 
     @Autowired
     BeanMapper beanMapper;
+
+    @RequestMapping(path = "/{id}/duplicate", method = RequestMethod.PUT)
+    public EstimationEditDto duplicateEstimation(@PathVariable Long id, @RequestBody EstimationDuplicateDto dto) {
+
+        return this.estimationService.duplicateEstimation(id, dto.getVersion());
+    }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public Page<EstimationDto> findPage(@RequestBody EstimationSearchDto dto) {

@@ -139,7 +139,14 @@ public class EstimationServiceImpl implements EstimationService {
             estimation.setCreatedBy(userEntity);
             estimation.setEstVersion(data.getEstVersion());
 
-            ProjectEntity project = projectService.createProject(data.getProject(), userEntity);
+            ProjectEntity project = null;
+
+            if (data.getProject().getId() == null) {
+                project = projectService.createProject(data.getProject(), userEntity);
+            } else {
+                project = projectService.get(data.getProject().getId());
+            }
+
             estimation.setProject(project);
 
         } else {
@@ -261,6 +268,40 @@ public class EstimationServiceImpl implements EstimationService {
     public EstimationEntity getLastEstimationByCustomer(CustomerDto customer) {
 
         return this.estimationRepository.findFirstByProjectCustomerOrderByLastUpdateDesc(this.beanMapper.map(customer, CustomerEntity.class));
+    }
+
+    @Override
+    public EstimationEditDto duplicateEstimation(Long id, String version) {
+
+        EstimationEditDto data = getEstimationForEdit(id);
+
+        UserEntity user = userService.getByUsername(UserUtils.getUserDetails().getUsername());
+        UserDto userDto = beanMapper.map(user, UserDto.class);
+
+        data.setId(null);
+        data.setEstVersion(version);
+        data.setCreated(new Date());
+        data.setLastUpdate(new Date());
+        data.setCreatedBy(userDto);
+
+        data.getParameters().forEach(i -> i.setId(null));
+        data.getElementWeight().forEach(i -> i.setId(i.getId() * -1));
+
+        data.getArchitectureTasks().forEach(i -> i.setId(null));
+        data.getDevelopmentTasksHours().forEach(i -> i.setId(null));
+        data.getDevelopmentTasksWeights().forEach(i -> {
+            i.setId(null);
+            i.getWorkElementWeight().setId(i.getWorkElementWeight().getId() * -1);
+        });
+        data.getConsiderations().forEach(i -> i.setId(null));
+
+        data.getDistribution().forEach(i -> i.setId(null));
+        data.getTeamPyramid().forEach(i -> i.setId(null));
+
+        Long newId = saveEstimation(null, data);
+        data.setId(newId);
+
+        return data;
     }
 
 }

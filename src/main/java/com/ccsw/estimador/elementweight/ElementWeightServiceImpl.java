@@ -13,6 +13,7 @@ import com.ccsw.estimador.estimation.EstimationService;
 import com.ccsw.estimador.estimation.model.EstimationEditDto;
 import com.ccsw.estimador.estimation.model.EstimationEntity;
 import com.ccsw.estimador.estimationlevel.EstimationLevelService;
+import com.ccsw.estimador.taskdevelopmentweights.model.TaskDevelopmentWeightsDto;
 
 /**
  * @author asolerpa
@@ -52,7 +53,7 @@ public class ElementWeightServiceImpl implements ElementWeightService {
         List<ElementWeightEntity> actualWeight = findByEstimationId(estimation.getId());
 
         removeWeights(actualWeight, data.getElementWeight());
-        addOrModifyWeights(actualWeight, data.getElementWeight(), estimation);
+        addOrModifyWeights(actualWeight, data, estimation);
 
     }
 
@@ -61,15 +62,18 @@ public class ElementWeightServiceImpl implements ElementWeightService {
         return elementWeightRepository.findById(id).orElse(null);
     }
 
-    private void addOrModifyWeights(List<ElementWeightEntity> actualWeights, List<ElementWeightDto> weights, EstimationEntity estimation) {
+    private void addOrModifyWeights(List<ElementWeightEntity> actualWeights, EstimationEditDto data, EstimationEntity estimation) {
 
+        List<ElementWeightDto> weights = data.getElementWeight();
         for (ElementWeightDto weightDto : weights) {
 
-            ElementWeightEntity item;
+            ElementWeightEntity item = null;
 
             if (weightDto.getId() != null) {
                 item = actualWeights.stream().filter(e -> e.getId().equals(weightDto.getId())).findFirst().orElse(null);
-            } else {
+            }
+
+            if (item == null) {
                 item = new ElementWeightEntity();
                 item.setEstimation(estimation);
             }
@@ -82,6 +86,21 @@ public class ElementWeightServiceImpl implements ElementWeightService {
             item.setLevel(estimationLevelService.get(weightDto.getLevel().getId()));
 
             elementWeightRepository.save(item);
+
+            if (weightDto.getId() != null && weightDto.getId().longValue() < 0) {
+                remapElementWeightId(data.getDevelopmentTasksWeights(), weightDto.getId(), item.getId());
+            }
+        }
+
+    }
+
+    private void remapElementWeightId(List<TaskDevelopmentWeightsDto> tasks, Long oldId, Long newId) {
+
+        for (TaskDevelopmentWeightsDto task : tasks) {
+
+            if (oldId.equals(task.getWorkElementWeight().getId())) {
+                task.getWorkElementWeight().setId(newId);
+            }
         }
 
     }

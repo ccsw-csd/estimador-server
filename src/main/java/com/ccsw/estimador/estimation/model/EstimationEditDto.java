@@ -44,9 +44,9 @@ public class EstimationEditDto {
 
     private List<UserDto> collaborators;
 
-    private List<ElementWeightDto> elementWeight;
-
     private List<ParameterDto> parameters;
+
+    private List<ElementWeightDto> elementWeight;
 
     private List<TaskArchitectureDto> architectureTasks;
 

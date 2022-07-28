@@ -30,4 +30,6 @@ public interface EstimationService {
     EstimationEntity getLastEstimationByCustomer(CustomerDto customer);
 
     Long saveEstimation(Long id, EstimationEditDto data);
+
+    EstimationEditDto duplicateEstimation(Long id, String version);
 }

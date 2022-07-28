@@ -48,4 +48,9 @@ public class ProjectServiceImpl implements ProjectService {
         return project;
     }
 
+    @Override
+    public ProjectEntity get(Long id) {
+        return this.projectRepository.findById(id).orElse(null);
+    }
+
 }

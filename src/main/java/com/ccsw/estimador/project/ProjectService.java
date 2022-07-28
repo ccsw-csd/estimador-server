@@ -18,4 +18,6 @@ public interface ProjectService {
     List<ProjectEntity> findAll();
 
     ProjectEntity createProject(ProjectDto data, UserEntity userEntity);
+
+    ProjectEntity get(Long id);
 }
