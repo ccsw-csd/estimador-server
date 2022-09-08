@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ccsw.estimador.config.security.UserInfoAppDto;
+import com.ccsw.estimador.config.security.UserInfoDto;
 import com.ccsw.estimador.role.RoleRepository;
 import com.ccsw.estimador.user.model.UserEntity;
 
@@ -38,27 +38,26 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getByUsername(username);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void save(UserInfoAppDto dto) {
+    public List<UserEntity> findByFilter(String filter) {
+
+        return this.userRepository.findUsersLikeFilter(filter, PageRequest.of(0, 15));
+    }
+
+    @Override
+    public void createUser(UserInfoDto dto) {
+        if (getByUsername(dto.getUsername()) != null)
+            return;
 
         UserEntity user = new UserEntity();
 
-        user.setRole(this.roleRepository.getByName(dto.getRole()));
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getMail());
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
 
         this.userRepository.save(user);
-    }
 
-    @Override
-    public List<UserEntity> findByFilter(String filter) {
-
-        return this.userRepository.findUsersLikeFilter(filter, PageRequest.of(0, 15));
     }
 
 }

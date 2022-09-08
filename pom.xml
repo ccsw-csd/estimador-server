@@ -9,11 +9,11 @@
 		<version>2.4.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.capgemini.ccsw</groupId>
+	<groupId>com.ccsw</groupId>
 	<artifactId>estimador</artifactId>
 	<version>1.0.0</version>
 	<name>estimador</name>
-	<description>estimador Capgemini - CCSW</description>
+	<description>estimador CCSW</description>
 
 	<properties>
 		<java.version>1.8</java.version>

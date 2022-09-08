@@ -2,7 +2,7 @@ package com.ccsw.estimador.user;
 
 import java.util.List;
 
-import com.ccsw.estimador.config.security.UserInfoAppDto;
+import com.ccsw.estimador.config.security.UserInfoDto;
 import com.ccsw.estimador.user.model.UserEntity;
 
 /**
@@ -22,10 +22,5 @@ public interface UserService {
 
     List<UserEntity> findByFilter(String filter);
 
-    /**
-     * Guarda un usuario
-     *
-     * @param dto
-     */
-    void save(UserInfoAppDto dto);
+    void createUser(UserInfoDto user);
 }

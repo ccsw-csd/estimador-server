@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.block;
+package com.ccsw.estimador.block;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

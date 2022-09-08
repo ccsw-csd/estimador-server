@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.config;
+package com.ccsw.estimador.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

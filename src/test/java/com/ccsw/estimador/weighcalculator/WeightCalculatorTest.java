@@ -1,25 +1,23 @@
-package com.capgemini.ccsw.estimador.weighcalculator;
+package com.ccsw.estimador.weighcalculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.capgemini.ccsw.estimador.config.BaseITAbstract;
-import com.ccsw.estimador.weightcalculator.model.TaskAndWeightsDto;
+import com.ccsw.estimador.weightcalculator.WeightCalculatorServiceImpl;
 import com.ccsw.estimador.weightcalculator.model.TaskDto;
 import com.ccsw.estimador.weightcalculator.model.WeightCalculatorDto;
 import com.ccsw.estimador.weightcalculator.model.WeightsDto;
 
-public class WeightCalculatorIT extends BaseITAbstract {
-
-    public static final String SERVICE_PATH = "/weightcalculator/calculate";
+@ExtendWith(MockitoExtension.class)
+public class WeightCalculatorTest {
 
     final Double verySimpleCostValue = 1d;
 
@@ -35,8 +33,12 @@ public class WeightCalculatorIT extends BaseITAbstract {
 
     final Double percentageTest = 10d;
 
+    @InjectMocks
+    WeightCalculatorServiceImpl weightCalculatorServiceImpl;
+
     @Test
-    void restWeightCalculatorTest() {
+    void weightCalculatorWorksCorrectlyTest() {
+
         TaskDto taskDto = new TaskDto();
         taskDto.setName(this.taskName);
         taskDto.setElementName(this.elementName);
@@ -59,16 +61,12 @@ public class WeightCalculatorIT extends BaseITAbstract {
         List<WeightsDto> weightsDtoList = new ArrayList<WeightsDto>();
         weightsDtoList.add(weightDto);
 
-        TaskAndWeightsDto taskAndWeightsDto = new TaskAndWeightsDto();
-        taskAndWeightsDto.setTasks(taskDtoList);
-        taskAndWeightsDto.setWeights(weightsDtoList);
+        List<WeightCalculatorDto> weightCalculatorDto = this.weightCalculatorServiceImpl.calculateWeights(taskDtoList,
+                weightsDtoList);
 
-        ParameterizedTypeReference<List<WeightCalculatorDto>> responseType = new ParameterizedTypeReference<List<WeightCalculatorDto>>() {
-        };
-        HttpEntity<?> httpEntity = new HttpEntity<>(taskAndWeightsDto, getHeaders());
+        assertNotNull(weightCalculatorDto);
+        assertEquals(27d, weightCalculatorDto.stream().filter(item -> item.getElement().equals(this.elementName))
+                .findFirst().orElse(null).getTotalHours());
 
-        ResponseEntity<List<WeightCalculatorDto>> response = this.restTemplate.exchange(LOCALHOST + this.port + SERVICE_PATH, HttpMethod.POST, httpEntity, responseType);
-
-        assertEquals(27d, response.getBody().stream().findFirst().orElse(null).getTotalHours());
     }
 }

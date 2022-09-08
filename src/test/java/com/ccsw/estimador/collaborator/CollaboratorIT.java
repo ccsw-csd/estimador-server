@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.collaborator;
+package com.ccsw.estimador.collaborator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,8 +11,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import com.capgemini.ccsw.estimador.config.BaseITAbstract;
 import com.ccsw.estimador.collaborator.model.CollaboratorDto;
+import com.ccsw.estimador.config.BaseITAbstract;
 import com.ccsw.estimador.estimation.model.EstimationDto;
 
 public class CollaboratorIT extends BaseITAbstract {

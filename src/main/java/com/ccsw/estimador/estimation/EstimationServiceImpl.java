@@ -20,6 +20,7 @@ import com.ccsw.estimador.consideration.model.ConsiderationDto;
 import com.ccsw.estimador.cost.CostService;
 import com.ccsw.estimador.cost.model.CostDto;
 import com.ccsw.estimador.cost.model.CostEntity;
+import com.ccsw.estimador.criteriacalculation.CriteriaCalculationService;
 import com.ccsw.estimador.customer.model.CustomerDto;
 import com.ccsw.estimador.customer.model.CustomerEntity;
 import com.ccsw.estimador.distribution.DistributionService;
@@ -96,6 +97,9 @@ public class EstimationServiceImpl implements EstimationService {
     @Autowired
     BeanMapper beanMapper;
 
+    @Autowired
+    CriteriaCalculationService criteriaCalculationService;
+
     @Override
     public Page<EstimationEntity> findPage(EstimationSearchDto dto) {
 
@@ -121,7 +125,13 @@ public class EstimationServiceImpl implements EstimationService {
             endDate = null;
         }
 
-        return this.estimationRepository.find(dto.getCustomerId(), dto.getProjectName(), startDate, endDate, dto.getPageable());
+        String username = UserUtils.getUserDetails().getUsername();
+
+        if (dto.getAdminView() && UserUtils.hasRole("ADMIN")) {
+            username = null;
+        }
+
+        return this.estimationRepository.find(dto.getCustomerId(), dto.getProjectName(), startDate, endDate, username, dto.getPageable());
     }
 
     @Override

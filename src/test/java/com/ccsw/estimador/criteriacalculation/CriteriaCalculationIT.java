@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.criteriacalculation;
+package com.ccsw.estimador.criteriacalculation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.capgemini.ccsw.estimador.config.BaseITAbstract;
+import com.ccsw.estimador.config.BaseITAbstract;
 import com.ccsw.estimador.criteriacalculation.model.CriteriaCalculationDto;
 import com.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 import com.ccsw.estimador.criteriacalculation.model.CriteriaDto;

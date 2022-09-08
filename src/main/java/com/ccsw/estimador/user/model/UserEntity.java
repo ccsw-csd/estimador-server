@@ -5,11 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.ccsw.estimador.role.model.RoleEntity;
 
 /**
  * @author pajimene
@@ -26,10 +22,6 @@ public class UserEntity {
 
     @Column(name = "username", nullable = false)
     private String username;
-
-    @ManyToOne
-    @JoinColumn(name = "role", nullable = false)
-    private RoleEntity role;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -70,22 +62,6 @@ public class UserEntity {
     public void setUsername(String username) {
 
         this.username = username;
-    }
-
-    /**
-     * @return role
-     */
-    public RoleEntity getRole() {
-
-        return this.role;
-    }
-
-    /**
-     * @param role new value of {@link #getrole}.
-     */
-    public void setRole(RoleEntity role) {
-
-        this.role = role;
     }
 
     /**

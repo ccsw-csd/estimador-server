@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.blockdurationcalculator;
+package com.ccsw.estimador.blockdurationcalculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -12,11 +12,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import com.capgemini.ccsw.estimador.config.BaseITAbstract;
 import com.ccsw.estimador.block.model.BlockDto;
 import com.ccsw.estimador.blockdurationcalculator.model.BlockDurationCalculatorDto;
 import com.ccsw.estimador.blockdurationcalculator.model.BlockDurationTransformatedDto;
 import com.ccsw.estimador.blockdurationcalculator.model.FteDto;
+import com.ccsw.estimador.config.BaseITAbstract;
 import com.ccsw.estimador.criteriacalculation.model.CriteriaCalculationTransformationDto;
 
 public class BlockDurationIT extends BaseITAbstract {

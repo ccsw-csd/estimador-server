@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.blockdurationcalculator;
+package com.ccsw.estimador.blockdurationcalculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

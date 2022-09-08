@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.profile;
+package com.ccsw.estimador.profile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

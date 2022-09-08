@@ -1,4 +1,4 @@
-package com.capgemini.ccsw.estimador.criteriacalculation;
+package com.ccsw.estimador.criteriacalculation;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

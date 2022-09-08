@@ -9,83 +9,99 @@ import org.springframework.data.domain.Pageable;
  */
 public class EstimationSearchDto {
 
-	private Pageable pageable;
-	
-	private Long customerId;
-	
-	private String projectName;
-	
-	private Date startDate;
-	
-	private Date endDate;
+    private Pageable pageable;
 
-	/**
-	 * @return the pageable
-	 */
-	public Pageable getPageable() {
-		return pageable;
-	}
+    private Long customerId;
 
-	/**
-	 * @param pageable the pageable to set
-	 */
-	public void setPageable(Pageable pageable) {
-		this.pageable = pageable;
-	}
+    private String projectName;
 
-	/**
-	 * @return the customerId
-	 */
-	public Long getCustomerId() {
-		return customerId;
-	}
+    private Date startDate;
 
-	/**
-	 * @param customerId the customerId to set
-	 */
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
+    private Date endDate;
 
-	/**
-	 * @return the projectName
-	 */
-	public String getProjectName() {
-		return projectName;
-	}
+    private boolean adminView;
 
-	/**
-	 * @param projectName the projectName to set
-	 */
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+    /**
+     * @return the pageable
+     */
+    public Pageable getPageable() {
+        return pageable;
+    }
 
-	/**
-	 * @return the startDate
-	 */
-	public Date getStartDate() {
-		return startDate;
-	}
+    /**
+     * @param pageable the pageable to set
+     */
+    public void setPageable(Pageable pageable) {
+        this.pageable = pageable;
+    }
 
-	/**
-	 * @param startDate the startDate to set
-	 */
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    /**
+     * @return the customerId
+     */
+    public Long getCustomerId() {
+        return customerId;
+    }
 
-	/**
-	 * @return the endDate
-	 */
-	public Date getEndDate() {
-		return endDate;
-	}
+    /**
+     * @param customerId the customerId to set
+     */
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
 
-	/**
-	 * @param endDate the endDate to set
-	 */
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}	
+    /**
+     * @return the projectName
+     */
+    public String getProjectName() {
+        return projectName;
+    }
+
+    /**
+     * @param projectName the projectName to set
+     */
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * @return the adminView
+     */
+    public boolean getAdminView() {
+        return adminView;
+    }
+
+    /**
+     * @param adminView the adminView to set
+     */
+    public void setAdminView(boolean adminView) {
+        this.adminView = adminView;
+    }
 }
