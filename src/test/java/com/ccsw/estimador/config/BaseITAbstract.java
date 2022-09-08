@@ -1,8 +1,11 @@
 package com.ccsw.estimador.config;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.junit.jupiter.api.BeforeEach;
+import java.security.Key;
+import java.util.Date;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,12 +14,12 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 
-import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
-import java.security.Key;
-import java.util.Date;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
+@TestPropertySource(locations = { "classpath:application.properties", "classpath:application-test.properties" })
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public abstract class BaseITAbstract {
@@ -38,7 +41,7 @@ public abstract class BaseITAbstract {
     @LocalServerPort
     protected int port;
 
-    protected HttpHeaders getHeaders(){
+    protected HttpHeaders getHeaders() {
 
         byte[] decodedKey = DatatypeConverter.parseBase64Binary(encodedKey);
         Key secretKey = new SecretKeySpec(decodedKey, SIGNATURE_ALGORITHM.getJcaName());
