@@ -341,23 +341,10 @@ public class EstimationServiceImpl implements EstimationService {
         headerStyle.setFont(font);
 
         int columna = 0;
-        Sheet sheet = workbook.createSheet("Tareas");
-        sheet.setColumnWidth(0, 7500);
-        sheet.setColumnWidth(1, 6000);
-        sheet.setColumnWidth(2, 4000);
 
-        createFirstSheet(sheet, headerStyle, workbook, dto, columna);
 
-        sheet = workbook.createSheet("Resumen");
-        sheet.setColumnWidth(0, 9000);
-        sheet.setColumnWidth(1, 4500);
-        sheet.setColumnWidth(2, 4000);
-        sheet.setColumnWidth(3, 4000);
-        sheet.setColumnWidth(4, 4000);
-        sheet.setColumnWidth(5, 4000);
-        sheet.setColumnWidth(6, 4000);
-        
-        createSecondSheet(sheet, headerStyle, workbook, dto, columna);
+        createFirstSheet(headerStyle, workbook, dto, columna);        
+        createSecondSheet(headerStyle, workbook, dto, columna);
 
         try {
             // Write the workbook in file system
@@ -373,7 +360,16 @@ public class EstimationServiceImpl implements EstimationService {
         return null;
     }
 
-    private void createSecondSheet(Sheet sheet, CellStyle headerStyle, Workbook workbook, EstimationEditDto dto, int columna) {
+    private void createSecondSheet(CellStyle headerStyle, Workbook workbook, EstimationEditDto dto, int columna) {
+
+        Sheet sheet = workbook.createSheet("Resumen");
+        sheet.setColumnWidth(0, 9000);
+        sheet.setColumnWidth(1, 4500);
+        sheet.setColumnWidth(2, 4000);
+        sheet.setColumnWidth(3, 4000);
+        sheet.setColumnWidth(4, 4000);
+        sheet.setColumnWidth(5, 4000);
+        sheet.setColumnWidth(6, 4000);
 
         Row header = sheet.createRow(0);
         Cell headerCell = header.createCell(columna);
@@ -557,7 +553,13 @@ public class EstimationServiceImpl implements EstimationService {
 
     }
 
-    private void createFirstSheet(Sheet sheet, CellStyle headerStyle, Workbook workbook, EstimationEditDto dto, int columna) {
+    private void createFirstSheet(CellStyle headerStyle, Workbook workbook, EstimationEditDto dto, int columna) {
+        
+        Sheet sheet = workbook.createSheet("Tareas");
+        sheet.setColumnWidth(0, 7500);
+        sheet.setColumnWidth(1, 6000);
+        sheet.setColumnWidth(2, 4000);
+
         Row header = sheet.createRow(0);
         Cell headerCell = header.createCell(columna);
         
