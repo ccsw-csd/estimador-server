@@ -328,9 +328,6 @@ public class EstimationServiceImpl implements EstimationService {
 
     @Override
     public File toExport(EstimationEditDto dto) throws FileNotFoundException{
-    
-
-        // First, we will create and style a header row that contains “Name” and “Age” cells:
         Workbook workbook = new XSSFWorkbook();
 
         CellStyle headerStyle = workbook.createCellStyle();
@@ -341,95 +338,17 @@ public class EstimationServiceImpl implements EstimationService {
         font.setFontName("Arial");
         font.setFontHeightInPoints((short) 16);
         font.setBold(true);
-        
         headerStyle.setFont(font);
-        // hoja 1
+
+        int columna = 0;
         Sheet sheet = workbook.createSheet("Tareas");
-        // width / 15 tamaño real
         sheet.setColumnWidth(0, 7500);
         sheet.setColumnWidth(1, 6000);
         sheet.setColumnWidth(2, 4000);
 
-        Row header = sheet.createRow(0);
+        createFirstSheet(sheet, headerStyle, workbook, dto, columna);
 
-
-        Cell headerCell = header.createCell(0);
-        headerCell.setCellValue("Arquitectura");
-        headerCell.setCellStyle(headerStyle);
-
-        CellStyle style = workbook.createCellStyle();
-        style.setWrapText(true);
-
-        // Crear las filas para arquitectura
-        Row row = sheet.createRow(1);
-        Cell cell = row.createCell(0);
-        cell.setCellValue("Tareas");
-        cell.setCellStyle(style);
-        cell = row.createCell(1);
-        cell.setCellValue("Horas");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setWrapText(true);
-
-        
-        // rellenamos arquitectura
-        List<TaskArchitectureDto> tareas = dto.getArchitectureTasks();
-        int fila = 2;
-        for (TaskArchitectureDto tarea : tareas) {
-            row = sheet.createRow(fila);
-            cell = row.createCell(0);
-            cell.setCellValue(tarea.getName());
-            cell = row.createCell(1);
-            cell.setCellValue(tarea.getHours());
-            fila++;
-        }
-
-        // Crear filas para desarrollo
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Desarrollo");
-        cell.setCellStyle(headerStyle);
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Tareas");
-        cell.setCellStyle(style);
-        cell = row.createCell(1);
-        cell.setCellValue("Horas");
-        cell.setCellStyle(style);
-        
-        // Rellenamos la tabla de Desarrollo
-        fila ++;
-        List<TaskDevelopmentHoursDto> desarrollos = dto.getDevelopmentTasksHours();
-        for(TaskDevelopmentHoursDto desarrollo: desarrollos){
-            row = sheet.createRow(fila);
-            cell = row.createCell(0);
-            cell.setCellValue(desarrollo.getName());
-            cell = row.createCell(1);
-            cell.setCellValue(desarrollo.getHours());
-            fila++;
-        }
-        // Creamos filas para comentarios
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Consideraciones");
-        cell.setCellStyle(headerStyle);
-
-        // Rellenamos comentarios
-        fila++;
-        List<ConsiderationDto> comentarios = dto.getConsiderations();
-        for(ConsiderationDto comentario : comentarios) {
-            row = sheet.createRow(fila);
-            cell = row.createCell(0);
-            cell.setCellValue(comentario.getComment());  
-            fila++;      
-        }
-
-        // hoja 2
         sheet = workbook.createSheet("Resumen");
-        // width / 15 tamaño real
         sheet.setColumnWidth(0, 9000);
         sheet.setColumnWidth(1, 4500);
         sheet.setColumnWidth(2, 4000);
@@ -438,38 +357,185 @@ public class EstimationServiceImpl implements EstimationService {
         sheet.setColumnWidth(5, 4000);
         sheet.setColumnWidth(6, 4000);
         
-        header = sheet.createRow(0);
-        headerCell = header.createCell(0);
+        createSecondSheet(sheet, headerStyle, workbook, dto, columna);
+
+        try {
+            // Write the workbook in file system
+            File file = File.createTempFile("Resumen" , "xlsx");
+            FileOutputStream outputStream = new FileOutputStream(file);
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+            return file;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private void createSecondSheet(Sheet sheet, CellStyle headerStyle, Workbook workbook, EstimationEditDto dto, int columna) {
+
+        Row header = sheet.createRow(0);
+        Cell headerCell = header.createCell(columna);
+        
+        createDistributionTable(workbook, headerCell, headerStyle, sheet, dto, columna);
+        createMemberTable(workbook, headerCell, headerStyle, sheet, dto, columna);
+        createRevenueTable(workbook, headerCell, headerStyle, sheet, dto, columna);
+        createConceptTable(workbook, headerCell, headerStyle, sheet, dto, columna);
+
+
+    }
+
+    private void createConceptTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
+            EstimationEditDto dto, int columna) {
+
+        int fila = 8 + dto.getDistribution().size() + dto.getTeamPyramid().size() + dto.getCosts().size();         
+
+        fila ++;
+        Row row = sheet.createRow(fila);
+        Cell cell = row.createCell(columna);
+        cell.setCellValue("Conceptos");
+        cell.setCellStyle(headerStyle);
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Concepto");
+        cell = row.createCell(columna + 1);
+        cell.setCellValue("Valor");
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Jornadas");
+        cell = row.createCell(columna + 1);
+        cell.setCellValue(dto.getTotalDays());
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Revenue (€)");
+        cell = row.createCell(columna + 1);
+        cell.setCellValue(dto.getTotalCost());
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Equipo total");
+        cell = row.createCell(columna + 1);
+        fila ++;
+        int trabajadores = 0;
+        List<TeamPyramidDto> perfiles = dto.getTeamPyramid();
+        for (TeamPyramidDto perfil : perfiles) {
+            if(perfil.getFte() != 0){
+                trabajadores += perfil.getFte();
+            }
+        }
+        cell.setCellValue(trabajadores);
+    }
+
+    private void createRevenueTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
+            EstimationEditDto dto, int columna) {
+
+        int fila = 5 + dto.getDistribution().size() + dto.getTeamPyramid().size();
+        fila ++;
+        Row row = sheet.createRow(fila);
+        Cell cell = row.createCell(columna);
+        cell.setCellValue("Revenue");
+        cell.setCellStyle(headerStyle);
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Grado");
+        cell = row.createCell(columna + 1);
+        cell.setCellValue("Jornadas");
+        cell = row.createCell(columna + 2);
+        cell.setCellValue("Coste (€)");
+        cell = row.createCell(columna + 3);
+        cell.setCellValue("Margen (%)");
+        cell = row.createCell(columna + 4);
+        cell.setCellValue("Revenue");
+        fila ++;
+
+        List<CostDto> costes = dto.getCosts();
+        for(CostDto coste : costes){
+            row = sheet.createRow(fila);
+            cell = row.createCell(columna);
+            cell.setCellValue(coste.getGrade());
+            cell = row.createCell(columna + 1);
+            cell.setCellValue(coste.getWorkdays());
+            cell = row.createCell(columna + 2);
+            cell.setCellValue(coste.getCost());
+            cell = row.createCell(columna + 3);
+            cell.setCellValue(coste.getMargin());
+            cell = row.createCell(columna + 4);
+            cell.setCellValue(coste.getRevenue());
+            fila ++;
+        }
+    }
+
+    private void createMemberTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
+            EstimationEditDto dto, int columna) {
+        
+        int fila = 2 + dto.getDistribution().size();
+        Row row = sheet.createRow(fila);
+        Cell cell = row.createCell(columna);
+
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Miembros del equipo");
+        cell.setCellStyle(headerStyle);
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Perfil");
+        cell = row.createCell(columna + 1);
+        cell.setCellValue("FTE's");
+        fila ++;
+
+        List<TeamPyramidDto> perfiles = dto.getTeamPyramid();
+        for (TeamPyramidDto perfil : perfiles) {
+            row = sheet.createRow(fila);
+            cell = row.createCell(columna);
+            cell.setCellValue(perfil.getProfile().getName());
+            cell = row.createCell(columna + 1);
+            cell.setCellValue(perfil.getFte());
+            fila++;
+        }
+    }
+
+    private void createDistributionTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
+            EstimationEditDto dto, int columna) {
+
         headerCell.setCellValue("Distribución del equipo");
         headerCell.setCellStyle(headerStyle);
-
-        row = sheet.createRow(1);
-        cell = row.createCell(0);
+                        
+        CellStyle style = workbook.createCellStyle();
+        style.setWrapText(true);
+                        
+        Row row = sheet.createRow(1);
+        Cell cell = row.createCell(columna);
         cell.setCellValue("Equipo");
         cell.setCellStyle(style);
-        cell = row.createCell(1);
+        cell = row.createCell(columna + 1);
         cell.setCellValue("Jornadas totales");
         cell.setCellStyle(style);
-        cell = row.createCell(2);
+        cell = row.createCell(columna + 2);
         cell.setCellValue("A (%)");
         cell.setCellStyle(style);
-        cell = row.createCell(3);
+        cell = row.createCell(columna + 3);
         cell.setCellValue("B (%)");
         cell.setCellStyle(style);
-        cell = row.createCell(4);
+        cell = row.createCell(columna + 4);
         cell.setCellValue("C (%)");
         cell.setCellStyle(style);
-        cell = row.createCell(5);
+        cell = row.createCell(columna + 5);
         cell.setCellValue("D (%)");
         cell.setCellStyle(style);
-        cell = row.createCell(6);
+        cell = row.createCell(columna + 6);
         cell.setCellValue("TOTAL (%)");
         cell.setCellStyle(style);
 
-        // Creamos la primera tabla 
         List<DistributionDto> distribuciones = dto.getDistribution();
-        fila = 2;
-        int columna = 0;
+        int fila = 2;
+
         for(DistributionDto distribucion : distribuciones){
             row = sheet.createRow(fila);
             cell = row.createCell(columna);
@@ -489,123 +555,103 @@ public class EstimationServiceImpl implements EstimationService {
             fila ++;
         }
 
-        // Tabla de miembros de equipo
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Miembros del equipo");
-        cell.setCellStyle(headerStyle);
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Perfil");
-        cell = row.createCell(1);
-        cell.setCellValue("FTE's");
-        fila ++;
+    }
 
-        // Rellenamos la tabla
-        List<TeamPyramidDto> perfiles = dto.getTeamPyramid();
-        for (TeamPyramidDto perfil : perfiles) {
+    private void createFirstSheet(Sheet sheet, CellStyle headerStyle, Workbook workbook, EstimationEditDto dto, int columna) {
+        Row header = sheet.createRow(0);
+        Cell headerCell = header.createCell(columna);
+        
+        createArchitectureTable(workbook, headerCell, headerStyle, sheet, dto, columna);
+        createTaskDevelopmentHoursTable(workbook, headerCell, headerStyle, sheet, dto, columna);
+        createCommentaryTable(workbook, headerCell, headerStyle, sheet, dto, columna);
+        
+    }
+
+    private void createCommentaryTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
+            EstimationEditDto dto, int columna) {
+
+        int fila = 5 + dto.getArchitectureTasks().size() + dto.getDevelopmentTasksHours().size();
+        CellStyle style = workbook.createCellStyle();
+        style.setWrapText(true);
+               
+        fila ++;
+        Row row = sheet.createRow(fila);
+        Cell cell = row.createCell(columna);
+        cell.setCellValue("Consideraciones");
+        cell.setCellStyle(headerStyle);
+
+        fila++;
+        List<ConsiderationDto> comentarios = dto.getConsiderations();
+        for(ConsiderationDto comentario : comentarios) {
             row = sheet.createRow(fila);
-            cell = row.createCell(0);
-            cell.setCellValue(perfil.getProfile().getName());
-            cell = row.createCell(1);
-            cell.setCellValue(perfil.getFte());
+            cell = row.createCell(columna);
+            cell.setCellValue(comentario.getComment());  
+            fila++;      
+        }
+    }
+
+    private void createTaskDevelopmentHoursTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
+            EstimationEditDto dto, int columna) {
+
+        int fila = 2 + dto.getArchitectureTasks().size();
+
+        CellStyle style = workbook.createCellStyle();
+        style.setWrapText(true);
+        
+        fila ++;
+        Row row = sheet.createRow(fila);
+        Cell cell = row.createCell(columna);
+        cell.setCellValue("Desarrollo");
+        cell.setCellStyle(headerStyle);
+
+        fila ++;
+        row = sheet.createRow(fila);
+        cell = row.createCell(columna);
+        cell.setCellValue("Tareas");
+        cell.setCellStyle(style);
+        cell = row.createCell(columna + 1);
+        cell.setCellValue("Horas");
+        cell.setCellStyle(style);
+        
+        fila ++;
+        List<TaskDevelopmentHoursDto> desarrollos = dto.getDevelopmentTasksHours();
+        for(TaskDevelopmentHoursDto desarrollo: desarrollos){
+            row = sheet.createRow(fila);
+            cell = row.createCell(columna);
+            cell.setCellValue(desarrollo.getName());
+            cell = row.createCell(columna + 1);
+            cell.setCellValue(desarrollo.getHours());
             fila++;
         }
+    }
 
-        // tabla revenue
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Revenue");
-        cell.setCellStyle(headerStyle);
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Grado");
-        cell = row.createCell(1);
-        cell.setCellValue("Jornadas");
-        cell = row.createCell(2);
-        cell.setCellValue("Coste (€)");
-        cell = row.createCell(3);
-        cell.setCellValue("Margen (%)");
-        cell = row.createCell(4);
-        cell.setCellValue("Revenue");
-        fila ++;
+    private void createArchitectureTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet, EstimationEditDto dto, int columna) {
+        headerCell.setCellValue("Arquitectura");
+        headerCell.setCellStyle(headerStyle);
 
-        // Rellenamos la tabla
-        List<CostDto> costes = dto.getCosts();
-        for(CostDto coste : costes){
+        CellStyle style = workbook.createCellStyle();
+        style.setWrapText(true);
+
+        Row row = sheet.createRow(1);
+        Cell cell = row.createCell(columna);
+        cell.setCellValue("Tareas");
+        cell.setCellStyle(style);
+        cell = row.createCell(columna);
+        cell.setCellValue("Horas");
+        cell.setCellStyle(style);
+        style = workbook.createCellStyle();
+        style.setWrapText(true);
+
+        List<TaskArchitectureDto> tareas = dto.getArchitectureTasks();
+        int fila = 2;
+        for (TaskArchitectureDto tarea : tareas) {
             row = sheet.createRow(fila);
-            cell = row.createCell(0);
-            cell.setCellValue(coste.getGrade());
-            cell = row.createCell(1);
-            cell.setCellValue(coste.getWorkdays());
-            cell = row.createCell(2);
-            cell.setCellValue(coste.getCost());
-            cell = row.createCell(3);
-            cell.setCellValue(coste.getMargin());
-            cell = row.createCell(4);
-            cell.setCellValue(coste.getRevenue());
-            fila ++;
+            cell = row.createCell(columna);
+            cell.setCellValue(tarea.getName());
+            cell = row.createCell(columna + 1);
+            cell.setCellValue(tarea.getHours());
+            fila++;
         }
-
-        // Crear tabla Concepto
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Conceptos");
-        cell.setCellStyle(headerStyle);
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Concepto");
-        cell = row.createCell(1);
-        cell.setCellValue("Valor");
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Jornadas");
-        cell = row.createCell(1);
-        cell.setCellValue(dto.getTotalDays());
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Revenue (€)");
-        cell = row.createCell(1);
-        cell.setCellValue(dto.getTotalCost());
-        fila ++;
-        row = sheet.createRow(fila);
-        cell = row.createCell(0);
-        cell.setCellValue("Duración (meses)");
-        cell = row.createCell(1);
-        cell.setCellValue("x €");
-        fila ++;
-        cell = row.createCell(0);
-        cell.setCellValue("Equipo total");
-        cell = row.createCell(1);
-
-        int trabajadores = 0;
-        for (TeamPyramidDto perfil : perfiles) {
-            if(perfil.getFte() != 0){
-                trabajadores += perfil.getFte();
-            }
-        }
-        cell.setCellValue(trabajadores);
- 
-        try {
-            // Write the workbook in file system
-            File file = File.createTempFile("Resumen" , "xlsx");
-            FileOutputStream outputStream = new FileOutputStream(file);
-            workbook.write(outputStream);
-            outputStream.close();
-            workbook.close();
-            return file;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }
