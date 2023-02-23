@@ -22,6 +22,10 @@ public class DistributionDto {
 
     private Double gradeD;
 
+    private Double total;
+
+    private Double workdays;
+
     /**
      * @return id
      */
@@ -116,6 +120,28 @@ public class DistributionDto {
     public void setGradeD(Double gradeD) {
 
         this.gradeD = gradeD;
+    }
+    /**
+     * @return total
+     */
+    public Double getTotal() {
+
+        return this.total;
+    }
+
+    /**
+     * @param total new value of {@link #getgradeD}.
+     */
+    public void setTotal(Double total) {
+
+        this.total = total;
+    }
+
+    public Double getWorkdays(){
+        return this.workdays;
+    }
+    public void setWorkdays(Double workdays){
+        this.workdays = workdays;
     }
 
 }
