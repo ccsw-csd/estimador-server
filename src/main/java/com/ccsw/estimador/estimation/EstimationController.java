@@ -1,9 +1,16 @@
 package com.ccsw.estimador.estimation;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,5 +64,15 @@ public class EstimationController {
     public List<EstimationDto> findVersion(@PathVariable Long projectId) {
 
         return this.beanMapper.mapList(this.estimationService.findVersion(projectId), EstimationDto.class);
+    }
+    @RequestMapping(path = { "/export" }, method = RequestMethod.POST)
+    public ResponseEntity<Resource> saveExport(@RequestBody EstimationEditDto data) throws FileNotFoundException {
+
+        File file = this.estimationService.toExport(data);
+        
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        return ResponseEntity.ok().contentLength(file.length()).contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .body(resource);
     }
 }

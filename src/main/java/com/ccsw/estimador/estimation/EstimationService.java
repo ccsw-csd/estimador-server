@@ -1,8 +1,11 @@
 package com.ccsw.estimador.estimation;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+
 
 import com.ccsw.estimador.customer.model.CustomerDto;
 import com.ccsw.estimador.estimation.model.EstimationEditDto;
@@ -32,4 +35,6 @@ public interface EstimationService {
     Long saveEstimation(Long id, EstimationEditDto data);
 
     EstimationEditDto duplicateEstimation(Long id, String version);
+
+    File toExport(EstimationEditDto dto) throws FileNotFoundException;
 }

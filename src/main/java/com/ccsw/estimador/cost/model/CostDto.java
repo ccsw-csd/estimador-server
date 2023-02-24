@@ -11,6 +11,8 @@ public class CostDto {
     private String grade;
     private Double cost;
     private Double margin;
+    private Double revenue;
+    private Double workdays;
 
     public CostDto() {
     }
@@ -20,6 +22,14 @@ public class CostDto {
         this.grade = grade;
         this.cost = cost;
         this.margin = margin;
+    }
+    public CostDto(String grade, Double cost, Double margin, Double revenue, Double workdays) {
+        this();
+        this.grade = grade;
+        this.cost = cost;
+        this.margin = margin;
+        this.revenue =  revenue;
+        this.workdays = workdays;
     }
 
     /**
@@ -62,6 +72,34 @@ public class CostDto {
      */
     public void setMargin(Double margin) {
         this.margin = margin;
+    }
+
+    /**
+     * @return the revenue
+     */
+    public Double getRevenue() {
+        return revenue;
+    }
+
+    /**
+     * @param revenue the revenue to set
+     */
+    public void setRevenue(Double revenue) {
+        this.revenue = revenue;
+    }
+
+    /**
+     * @return the workdays
+     */
+    public Double getWorkdays() {
+        return workdays;
+    }
+
+    /**
+     * @param workdays the workdays to set
+     */
+    public void setWorkdays(Double workdays) {
+        this.workdays = workdays;
     }
 
 }
