@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.ccsw</groupId>
 	<artifactId>estimador</artifactId>
-	<version>2.0.0</version>
+	<version>2.1.0</version>
 	<name>estimador</name>
 	<description>estimador CCSW</description>
 
@@ -37,17 +37,6 @@
 
 
 	<dependencies>
-	<!-- Apache POI -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>5.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>5.2.0</version>
-		</dependency>
 		<!-- General -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -105,6 +94,29 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Apache POI -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		
+		<!-- Springboot Admin -->
+		<dependency> 
+		    <groupId>de.codecentric</groupId>
+		    <artifactId>spring-boot-admin-starter-client</artifactId>
+		    <version>2.6.8</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>		
 	</dependencies>
 
 
