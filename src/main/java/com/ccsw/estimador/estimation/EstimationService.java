@@ -4,13 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-
-
 import com.ccsw.estimador.customer.model.CustomerDto;
 import com.ccsw.estimador.estimation.model.EstimationEditDto;
 import com.ccsw.estimador.estimation.model.EstimationEntity;
-import com.ccsw.estimador.estimation.model.EstimationSearchDto;
 
 /**
  * @author iciudade
@@ -24,7 +20,7 @@ public interface EstimationService {
      * @param dto
      * @return
      */
-    Page<EstimationEntity> findPage(EstimationSearchDto dto);
+    List<EstimationEntity> findAll(boolean adminView);
 
     EstimationEditDto getEstimationForEdit(Long id);
 

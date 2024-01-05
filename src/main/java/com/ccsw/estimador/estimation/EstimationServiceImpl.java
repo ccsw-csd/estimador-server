@@ -3,8 +3,6 @@ package com.ccsw.estimador.estimation;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +18,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +38,6 @@ import com.ccsw.estimador.elementweight.ElementWeightService;
 import com.ccsw.estimador.elementweight.model.ElementWeightDto;
 import com.ccsw.estimador.estimation.model.EstimationEditDto;
 import com.ccsw.estimador.estimation.model.EstimationEntity;
-import com.ccsw.estimador.estimation.model.EstimationSearchDto;
 import com.ccsw.estimador.parameter.ParameterService;
 import com.ccsw.estimador.parameter.model.ParameterDto;
 import com.ccsw.estimador.project.ProjectService;
@@ -113,37 +109,15 @@ public class EstimationServiceImpl implements EstimationService {
     CriteriaCalculationService criteriaCalculationService;
 
     @Override
-    public Page<EstimationEntity> findPage(EstimationSearchDto dto) {
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date startDate;
-
-        Date endDate;
-
-        try {
-            if (dto.getStartDate() == null)
-                startDate = format.parse("2020-01-01");
-            else
-                startDate = dto.getStartDate();
-
-            if (dto.getEndDate() == null)
-                endDate = format.parse("2099-12-31");
-            else
-                endDate = dto.getEndDate();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            startDate = null;
-            endDate = null;
-        }
+    public List<EstimationEntity> findAll(boolean adminView) {
 
         String username = UserUtils.getUserDetails().getUsername();
 
-        if (dto.getAdminView() && UserUtils.hasRole("ADMIN")) {
+        if (adminView && UserUtils.hasRole("ADMIN")) {
             username = null;
         }
 
-        return this.estimationRepository.find(dto.getCustomerId(), dto.getProjectName(), startDate, endDate, username, dto.getPageable());
+        return this.estimationRepository.find(username);
     }
 
     @Override
@@ -327,7 +301,7 @@ public class EstimationServiceImpl implements EstimationService {
     }
 
     @Override
-    public File toExport(EstimationEditDto dto) throws FileNotFoundException{
+    public File toExport(EstimationEditDto dto) throws FileNotFoundException {
         Workbook workbook = new XSSFWorkbook();
 
         CellStyle headerStyle = workbook.createCellStyle();
@@ -342,13 +316,12 @@ public class EstimationServiceImpl implements EstimationService {
 
         int columna = 0;
 
-
-        createFirstSheet(headerStyle, workbook, dto, columna);        
+        createFirstSheet(headerStyle, workbook, dto, columna);
         createSecondSheet(headerStyle, workbook, dto, columna);
 
         try {
             // Write the workbook in file system
-            File file = File.createTempFile("Resumen" , "xlsx");
+            File file = File.createTempFile("Resumen", "xlsx");
             FileOutputStream outputStream = new FileOutputStream(file);
             workbook.write(outputStream);
             outputStream.close();
@@ -373,69 +346,66 @@ public class EstimationServiceImpl implements EstimationService {
 
         Row header = sheet.createRow(0);
         Cell headerCell = header.createCell(columna);
-        
+
         createDistributionTable(workbook, headerCell, headerStyle, sheet, dto, columna);
         createMemberTable(workbook, headerCell, headerStyle, sheet, dto, columna);
         createRevenueTable(workbook, headerCell, headerStyle, sheet, dto, columna);
         createConceptTable(workbook, headerCell, headerStyle, sheet, dto, columna);
 
-
     }
 
-    private void createConceptTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
-            EstimationEditDto dto, int columna) {
+    private void createConceptTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet, EstimationEditDto dto, int columna) {
 
-        int fila = 8 + dto.getDistribution().size() + dto.getTeamPyramid().size() + dto.getCosts().size();         
+        int fila = 8 + dto.getDistribution().size() + dto.getTeamPyramid().size() + dto.getCosts().size();
 
-        fila ++;
+        fila++;
         Row row = sheet.createRow(fila);
         Cell cell = row.createCell(columna);
         cell.setCellValue("Conceptos");
         cell.setCellStyle(headerStyle);
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Concepto");
         cell = row.createCell(columna + 1);
         cell.setCellValue("Valor");
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Jornadas");
         cell = row.createCell(columna + 1);
         cell.setCellValue(dto.getTotalDays());
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Revenue (€)");
         cell = row.createCell(columna + 1);
         cell.setCellValue(dto.getTotalCost());
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Equipo total");
         cell = row.createCell(columna + 1);
-        fila ++;
+        fila++;
         int trabajadores = 0;
         List<TeamPyramidDto> perfiles = dto.getTeamPyramid();
         for (TeamPyramidDto perfil : perfiles) {
-            if(perfil.getFte() != 0){
+            if (perfil.getFte() != 0) {
                 trabajadores += perfil.getFte();
             }
         }
         cell.setCellValue(trabajadores);
     }
 
-    private void createRevenueTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
-            EstimationEditDto dto, int columna) {
+    private void createRevenueTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet, EstimationEditDto dto, int columna) {
 
         int fila = 5 + dto.getDistribution().size() + dto.getTeamPyramid().size();
-        fila ++;
+        fila++;
         Row row = sheet.createRow(fila);
         Cell cell = row.createCell(columna);
         cell.setCellValue("Revenue");
         cell.setCellStyle(headerStyle);
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Grado");
@@ -447,10 +417,10 @@ public class EstimationServiceImpl implements EstimationService {
         cell.setCellValue("Margen (%)");
         cell = row.createCell(columna + 4);
         cell.setCellValue("Revenue");
-        fila ++;
+        fila++;
 
         List<CostDto> costes = dto.getCosts();
-        for(CostDto coste : costes){
+        for (CostDto coste : costes) {
             row = sheet.createRow(fila);
             cell = row.createCell(columna);
             cell.setCellValue(coste.getGrade());
@@ -462,29 +432,28 @@ public class EstimationServiceImpl implements EstimationService {
             cell.setCellValue(coste.getMargin());
             cell = row.createCell(columna + 4);
             cell.setCellValue(coste.getRevenue());
-            fila ++;
+            fila++;
         }
     }
 
-    private void createMemberTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
-            EstimationEditDto dto, int columna) {
-        
+    private void createMemberTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet, EstimationEditDto dto, int columna) {
+
         int fila = 2 + dto.getDistribution().size();
         Row row = sheet.createRow(fila);
         Cell cell = row.createCell(columna);
 
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Miembros del equipo");
         cell.setCellStyle(headerStyle);
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Perfil");
         cell = row.createCell(columna + 1);
         cell.setCellValue("FTE's");
-        fila ++;
+        fila++;
 
         List<TeamPyramidDto> perfiles = dto.getTeamPyramid();
         for (TeamPyramidDto perfil : perfiles) {
@@ -497,15 +466,14 @@ public class EstimationServiceImpl implements EstimationService {
         }
     }
 
-    private void createDistributionTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
-            EstimationEditDto dto, int columna) {
+    private void createDistributionTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet, EstimationEditDto dto, int columna) {
 
         headerCell.setCellValue("Distribución del equipo");
         headerCell.setCellStyle(headerStyle);
-                        
+
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
-                        
+
         Row row = sheet.createRow(1);
         Cell cell = row.createCell(columna);
         cell.setCellValue("Equipo");
@@ -532,7 +500,7 @@ public class EstimationServiceImpl implements EstimationService {
         List<DistributionDto> distribuciones = dto.getDistribution();
         int fila = 2;
 
-        for(DistributionDto distribucion : distribuciones){
+        for (DistributionDto distribucion : distribuciones) {
             row = sheet.createRow(fila);
             cell = row.createCell(columna);
             cell.setCellValue(distribucion.getBlock().getName());
@@ -547,14 +515,14 @@ public class EstimationServiceImpl implements EstimationService {
             cell = row.createCell(columna + 5);
             cell.setCellValue(distribucion.getGradeD());
             cell = row.createCell(columna + 6);
-            cell.setCellValue(distribucion.getTotal());           
-            fila ++;
+            cell.setCellValue(distribucion.getTotal());
+            fila++;
         }
 
     }
 
     private void createFirstSheet(CellStyle headerStyle, Workbook workbook, EstimationEditDto dto, int columna) {
-        
+
         Sheet sheet = workbook.createSheet("Tareas");
         sheet.setColumnWidth(0, 7500);
         sheet.setColumnWidth(1, 6000);
@@ -562,21 +530,20 @@ public class EstimationServiceImpl implements EstimationService {
 
         Row header = sheet.createRow(0);
         Cell headerCell = header.createCell(columna);
-        
+
         createArchitectureTable(workbook, headerCell, headerStyle, sheet, dto, columna);
         createTaskDevelopmentHoursTable(workbook, headerCell, headerStyle, sheet, dto, columna);
         createCommentaryTable(workbook, headerCell, headerStyle, sheet, dto, columna);
-        
+
     }
 
-    private void createCommentaryTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
-            EstimationEditDto dto, int columna) {
+    private void createCommentaryTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet, EstimationEditDto dto, int columna) {
 
         int fila = 5 + dto.getArchitectureTasks().size() + dto.getDevelopmentTasksHours().size();
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
-               
-        fila ++;
+
+        fila++;
         Row row = sheet.createRow(fila);
         Cell cell = row.createCell(columna);
         cell.setCellValue("Consideraciones");
@@ -584,29 +551,28 @@ public class EstimationServiceImpl implements EstimationService {
 
         fila++;
         List<ConsiderationDto> comentarios = dto.getConsiderations();
-        for(ConsiderationDto comentario : comentarios) {
+        for (ConsiderationDto comentario : comentarios) {
             row = sheet.createRow(fila);
             cell = row.createCell(columna);
-            cell.setCellValue(comentario.getComment());  
-            fila++;      
+            cell.setCellValue(comentario.getComment());
+            fila++;
         }
     }
 
-    private void createTaskDevelopmentHoursTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet,
-            EstimationEditDto dto, int columna) {
+    private void createTaskDevelopmentHoursTable(Workbook workbook, Cell headerCell, CellStyle headerStyle, Sheet sheet, EstimationEditDto dto, int columna) {
 
         int fila = 2 + dto.getArchitectureTasks().size();
 
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
-        
-        fila ++;
+
+        fila++;
         Row row = sheet.createRow(fila);
         Cell cell = row.createCell(columna);
         cell.setCellValue("Desarrollo");
         cell.setCellStyle(headerStyle);
 
-        fila ++;
+        fila++;
         row = sheet.createRow(fila);
         cell = row.createCell(columna);
         cell.setCellValue("Tareas");
@@ -614,10 +580,10 @@ public class EstimationServiceImpl implements EstimationService {
         cell = row.createCell(columna + 1);
         cell.setCellValue("Horas");
         cell.setCellStyle(style);
-        
-        fila ++;
+
+        fila++;
         List<TaskDevelopmentHoursDto> desarrollos = dto.getDevelopmentTasksHours();
-        for(TaskDevelopmentHoursDto desarrollo: desarrollos){
+        for (TaskDevelopmentHoursDto desarrollo : desarrollos) {
             row = sheet.createRow(fila);
             cell = row.createCell(columna);
             cell.setCellValue(desarrollo.getName());
